@@ -4,6 +4,8 @@
  */
 #include "frontend.h"
 
+using namespace s21;
+
 /**
  * @brief Функция отрисовки актуального состояния игры.
  *

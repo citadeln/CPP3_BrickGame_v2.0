@@ -6,6 +6,8 @@
 
 #include "tetris.h"
 
+using namespace s21;
+
 /**
  * @brief Вход в программу.
  *

@@ -1,6 +1,6 @@
-CC = gcc
-CCFLAGS = -Wall -Wextra -Wextra -std=c11 -g
-LDFLAGS = -lcheck -lsubunit -lm
+CC = g++
+CCFLAGS = -Wall -Wextra -std=c++17 -g
+LDFLAGS = -lncurses
 LIBFLAGS = -L. -L/usr/local/lib -L/usr/include
 RM = rm -rf
 
@@ -13,7 +13,7 @@ GAME_NAME = tetris
 # имя тестового файла
 ТESTS_NAME = tetris_test
 # имя тестового файла c тестами покрытия кода gcovr
-ТESTS_GCOV_NAME = tetris_tests_gcov
+TESTS_GCOV_NAME = tetris_tests_gcov
 # имя директории для цели dist
 TAR_DIR = s21_tetris-1.0
 # директория установки
@@ -21,28 +21,28 @@ INSTALL_DIR = ./install
 
 # основные файлы и директории
 MAIN_DIR = ./
-MAIN_SOURCES = ./tetris.c
-MAIN_OBJECTS = $(MAIN_SOURCES:.c=.o)
+MAIN_SOURCES = ./tetris.cc
+MAIN_OBJECTS = $(MAIN_SOURCES:.cc=.o)
 
 
 # файлы и директории функций библиотеки backend'a
 BACK_LIB_NAME = backend.a
 BACK_LIB_DIR = ./brick_game/tetris
-BACK_LIB_SOURCES = $(shell find $(BACK_LIB_DIR) -name "*.c")
-BACK_OBJECTS = $(BACK_LIB_SOURCES:.c=.o)
+BACK_LIB_SOURCES = $(shell find $(BACK_LIB_DIR) -name "*.cc")
+BACK_OBJECTS = $(BACK_LIB_SOURCES:.cc=.o)
 
 
 # файлы и директории функций frontend'a
 FRONT_DIR = ./gui/cli
-FRONT_SOURCES = $(shell find $(FRONT_DIR) -name "*.c")
-FRONT_OBJECTS = $(FRONT_SOURCES:.c=.o)
+FRONT_SOURCES = $(shell find $(FRONT_DIR) -name "*.cc")
+FRONT_OBJECTS = $(FRONT_SOURCES:.cc=.o)
 
 
 # файлы и директории тестов
 TEST_DIR = tests/tetris
 TEST_HEADER_NAME = tetris_test.h
-TEST_SRC = $(shell find $(TEST_DIR) -name "*.c")
-TEST_OBJ = $(TEST_SRC:.c=.o)
+TEST_SRC = $(shell find $(TEST_DIR) -name "*.cc")
+TEST_OBJ = $(TEST_SRC:.cc=.o)
 
 .PHONY: all build clean install uninstall dvi dist
 
@@ -85,7 +85,7 @@ $(ТESTS_GCOV_NAME):$(TEST_SRC) $(BACK_LIB_SOURCES)
 	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(LDFLAGS)
 
 clang:
-	clang-format -n $(shell find $(MAIN_DIR) -name "*.c")
+	clang-format -n $(shell find $(MAIN_DIR) -name "*.cc")
 	clang-format -n $(shell find $(MAIN_DIR) -name "*.h")
 
 cpp:
@@ -113,5 +113,5 @@ $(BACK_LIB_NAME): $(BACK_OBJECTS)
 	ar rc $@ $^
 	ranlib $@
 
-%.o: %.c
+%.o: %.cc
 	$(CC) $(CCFLAGS) -c $< -o $@
