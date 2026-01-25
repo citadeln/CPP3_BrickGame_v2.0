@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tetris: Исходный файл brick_game/tetris/backend.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tetris
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Tetris realisation</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_2ee2de302366a9522113dfc9d3962873.html">brick_game</a></li><li class="navelem"><a class="el" href="dir_a27466d1e2cff2d3a32cbaf29900b661.html">tetris</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">backend.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="backend_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef BACKEND_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define BACKEND_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="defines_8h.html">defines.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fsm_8h.html">fsm.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="backend_8h.html#ab961f91e569a34b6984536633126257a">userInput</a>(<a class="code" href="types_8h.html#a7ba289d7b97db30e0b7041ca2cef75a9">UserAction_t</a> action, <span class="keywordtype">bool</span> hold);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="structParams__t.html">Params_t</a> *<a class="code" href="backend_8c.html#a88a74f2289090d21a19bf560ebdc8aca">create_prms</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="structFigureinfo__t.html">Figureinfo_t</a> *<a class="code" href="backend_8h.html#ac5147a9d9186f4d0b58743edbc3aefbd">create_figure_info</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="structGameInfo__t.html">GameInfo_t</a> *<a class="code" href="backend_8h.html#a18951a4f54a2f243cfeae0f3f7167f8b">get_field_info</a>(<a class="code" href="structFigureinfo__t.html">Figureinfo_t</a> *figureinfo);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<a class="code" href="structGameInfo__t.html">GameInfo_t</a> *<a class="code" href="backend_8h.html#a098199fee6a6de541b4238862a7fc1e7">create_field_info</a>(<a class="code" href="structFigureinfo__t.html">Figureinfo_t</a> *figure_info);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> <a class="code" href="backend_8h.html#a6024d0eb3df6a6950e4222383cc38169">clear_or_draw_position</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms, <span class="keywordtype">bool</span> param);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="backend_8h.html#af087ab3e90074648623917594b65d358">hi_score</a>(<a class="code" href="structGameInfo__t.html">GameInfo_t</a> *gameinfo);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> <a class="code" href="backend_8h.html#a9e4ebcb35826c7f6cf672b4b00fa2d37">get_block_coord</a>(<span class="keywordtype">int</span> figure_type, <span class="keywordtype">int</span> figure_state, <span class="keywordtype">int</span> block_number,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                    <span class="keywordtype">int</span> coord);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="backend_8h.html#afd3f5100640fd1e74bdd58ec3afac8fe">chech_timer</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="structGameInfo__t.html">GameInfo_t</a> <a class="code" href="backend_8h.html#afd5762991a9248a0b4192983fd786a8f">updateCurrentState</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// BACKEND_H</span></div>
+<div class="ttc" id="abackend_8c_html_a88a74f2289090d21a19bf560ebdc8aca"><div class="ttname"><a href="backend_8c.html#a88a74f2289090d21a19bf560ebdc8aca">create_prms</a></div><div class="ttdeci">Params_t * create_prms(Params_t *pointer)</div><div class="ttdoc">Функция, создающая основную статичную структуру, хранящую данные о состоянии игры.</div><div class="ttdef"><b>Definition:</b> backend.c:127</div></div>
+<div class="ttc" id="abackend_8h_html_a098199fee6a6de541b4238862a7fc1e7"><div class="ttname"><a href="backend_8h.html#a098199fee6a6de541b4238862a7fc1e7">create_field_info</a></div><div class="ttdeci">GameInfo_t * create_field_info(Figureinfo_t *figure_info)</div><div class="ttdoc">Функция создает структуру с начальными данными для поля и статистики.</div><div class="ttdef"><b>Definition:</b> backend.c:220</div></div>
+<div class="ttc" id="abackend_8h_html_a18951a4f54a2f243cfeae0f3f7167f8b"><div class="ttname"><a href="backend_8h.html#a18951a4f54a2f243cfeae0f3f7167f8b">get_field_info</a></div><div class="ttdeci">GameInfo_t * get_field_info(Figureinfo_t *figureinfo)</div><div class="ttdoc">Функция получения указателя на структуру с данными по полю и статистике.</div><div class="ttdef"><b>Definition:</b> backend.c:185</div></div>
+<div class="ttc" id="abackend_8h_html_a6024d0eb3df6a6950e4222383cc38169"><div class="ttname"><a href="backend_8h.html#a6024d0eb3df6a6950e4222383cc38169">clear_or_draw_position</a></div><div class="ttdeci">void clear_or_draw_position(Params_t *prms, bool param)</div><div class="ttdoc">Функция удаления или заполнения матрицы по положению фигуры.</div><div class="ttdef"><b>Definition:</b> backend.c:271</div></div>
+<div class="ttc" id="abackend_8h_html_a9e4ebcb35826c7f6cf672b4b00fa2d37"><div class="ttname"><a href="backend_8h.html#a9e4ebcb35826c7f6cf672b4b00fa2d37">get_block_coord</a></div><div class="ttdeci">int get_block_coord(int figure_type, int figure_state, int block_number, int coord)</div><div class="ttdoc">Функция, хранящая в массиве координаты фигуры относительно курсора.</div><div class="ttdef"><b>Definition:</b> backend.c:48</div></div>
+<div class="ttc" id="abackend_8h_html_ab961f91e569a34b6984536633126257a"><div class="ttname"><a href="backend_8h.html#ab961f91e569a34b6984536633126257a">userInput</a></div><div class="ttdeci">void userInput(UserAction_t action, bool hold)</div><div class="ttdoc">Основная функция обработки действий пользователя на основе нажатых клавиш.</div><div class="ttdef"><b>Definition:</b> backend.c:19</div></div>
+<div class="ttc" id="abackend_8h_html_ac5147a9d9186f4d0b58743edbc3aefbd"><div class="ttname"><a href="backend_8h.html#ac5147a9d9186f4d0b58743edbc3aefbd">create_figure_info</a></div><div class="ttdeci">Figureinfo_t * create_figure_info()</div><div class="ttdoc">Функция создает статичную структуру с данными по фигурам.</div><div class="ttdef"><b>Definition:</b> backend.c:154</div></div>
+<div class="ttc" id="abackend_8h_html_af087ab3e90074648623917594b65d358"><div class="ttname"><a href="backend_8h.html#af087ab3e90074648623917594b65d358">hi_score</a></div><div class="ttdeci">void hi_score(GameInfo_t *gameinfo)</div><div class="ttdoc">Функция работы с рекордом очков.</div><div class="ttdef"><b>Definition:</b> backend.c:315</div></div>
+<div class="ttc" id="abackend_8h_html_afd3f5100640fd1e74bdd58ec3afac8fe"><div class="ttname"><a href="backend_8h.html#afd3f5100640fd1e74bdd58ec3afac8fe">chech_timer</a></div><div class="ttdeci">void chech_timer(Params_t *prms)</div><div class="ttdoc">Функция проверки истечения времени для движения вниз.</div><div class="ttdef"><b>Definition:</b> backend.c:292</div></div>
+<div class="ttc" id="abackend_8h_html_afd5762991a9248a0b4192983fd786a8f"><div class="ttname"><a href="backend_8h.html#afd5762991a9248a0b4192983fd786a8f">updateCurrentState</a></div><div class="ttdeci">GameInfo_t updateCurrentState()</div><div class="ttdoc">Функция обновления состояния игры.</div><div class="ttdef"><b>Definition:</b> backend.c:340</div></div>
+<div class="ttc" id="adefines_8h_html"><div class="ttname"><a href="defines_8h.html">defines.h</a></div><div class="ttdoc">Заголовочный файл с параметрами программы.</div></div>
+<div class="ttc" id="afsm_8h_html"><div class="ttname"><a href="fsm_8h.html">fsm.h</a></div><div class="ttdoc">Заголовочный файл функций конечного автомата.</div></div>
+<div class="ttc" id="astructFigureinfo__t_html"><div class="ttname"><a href="structFigureinfo__t.html">Figureinfo_t</a></div><div class="ttdoc">структура для данных о текущей и следующей фигуре</div><div class="ttdef"><b>Definition:</b> types.h:42</div></div>
+<div class="ttc" id="astructGameInfo__t_html"><div class="ttname"><a href="structGameInfo__t.html">GameInfo_t</a></div><div class="ttdoc">структура для данных об игре</div><div class="ttdef"><b>Definition:</b> types.h:62</div></div>
+<div class="ttc" id="astructParams__t_html"><div class="ttname"><a href="structParams__t.html">Params_t</a></div><div class="ttdoc">структура с данными о фигурах и самой игре</div><div class="ttdef"><b>Definition:</b> types.h:75</div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">Заголовочный файл с овновными типами.</div></div>
+<div class="ttc" id="atypes_8h_html_a7ba289d7b97db30e0b7041ca2cef75a9"><div class="ttname"><a href="types_8h.html#a7ba289d7b97db30e0b7041ca2cef75a9">UserAction_t</a></div><div class="ttdeci">UserAction_t</div><div class="ttdoc">enum для действий ввода пользователя</div><div class="ttdef"><b>Definition:</b> types.h:28</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

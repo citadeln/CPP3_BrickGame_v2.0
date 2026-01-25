@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tetris: Файл brick_game/tetris/backend.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tetris
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Tetris realisation</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_2ee2de302366a9522113dfc9d3962873.html">brick_game</a></li><li class="navelem"><a class="el" href="dir_a27466d1e2cff2d3a32cbaf29900b661.html">tetris</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle">
+<div class="title">Файл backend.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Основные функции работы игры.  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="backend_8h_source.html">backend.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:ab961f91e569a34b6984536633126257a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#ab961f91e569a34b6984536633126257a">userInput</a> (<a class="el" href="types_8h.html#a7ba289d7b97db30e0b7041ca2cef75a9">UserAction_t</a> action, bool hold)</td></tr>
+<tr class="memdesc:ab961f91e569a34b6984536633126257a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Основная функция обработки действий пользователя на основе нажатых клавиш.  <a href="backend_8c.html#ab961f91e569a34b6984536633126257a">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab961f91e569a34b6984536633126257a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4ebcb35826c7f6cf672b4b00fa2d37"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#a9e4ebcb35826c7f6cf672b4b00fa2d37">get_block_coord</a> (int figure_type, int figure_state, int block_number, int coord)</td></tr>
+<tr class="memdesc:a9e4ebcb35826c7f6cf672b4b00fa2d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция, хранящая в массиве координаты фигуры относительно курсора.  <a href="backend_8c.html#a9e4ebcb35826c7f6cf672b4b00fa2d37">Подробнее...</a><br /></td></tr>
+<tr class="separator:a9e4ebcb35826c7f6cf672b4b00fa2d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a74f2289090d21a19bf560ebdc8aca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structParams__t.html">Params_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#a88a74f2289090d21a19bf560ebdc8aca">create_prms</a> (<a class="el" href="structParams__t.html">Params_t</a> *pointer)</td></tr>
+<tr class="memdesc:a88a74f2289090d21a19bf560ebdc8aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция, создающая основную статичную структуру, хранящую данные о состоянии игры.  <a href="backend_8c.html#a88a74f2289090d21a19bf560ebdc8aca">Подробнее...</a><br /></td></tr>
+<tr class="separator:a88a74f2289090d21a19bf560ebdc8aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5147a9d9186f4d0b58743edbc3aefbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structFigureinfo__t.html">Figureinfo_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#ac5147a9d9186f4d0b58743edbc3aefbd">create_figure_info</a> ()</td></tr>
+<tr class="memdesc:ac5147a9d9186f4d0b58743edbc3aefbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция создает статичную структуру с данными по фигурам.  <a href="backend_8c.html#ac5147a9d9186f4d0b58743edbc3aefbd">Подробнее...</a><br /></td></tr>
+<tr class="separator:ac5147a9d9186f4d0b58743edbc3aefbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bf2cad7005df2c6a9a76c68b84f96b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGameInfo__t.html">GameInfo_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#ac8bf2cad7005df2c6a9a76c68b84f96b">get_field_info</a> (<a class="el" href="structFigureinfo__t.html">Figureinfo_t</a> *figure_info)</td></tr>
+<tr class="memdesc:ac8bf2cad7005df2c6a9a76c68b84f96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция получения указателя на структуру с данными по полю и статистике.  <a href="backend_8c.html#ac8bf2cad7005df2c6a9a76c68b84f96b">Подробнее...</a><br /></td></tr>
+<tr class="separator:ac8bf2cad7005df2c6a9a76c68b84f96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098199fee6a6de541b4238862a7fc1e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGameInfo__t.html">GameInfo_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#a098199fee6a6de541b4238862a7fc1e7">create_field_info</a> (<a class="el" href="structFigureinfo__t.html">Figureinfo_t</a> *figure_info)</td></tr>
+<tr class="memdesc:a098199fee6a6de541b4238862a7fc1e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция создает структуру с начальными данными для поля и статистики.  <a href="backend_8c.html#a098199fee6a6de541b4238862a7fc1e7">Подробнее...</a><br /></td></tr>
+<tr class="separator:a098199fee6a6de541b4238862a7fc1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6024d0eb3df6a6950e4222383cc38169"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#a6024d0eb3df6a6950e4222383cc38169">clear_or_draw_position</a> (<a class="el" href="structParams__t.html">Params_t</a> *prms, bool param)</td></tr>
+<tr class="memdesc:a6024d0eb3df6a6950e4222383cc38169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция удаления или заполнения матрицы по положению фигуры.  <a href="backend_8c.html#a6024d0eb3df6a6950e4222383cc38169">Подробнее...</a><br /></td></tr>
+<tr class="separator:a6024d0eb3df6a6950e4222383cc38169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd3f5100640fd1e74bdd58ec3afac8fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#afd3f5100640fd1e74bdd58ec3afac8fe">chech_timer</a> (<a class="el" href="structParams__t.html">Params_t</a> *prms)</td></tr>
+<tr class="memdesc:afd3f5100640fd1e74bdd58ec3afac8fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция проверки истечения времени для движения вниз.  <a href="backend_8c.html#afd3f5100640fd1e74bdd58ec3afac8fe">Подробнее...</a><br /></td></tr>
+<tr class="separator:afd3f5100640fd1e74bdd58ec3afac8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af087ab3e90074648623917594b65d358"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#af087ab3e90074648623917594b65d358">hi_score</a> (<a class="el" href="structGameInfo__t.html">GameInfo_t</a> *gameinfo)</td></tr>
+<tr class="memdesc:af087ab3e90074648623917594b65d358"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция работы с рекордом очков.  <a href="backend_8c.html#af087ab3e90074648623917594b65d358">Подробнее...</a><br /></td></tr>
+<tr class="separator:af087ab3e90074648623917594b65d358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd5762991a9248a0b4192983fd786a8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGameInfo__t.html">GameInfo_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="backend_8c.html#afd5762991a9248a0b4192983fd786a8f">updateCurrentState</a> ()</td></tr>
+<tr class="memdesc:afd5762991a9248a0b4192983fd786a8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция обновления состояния игры.  <a href="backend_8c.html#afd5762991a9248a0b4192983fd786a8f">Подробнее...</a><br /></td></tr>
+<tr class="separator:afd5762991a9248a0b4192983fd786a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Основные функции работы игры. </p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="afd3f5100640fd1e74bdd58ec3afac8fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd3f5100640fd1e74bdd58ec3afac8fe">&#9670;&nbsp;</a></span>chech_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void chech_timer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structParams__t.html">Params_t</a> *&#160;</td>
+          <td class="paramname"><em>prms</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция проверки истечения времени для движения вниз. </p>
+<p>Функция проверяет разницу между текущем временем и временем начала движения вниз. Если разница больше текущего значения скорости, то стадия игры переходит в шифтинг (принудительный сдвинг вниз на 1 строку).</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prms</td><td>Указатель на структуру со всеми данными по игре. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6024d0eb3df6a6950e4222383cc38169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6024d0eb3df6a6950e4222383cc38169">&#9670;&nbsp;</a></span>clear_or_draw_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear_or_draw_position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structParams__t.html">Params_t</a> *&#160;</td>
+          <td class="paramname"><em>prms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>param</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция удаления или заполнения матрицы по положению фигуры. </p>
+<p>Функция работает с текущим положением фигуры. В зависимости от 2го принимаемого параметра зануляет или заполняет матрицу по координатами фигуры относительно блока-курсора.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prms</td><td>Указатель на структуру со всеми данными по игре. </td></tr>
+    <tr><td class="paramname">param</td><td>Режим работы функции: 0 - удаляет фигуру, 1 - заполняет матрицу по текущему положению фигуры. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a098199fee6a6de541b4238862a7fc1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a098199fee6a6de541b4238862a7fc1e7">&#9670;&nbsp;</a></span>create_field_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structGameInfo__t.html">GameInfo_t</a>* create_field_info </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structFigureinfo__t.html">Figureinfo_t</a> *&#160;</td>
+          <td class="paramname"><em>figure_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция создает структуру с начальными данными для поля и статистики. </p>
+<p>Функция создает:</p><ul>
+<li>массив для поля 20+2х10 - 2 дополнительные строки отводятся под появление фигуры и дальнейший спуск вниз на 2 строки, для проверки условия gameover.</li>
+<li>массив для поля будущей фигуры 4х4 Функция заполняет начальные данные для статистики:</li>
+<li>счет,</li>
+<li>рекорд,</li>
+<li>уровень,</li>
+<li>скорость(в наносекундах),</li>
+<li>состояние паузы.</li>
+</ul>
+<p>Значения паузы:</p><ul>
+<li>-1 - конец игры,</li>
+<li>0 - игра идет,</li>
+<li>1 - пауза в игре,</li>
+<li>2 - начало игры,</li>
+<li>3 - gameover.</li>
+</ul>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">figure_info</td><td>Принимает указатель на структуру фигуры для заполнения массива будущей фигуры.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd><a class="el" href="structGameInfo__t.html" title="структура для данных об игре">GameInfo_t</a> Возвращает указатель на статичную структуру. </dd></dl>
+
+</div>
+</div>
+<a id="ac5147a9d9186f4d0b58743edbc3aefbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5147a9d9186f4d0b58743edbc3aefbd">&#9670;&nbsp;</a></span>create_figure_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structFigureinfo__t.html">Figureinfo_t</a>* create_figure_info </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция создает статичную структуру с данными по фигурам. </p>
+<p>Функция создает статичную структуру с данными по фигуре:</p><ul>
+<li>координаты блока-курсора, относительно которого будет отрисовываться фигура</li>
+<li>тип текушей фигуры</li>
+<li>ее состояние</li>
+<li>тип следующей фигуры</li>
+<li>цвет текушей фигуры</li>
+<li>цвет следующей фигуры</li>
+</ul>
+<dl class="section return"><dt>Возвращает</dt><dd>Figureinfo_t* Возвращает указатель статичной структуры. </dd></dl>
+
+</div>
+</div>
+<a id="a88a74f2289090d21a19bf560ebdc8aca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88a74f2289090d21a19bf560ebdc8aca">&#9670;&nbsp;</a></span>create_prms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structParams__t.html">Params_t</a>* create_prms </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structParams__t.html">Params_t</a> *&#160;</td>
+          <td class="paramname"><em>pointer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция, создающая основную статичную структуру, хранящую данные о состоянии игры. </p>
+<p>При первом запуске создает статичную структуру со всеми данными о текущем состоянии игры, заполняет ее стартовыми значениями, и отдает на нее указатель.</p>
+<p>Структура содержит:</p><ul>
+<li>указатель на структуру с данными о поле и статистике,</li>
+<li>указатель на структуру с данными о фигурах,</li>
+<li>текущее состояние игры,</li>
+<li>время для срабатывания движения вниз.</li>
+</ul>
+<p>При последующих запусках отдает только указатель на структуру.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pointer</td><td>указатель, если передается NULL, то структура создается со стартовыми значенями. Используется при первом запуске или начале новой игры после gameover.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Params_t* Возвращает указатель на статичную структуру. </dd></dl>
+
+</div>
+</div>
+<a id="a9e4ebcb35826c7f6cf672b4b00fa2d37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4ebcb35826c7f6cf672b4b00fa2d37">&#9670;&nbsp;</a></span>get_block_coord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_block_coord </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>figure_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>figure_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>block_number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>coord</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция, хранящая в массиве координаты фигуры относительно курсора. </p>
+<p>Функция принимает тип, состояние фигуры, номер блока и номер координаты, и отдает текущую координату блока относительно блока-курсор.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">figure_type</td><td>Текущий тип фигуры от 0 до 6 </td></tr>
+    <tr><td class="paramname">figure_state</td><td>Текущее состояние фигуры от 0 до 3 </td></tr>
+    <tr><td class="paramname">block_number</td><td>Номер блока фигуры от 0 до 3 </td></tr>
+    <tr><td class="paramname">coord</td><td>Координата блока 0 - Y, 1 - X</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>int Возвращает координату блока. </dd></dl>
+
+</div>
+</div>
+<a id="ac8bf2cad7005df2c6a9a76c68b84f96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8bf2cad7005df2c6a9a76c68b84f96b">&#9670;&nbsp;</a></span>get_field_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structGameInfo__t.html">GameInfo_t</a>* get_field_info </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structFigureinfo__t.html">Figureinfo_t</a> *&#160;</td>
+          <td class="paramname"><em>figure_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция получения указателя на структуру с данными по полю и статистике. </p>
+<p>Функция возвращает указатель на статичную структуру с данными по полю и статистике.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">figure_info</td><td>Принимает указатель на структуры данных по фигурам.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>GameInfo_t* Возвращает указатель статичной структуры. </dd></dl>
+
+</div>
+</div>
+<a id="af087ab3e90074648623917594b65d358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af087ab3e90074648623917594b65d358">&#9670;&nbsp;</a></span>hi_score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hi_score </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGameInfo__t.html">GameInfo_t</a> *&#160;</td>
+          <td class="paramname"><em>gameinfo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция работы с рекордом очков. </p>
+<p>Функция получения или записи рекорда из файла hi-score.txt.</p>
+<p>Если текущий счет больше рекорда из файла, то перезаписывает файл с новым значением.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameinfo</td><td>Указатель на структуру с данными статистики по игре. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afd5762991a9248a0b4192983fd786a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd5762991a9248a0b4192983fd786a8f">&#9670;&nbsp;</a></span>updateCurrentState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structGameInfo__t.html">GameInfo_t</a> updateCurrentState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция обновления состояния игры. </p>
+<p>Функция получает актуальные данные о состоянии игры.</p>
+<dl class="section return"><dt>Возвращает</dt><dd><a class="el" href="structGameInfo__t.html" title="структура для данных об игре">GameInfo_t</a> Возвращает структуру с актуальными данными игры. </dd></dl>
+
+</div>
+</div>
+<a id="ab961f91e569a34b6984536633126257a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab961f91e569a34b6984536633126257a">&#9670;&nbsp;</a></span>userInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void userInput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a7ba289d7b97db30e0b7041ca2cef75a9">UserAction_t</a>&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hold</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Основная функция обработки действий пользователя на основе нажатых клавиш. </p>
+<p>Функция получает входящее значение нажатой клавиши пользователем и в зависимости от состояния системы принимает решение о дальнейшем выполнении вспомогательных функций.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td>ввод пользователя или его отсутсвие </td></tr>
+    <tr><td class="paramname">hold</td><td>параметр длительного зажатия клавиши </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

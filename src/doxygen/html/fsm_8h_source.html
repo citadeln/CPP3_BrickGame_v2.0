@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tetris: Исходный файл brick_game/tetris/fsm.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tetris
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Tetris realisation</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_2ee2de302366a9522113dfc9d3962873.html">brick_game</a></li><li class="navelem"><a class="el" href="dir_a27466d1e2cff2d3a32cbaf29900b661.html">tetris</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">fsm.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fsm_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef FSM_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define FSM_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="backend_8h.html">backend.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="fsm_8h.html#ac9a66acc83085a782ecdacf541836b72">   15</a></span>&#160;<span class="keyword">typedef</span> void (*<span class="keyword">function</span>)(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">function</span> <a class="code" href="fsm_8h.html#a6c9a6d6148e0ee5ca22623b7dd7290f3">fsm_table</a>(<a class="code" href="types_8h.html#a6678e2a28b2bccb9f0563b3d59e15aa2">GameState_t</a> state, <a class="code" href="types_8h.html#a7ba289d7b97db30e0b7041ca2cef75a9">UserAction_t</a> action);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#ad1d08b78b2d41c0c744e94876a02df7b">spawn</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#a825f8c2e65c94cb8032e9e3fdd220be7">move_down</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#abfb35aff01c25dd3c28f3b9b86c34aa2">rotate</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#abfced3c52043031c02bcd9678da29844">move_left</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#a8a1b374f14a68811256aea93ff4e5c63">move_right</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#a0c8439484206ee18463031aa1860884f">fast_move_down</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> <a class="code" href="fsm_8h.html#a9b1cb9e2e5b0dbc108c05b0c4dce78ae">collide_while_moving</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms, <span class="keywordtype">int</span> y_shift, <span class="keywordtype">int</span> x_shift);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> <a class="code" href="fsm_8h.html#afa190c5260638fd573d49d72a91efed9">collide_while_rotating</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms, <span class="keywordtype">int</span> new_state);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#ae32fafcd0626eb6f1955100d710d958c">collide</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#a23df7fcba94844cf879cf247e6058379">remove_full_line</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#aba5ecd544bfaf75d5f1ddc8c25dbce26">pause</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#aceb3572e8abfaf1f3ba38168417d16b3">unpause</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#a8d4b0013c7ab0dc35d8ff965ef5ac646">gameover</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fsm_8h.html#a2732c6bcf7ba0e54b6b607223091c6a0">exitstate</a>(<a class="code" href="structParams__t.html">Params_t</a> *prms);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// FSM_H</span></div>
+<div class="ttc" id="abackend_8h_html"><div class="ttname"><a href="backend_8h.html">backend.h</a></div><div class="ttdoc">Заголовочный файл основных функций игры.</div></div>
+<div class="ttc" id="afsm_8h_html_a0c8439484206ee18463031aa1860884f"><div class="ttname"><a href="fsm_8h.html#a0c8439484206ee18463031aa1860884f">fast_move_down</a></div><div class="ttdeci">void fast_move_down(Params_t *prms)</div><div class="ttdoc">Функция ускоренного движения вниз.</div><div class="ttdef"><b>Definition:</b> fsm.c:206</div></div>
+<div class="ttc" id="afsm_8h_html_a23df7fcba94844cf879cf247e6058379"><div class="ttname"><a href="fsm_8h.html#a23df7fcba94844cf879cf247e6058379">remove_full_line</a></div><div class="ttdeci">void remove_full_line(Params_t *prms, int y)</div><div class="ttdoc">Функция удаления заполненной линии.</div><div class="ttdef"><b>Definition:</b> fsm.c:375</div></div>
+<div class="ttc" id="afsm_8h_html_a2732c6bcf7ba0e54b6b607223091c6a0"><div class="ttname"><a href="fsm_8h.html#a2732c6bcf7ba0e54b6b607223091c6a0">exitstate</a></div><div class="ttdeci">void exitstate(Params_t *prms)</div><div class="ttdoc">Функция выхода из игры.</div><div class="ttdef"><b>Definition:</b> fsm.c:430</div></div>
+<div class="ttc" id="afsm_8h_html_a6c9a6d6148e0ee5ca22623b7dd7290f3"><div class="ttname"><a href="fsm_8h.html#a6c9a6d6148e0ee5ca22623b7dd7290f3">fsm_table</a></div><div class="ttdeci">function fsm_table(GameState_t state, UserAction_t action)</div><div class="ttdoc">Функция автомата конечных состояний.</div><div class="ttdef"><b>Definition:</b> fsm.c:20</div></div>
+<div class="ttc" id="afsm_8h_html_a825f8c2e65c94cb8032e9e3fdd220be7"><div class="ttname"><a href="fsm_8h.html#a825f8c2e65c94cb8032e9e3fdd220be7">move_down</a></div><div class="ttdeci">void move_down(Params_t *prms)</div><div class="ttdoc">Функция движения блока вниз на одну строку.</div><div class="ttdef"><b>Definition:</b> fsm.c:110</div></div>
+<div class="ttc" id="afsm_8h_html_a8a1b374f14a68811256aea93ff4e5c63"><div class="ttname"><a href="fsm_8h.html#a8a1b374f14a68811256aea93ff4e5c63">move_right</a></div><div class="ttdeci">void move_right(Params_t *prms)</div><div class="ttdoc">Функция движение вправо.</div><div class="ttdef"><b>Definition:</b> fsm.c:187</div></div>
+<div class="ttc" id="afsm_8h_html_a8d4b0013c7ab0dc35d8ff965ef5ac646"><div class="ttname"><a href="fsm_8h.html#a8d4b0013c7ab0dc35d8ff965ef5ac646">gameover</a></div><div class="ttdeci">void gameover(Params_t *prms)</div><div class="ttdoc">Функция окончания игры.</div><div class="ttdef"><b>Definition:</b> fsm.c:417</div></div>
+<div class="ttc" id="afsm_8h_html_a9b1cb9e2e5b0dbc108c05b0c4dce78ae"><div class="ttname"><a href="fsm_8h.html#a9b1cb9e2e5b0dbc108c05b0c4dce78ae">collide_while_moving</a></div><div class="ttdeci">int collide_while_moving(Params_t *prms, int y_shift, int x_shift)</div><div class="ttdoc">Функция проверки столкновения при движении фигуры.</div><div class="ttdef"><b>Definition:</b> fsm.c:247</div></div>
+<div class="ttc" id="afsm_8h_html_aba5ecd544bfaf75d5f1ddc8c25dbce26"><div class="ttname"><a href="fsm_8h.html#aba5ecd544bfaf75d5f1ddc8c25dbce26">pause</a></div><div class="ttdeci">void pause(Params_t *prms)</div><div class="ttdoc">Функция постановки игры на паузу.</div><div class="ttdef"><b>Definition:</b> fsm.c:390</div></div>
+<div class="ttc" id="afsm_8h_html_abfb35aff01c25dd3c28f3b9b86c34aa2"><div class="ttname"><a href="fsm_8h.html#abfb35aff01c25dd3c28f3b9b86c34aa2">rotate</a></div><div class="ttdeci">void rotate(Params_t *prms)</div><div class="ttdoc">Функция поворота фигуры.</div><div class="ttdef"><b>Definition:</b> fsm.c:137</div></div>
+<div class="ttc" id="afsm_8h_html_abfced3c52043031c02bcd9678da29844"><div class="ttname"><a href="fsm_8h.html#abfced3c52043031c02bcd9678da29844">move_left</a></div><div class="ttdeci">void move_left(Params_t *prms)</div><div class="ttdoc">Функция движение влево.</div><div class="ttdef"><b>Definition:</b> fsm.c:170</div></div>
+<div class="ttc" id="afsm_8h_html_aceb3572e8abfaf1f3ba38168417d16b3"><div class="ttname"><a href="fsm_8h.html#aceb3572e8abfaf1f3ba38168417d16b3">unpause</a></div><div class="ttdeci">void unpause(Params_t *prms)</div><div class="ttdoc">Функция выводит игру из состояния паузы.</div><div class="ttdef"><b>Definition:</b> fsm.c:403</div></div>
+<div class="ttc" id="afsm_8h_html_ad1d08b78b2d41c0c744e94876a02df7b"><div class="ttname"><a href="fsm_8h.html#ad1d08b78b2d41c0c744e94876a02df7b">spawn</a></div><div class="ttdeci">void spawn(Params_t *prms)</div><div class="ttdoc">Функция появления блока на поле.</div><div class="ttdef"><b>Definition:</b> fsm.c:61</div></div>
+<div class="ttc" id="afsm_8h_html_ae32fafcd0626eb6f1955100d710d958c"><div class="ttname"><a href="fsm_8h.html#ae32fafcd0626eb6f1955100d710d958c">collide</a></div><div class="ttdeci">void collide(Params_t *prms)</div><div class="ttdoc">Функция присоединения фигуры при столкновении.</div><div class="ttdef"><b>Definition:</b> fsm.c:335</div></div>
+<div class="ttc" id="afsm_8h_html_afa190c5260638fd573d49d72a91efed9"><div class="ttname"><a href="fsm_8h.html#afa190c5260638fd573d49d72a91efed9">collide_while_rotating</a></div><div class="ttdeci">int collide_while_rotating(Params_t *prms, int new_state)</div><div class="ttdoc">Функция проверки столкновения при повороте фигуры.</div><div class="ttdef"><b>Definition:</b> fsm.c:286</div></div>
+<div class="ttc" id="astructParams__t_html"><div class="ttname"><a href="structParams__t.html">Params_t</a></div><div class="ttdoc">структура с данными о фигурах и самой игре</div><div class="ttdef"><b>Definition:</b> types.h:75</div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">Заголовочный файл с овновными типами.</div></div>
+<div class="ttc" id="atypes_8h_html_a6678e2a28b2bccb9f0563b3d59e15aa2"><div class="ttname"><a href="types_8h.html#a6678e2a28b2bccb9f0563b3d59e15aa2">GameState_t</a></div><div class="ttdeci">GameState_t</div><div class="ttdoc">enum для состояний КА в данный момент</div><div class="ttdef"><b>Definition:</b> types.h:14</div></div>
+<div class="ttc" id="atypes_8h_html_a7ba289d7b97db30e0b7041ca2cef75a9"><div class="ttname"><a href="types_8h.html#a7ba289d7b97db30e0b7041ca2cef75a9">UserAction_t</a></div><div class="ttdeci">UserAction_t</div><div class="ttdoc">enum для действий ввода пользователя</div><div class="ttdef"><b>Definition:</b> types.h:28</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

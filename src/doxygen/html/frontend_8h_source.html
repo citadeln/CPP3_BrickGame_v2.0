@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tetris: Исходный файл gui/cli/frontend.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tetris
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Tetris realisation</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_11bc0974ce736ce9a6fadebbeb7a8314.html">gui</a></li><li class="navelem"><a class="el" href="dir_eb72031c353f9ecdf51ac453b26ef86a.html">cli</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">frontend.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="frontend_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef FRONTEND_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define FRONTEND_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;ncurses.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;./../../brick_game/tetris/backend.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;./../../brick_game/tetris/defines.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="frontend_8h.html#a93f33baed7269e831cc6a5008d6323a3">   13</a></span>&#160;<span class="preprocessor">#define HUD_WIDTH 11  </span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#a9d69a467468050de23e12df2d023bcc2">print_game</a>(<a class="code" href="structGameInfo__t.html">GameInfo_t</a> gameinfo);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#aef607383551b146df5e130749c5c39de">print_stats</a>(<a class="code" href="structGameInfo__t.html">GameInfo_t</a> gameinfo);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#abf15e4551fd729806881dbb91dcee2b7">print_overlay</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#a47f0dc7bb65d3438bf10f20a62fd975c">print_start</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#af68b2a201e5c56292fe02147fd982d12">print_pause</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#a7d372bc0e60178ac7caf7ed419e08930">print_gameover</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#a4b258dbfb93333d29c328d5b606f7b94">print_exit</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="frontend_8h.html#a0db325c2ab3a08ca15590cf72ac455ec">print_rectangle</a>(<span class="keywordtype">int</span> y1, <span class="keywordtype">int</span> y2, <span class="keywordtype">int</span> x1, <span class="keywordtype">int</span> x2);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// FRONTEND_H</span></div>
+<div class="ttc" id="afrontend_8h_html_a0db325c2ab3a08ca15590cf72ac455ec"><div class="ttname"><a href="frontend_8h.html#a0db325c2ab3a08ca15590cf72ac455ec">print_rectangle</a></div><div class="ttdeci">void print_rectangle(int y1, int y2, int x1, int x2)</div><div class="ttdoc">Функция отрисовки прямоугольника.</div><div class="ttdef"><b>Definition:</b> frontend.c:175</div></div>
+<div class="ttc" id="afrontend_8h_html_a47f0dc7bb65d3438bf10f20a62fd975c"><div class="ttname"><a href="frontend_8h.html#a47f0dc7bb65d3438bf10f20a62fd975c">print_start</a></div><div class="ttdeci">void print_start(void)</div><div class="ttdoc">Функция отрисовки стартового сообщения.</div><div class="ttdef"><b>Definition:</b> frontend.c:90</div></div>
+<div class="ttc" id="afrontend_8h_html_a4b258dbfb93333d29c328d5b606f7b94"><div class="ttname"><a href="frontend_8h.html#a4b258dbfb93333d29c328d5b606f7b94">print_exit</a></div><div class="ttdeci">void print_exit()</div><div class="ttdoc">Функция отрисовки сообщения выхода.</div><div class="ttdef"><b>Definition:</b> frontend.c:127</div></div>
+<div class="ttc" id="afrontend_8h_html_a7d372bc0e60178ac7caf7ed419e08930"><div class="ttname"><a href="frontend_8h.html#a7d372bc0e60178ac7caf7ed419e08930">print_gameover</a></div><div class="ttdeci">void print_gameover()</div><div class="ttdoc">Функция отрисовки сообщения gameover.</div><div class="ttdef"><b>Definition:</b> frontend.c:112</div></div>
+<div class="ttc" id="afrontend_8h_html_a9d69a467468050de23e12df2d023bcc2"><div class="ttname"><a href="frontend_8h.html#a9d69a467468050de23e12df2d023bcc2">print_game</a></div><div class="ttdeci">void print_game(GameInfo_t gameinfo)</div><div class="ttdoc">Функция отрисовки актуального состояния игры.</div><div class="ttdef"><b>Definition:</b> frontend.c:15</div></div>
+<div class="ttc" id="afrontend_8h_html_abf15e4551fd729806881dbb91dcee2b7"><div class="ttname"><a href="frontend_8h.html#abf15e4551fd729806881dbb91dcee2b7">print_overlay</a></div><div class="ttdeci">void print_overlay(void)</div><div class="ttdoc">Функция отрисовки границ игрового поля и заголовков.</div><div class="ttdef"><b>Definition:</b> frontend.c:67</div></div>
+<div class="ttc" id="afrontend_8h_html_aef607383551b146df5e130749c5c39de"><div class="ttname"><a href="frontend_8h.html#aef607383551b146df5e130749c5c39de">print_stats</a></div><div class="ttdeci">void print_stats(GameInfo_t gameinfo)</div><div class="ttdoc">Функция отрисовки статистики.</div><div class="ttdef"><b>Definition:</b> frontend.c:153</div></div>
+<div class="ttc" id="afrontend_8h_html_af68b2a201e5c56292fe02147fd982d12"><div class="ttname"><a href="frontend_8h.html#af68b2a201e5c56292fe02147fd982d12">print_pause</a></div><div class="ttdeci">void print_pause()</div><div class="ttdoc">Функция отрисовки сообщения паузы.</div><div class="ttdef"><b>Definition:</b> frontend.c:102</div></div>
+<div class="ttc" id="astructGameInfo__t_html"><div class="ttname"><a href="structGameInfo__t.html">GameInfo_t</a></div><div class="ttdoc">структура для данных об игре</div><div class="ttdef"><b>Definition:</b> types.h:62</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
