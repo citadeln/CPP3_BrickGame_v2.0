@@ -161,7 +161,15 @@ Params_t *create_prms(Params_t *pointer) {
  * @return Figureinfo_t* Возвращает указатель статичной структуры.
  */
 Figureinfo_t *create_figure_info() {
-  static Figureinfo_t current_figure = {0};
+  static Figureinfo_t current_figure = {
+    0,              // y
+    0,              // x
+    rand() % 7,     // figure_type
+    0,              // figure_state
+    rand() % 7,     // next_figure_type
+    1,              // figure_color
+    1               // next_figure_color
+};
 
   current_figure.y = Y_BLOCK;
   current_figure.x = X_BLOCK;
