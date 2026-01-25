@@ -1,6 +1,6 @@
 CC = g++
 CCFLAGS = -Wall -Wextra -std=c++17 -g
-LDFLAGS = -lncurses
+NCURSES_FLAGS = -lncurses
 LIBFLAGS = -L. -L/usr/local/lib -L/usr/include
 RM = rm -rf
 
@@ -48,8 +48,11 @@ TEST_OBJ = $(TEST_SRC:.cc=.o)
 
 all: clean build
 
+%.o: %.cc
+	$(CC) $(CCFLAGS) -c $< -o $@
+
 build: $(BACK_LIB_NAME) $(FRONT_OBJECTS) $(MAIN_OBJECTS)
-	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(FRONT_OBJECTS) -lncurses -o $(GAME_NAME)
+	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(FRONT_OBJECTS) $(NCURSES_FLAGS) -o $(GAME_NAME)
 
 install: build
 	mkdir $(INSTALL_DIR)
@@ -72,7 +75,7 @@ test: clean $(ТESTS_NAME)
 	./$(ТESTS_NAME)
 
 $(ТESTS_NAME): $(TEST_OBJ) $(BACK_LIB_NAME)
-	$(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(BACK_LIB_NAME) -o $@ $(LDFLAGS)
+	$(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(BACK_LIB_NAME) -o $@ $(NCURSES_FLAGS)
 
 gcov_report: clean_gcov clean_report $(ТESTS_GCOV_NAME)
 	./$(ТESTS_GCOV_NAME)
@@ -82,7 +85,7 @@ gcov_report: clean_gcov clean_report $(ТESTS_GCOV_NAME)
 	open report/coverage.html
 
 $(ТESTS_GCOV_NAME):$(TEST_SRC) $(BACK_LIB_SOURCES)
-	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(LDFLAGS)
+	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(NCURSES_FLAGS)
 
 clang:
 	clang-format -n $(shell find $(MAIN_DIR) -name "*.cc")
@@ -112,6 +115,3 @@ clean_gcov:
 $(BACK_LIB_NAME): $(BACK_OBJECTS)
 	ar rc $@ $^
 	ranlib $@
-
-%.o: %.cc
-	$(CC) $(CCFLAGS) -c $< -o $@
