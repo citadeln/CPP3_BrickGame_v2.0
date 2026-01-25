@@ -235,7 +235,15 @@ GameInfo_t *get_field_info(Figureinfo_t *figure_info) {
  * @return GameInfo_t Возвращает указатель на статичную структуру.
  */
 GameInfo_t *create_field_info(Figureinfo_t *figure_info) {
-  static GameInfo_t field_info = {0};
+  static GameInfo_t field_info = {
+      nullptr,        // field
+      nullptr,        // next
+      0,              // score
+      0,              // high_score
+      1,              // level
+      50000000,       // speed
+      2               // pause
+  };
 
   static int field[Y_FIELD + 2][X_FIELD];
   static int *field_pointer[Y_FIELD + 2];
