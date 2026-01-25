@@ -4,6 +4,7 @@
  */
 
 #include "backend.h"
+#include "./../../s21_namespace.h"
 
 using namespace s21;
 
@@ -19,7 +20,7 @@ using namespace s21;
  * @param hold параметр длительного зажатия клавиши
  */
 void userInput(UserAction_t action, bool hold) {
-  static Params_t *prms = NULL;
+  static Params_t *prms = nullptr;
 
   prms = create_prms(prms);
 
@@ -127,7 +128,13 @@ int get_block_coord(int figure_type, int figure_state, int block_number,
  * @return Params_t* Возвращает указатель на статичную структуру.
  */
 Params_t *create_prms(Params_t *pointer) {
-  static Params_t prms = {0};
+  static Params_t prms = {
+    nullptr,               // figureinfo
+    nullptr,               // gameinfo
+    START,                 // state
+    {},                    // start_time
+    false                  // hold
+};
 
   if (pointer == NULL) {
     prms.figureinfo = create_figure_info();

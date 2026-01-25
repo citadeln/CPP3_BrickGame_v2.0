@@ -3,6 +3,7 @@
  * @brief Функции отрисовки интерфейса в окне консоли.
  */
 #include "frontend.h"
+#include "./../../s21_namespace.h"
 
 using namespace s21;
 

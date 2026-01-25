@@ -14,6 +14,9 @@
 #ifndef TETRIS_H
 #define TETRIS_H
 
+// Определение пространства имён s21
+namespace s21 {};
+
 #include "./brick_game/tetris/backend.h"
 #include "./gui/cli/frontend.h"
 
