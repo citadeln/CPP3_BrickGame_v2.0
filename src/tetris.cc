@@ -68,7 +68,7 @@ void game_loop() {
  * пользователя.
  */
 UserAction_t get_signal() {
-    UserAction_t action = ERR;
+    UserAction_t action = ERRENUM;
 
     switch (getch()) {
         case '\n':
@@ -96,7 +96,7 @@ UserAction_t get_signal() {
             action = Action;
             break;
         default:
-            action = ERR;
+            action = ERRENUM;
             break;
     }
 
