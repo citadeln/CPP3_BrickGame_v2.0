@@ -8,7 +8,7 @@
  *
  * Реализация Тетриса на языке Си.
  *
- * @author kristieh
+ * @author monroebu (легаси - kristieh)
  */
 
 #ifndef TETRIS_H
