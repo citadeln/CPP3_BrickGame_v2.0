@@ -4,6 +4,7 @@
  */
 
 #include "backend.h"
+
 #include "./../../s21_namespace.h"
 
 using namespace s21;
@@ -129,12 +130,12 @@ int get_block_coord(int figure_type, int figure_state, int block_number,
  */
 Params_t *create_prms(Params_t *pointer) {
   static Params_t prms = {
-    nullptr,               // figureinfo
-    nullptr,               // gameinfo
-    START,                 // state
-    {},                    // start_time
-    false                  // hold
-};
+      nullptr,  // figureinfo
+      nullptr,  // gameinfo
+      START,    // state
+      {},       // start_time
+      false     // hold
+  };
 
   if (pointer == NULL) {
     prms.figureinfo = create_figure_info();
@@ -162,14 +163,14 @@ Params_t *create_prms(Params_t *pointer) {
  */
 Figureinfo_t *create_figure_info() {
   static Figureinfo_t current_figure = {
-    0,              // y
-    0,              // x
-    rand() % 7,     // figure_type
-    0,              // figure_state
-    rand() % 7,     // next_figure_type
-    1,              // figure_color
-    1               // next_figure_color
-};
+      0,           // y
+      0,           // x
+      rand() % 7,  // figure_type
+      0,           // figure_state
+      rand() % 7,  // next_figure_type
+      1,           // figure_color
+      1            // next_figure_color
+  };
 
   current_figure.y = Y_BLOCK;
   current_figure.x = X_BLOCK;
@@ -236,13 +237,13 @@ GameInfo_t *get_field_info(Figureinfo_t *figure_info) {
  */
 GameInfo_t *create_field_info(Figureinfo_t *figure_info) {
   static GameInfo_t field_info = {
-      nullptr,        // field
-      nullptr,        // next
-      0,              // score
-      0,              // high_score
-      1,              // level
-      50000000,       // speed
-      2               // pause
+      nullptr,   // field
+      nullptr,   // next
+      0,         // score
+      0,         // high_score
+      1,         // level
+      50000000,  // speed
+      2          // pause
   };
 
   static int field[Y_FIELD + 2][X_FIELD];
@@ -275,7 +276,7 @@ GameInfo_t *create_field_info(Figureinfo_t *figure_info) {
   field_info.high_score = 0;
   hi_score(&field_info);
   field_info.level = 1;
-  //скорость в наносекундах
+  // скорость в наносекундах
   field_info.speed = ((11 - field_info.level) * 50000000);
   field_info.pause = 2;
 

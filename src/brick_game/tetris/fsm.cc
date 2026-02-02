@@ -18,7 +18,8 @@
  * @return function Возвращает функцию для выполнения.
  */
 function fsm_table(GameState_t state, UserAction_t action) {
-  if ((int)action == -1) action = UserAction_t::Action; // было if ((int)action == -1) action = 8;
+  if ((int)action == -1)
+    action = UserAction_t::Action;  // было if ((int)action == -1) action = 8;
 
   static const function fsm_table[8][9] = {
       // START
