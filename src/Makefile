@@ -14,7 +14,7 @@ GAME_NAME = tetris
 # имя тестового файла
 ТESTS_NAME = tetris_test
 # имя тестового файла c тестами покрытия кода gcovr
-TESTS_GCOV_NAME = tetris_tests_gcov
+ТESTS_GCOV_NAME = tetris_tests_gcov
 # имя директории для цели dist
 TAR_DIR = s21_tetris-1.0
 # директория установки
