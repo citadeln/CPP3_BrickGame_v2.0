@@ -6,6 +6,8 @@
 
 #include "tetris.h"
 
+using namespace s21;
+
 /**
  * @brief Вход в программу.
  *
@@ -66,39 +68,39 @@ void game_loop() {
  * пользователя.
  */
 UserAction_t get_signal() {
-  UserAction_t action = ERR;
+    UserAction_t action = ERRENUM;
 
-  switch (getch()) {
-    case '\n':
-      action = Start;
-      break;
-    case 'p':
-      action = Pause;
-      break;
-    case 'q':
-      action = Terminate;
-      break;
-    case KEY_LEFT:
-      action = Left;
-      break;
-    case KEY_RIGHT:
-      action = Right;
-      break;
-    case KEY_UP:
-      action = Up;
-      break;
-    case KEY_DOWN:
-      action = Down;
-      break;
-    case ' ':
-      action = Action;
-      break;
-    default:
-      action = ERR;
-      break;
-  }
+    switch (getch()) {
+        case '\n':
+            action = Start;
+            break;
+        case 'p':
+            action = Pause;
+            break;
+        case 'q':
+            action = Terminate;
+            break;
+        case KEY_LEFT:
+            action = Left;
+            break;
+        case KEY_RIGHT:
+            action = Right;
+            break;
+        case KEY_UP:
+            action = Up;
+            break;
+        case KEY_DOWN:
+            action = Down;
+            break;
+        case ' ':
+            action = Action;
+            break;
+        default:
+            action = ERRENUM;
+            break;
+    }
 
-  return action;
+    return action;
 }
 
 /**

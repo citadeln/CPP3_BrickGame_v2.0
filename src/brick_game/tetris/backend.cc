@@ -4,6 +4,9 @@
  */
 
 #include "backend.h"
+#include "./../../s21_namespace.h"
+
+using namespace s21;
 
 /**
  * @brief Основная функция обработки действий пользователя на основе нажатых
@@ -17,7 +20,7 @@
  * @param hold параметр длительного зажатия клавиши
  */
 void userInput(UserAction_t action, bool hold) {
-  static Params_t *prms = NULL;
+  static Params_t *prms = nullptr;
 
   prms = create_prms(prms);
 
@@ -125,7 +128,13 @@ int get_block_coord(int figure_type, int figure_state, int block_number,
  * @return Params_t* Возвращает указатель на статичную структуру.
  */
 Params_t *create_prms(Params_t *pointer) {
-  static Params_t prms = {0};
+  static Params_t prms = {
+    nullptr,               // figureinfo
+    nullptr,               // gameinfo
+    START,                 // state
+    {},                    // start_time
+    false                  // hold
+};
 
   if (pointer == NULL) {
     prms.figureinfo = create_figure_info();
@@ -152,7 +161,15 @@ Params_t *create_prms(Params_t *pointer) {
  * @return Figureinfo_t* Возвращает указатель статичной структуры.
  */
 Figureinfo_t *create_figure_info() {
-  static Figureinfo_t current_figure = {0};
+  static Figureinfo_t current_figure = {
+    0,              // y
+    0,              // x
+    rand() % 7,     // figure_type
+    0,              // figure_state
+    rand() % 7,     // next_figure_type
+    1,              // figure_color
+    1               // next_figure_color
+};
 
   current_figure.y = Y_BLOCK;
   current_figure.x = X_BLOCK;
@@ -218,7 +235,15 @@ GameInfo_t *get_field_info(Figureinfo_t *figure_info) {
  * @return GameInfo_t Возвращает указатель на статичную структуру.
  */
 GameInfo_t *create_field_info(Figureinfo_t *figure_info) {
-  static GameInfo_t field_info = {0};
+  static GameInfo_t field_info = {
+      nullptr,        // field
+      nullptr,        // next
+      0,              // score
+      0,              // high_score
+      1,              // level
+      50000000,       // speed
+      2               // pause
+  };
 
   static int field[Y_FIELD + 2][X_FIELD];
   static int *field_pointer[Y_FIELD + 2];
