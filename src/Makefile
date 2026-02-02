@@ -5,8 +5,9 @@ CHECK_FLAGS = -lcheck -lsubunit
 LIBFLAGS = -L. -L/usr/local/lib -L/usr/include
 RM = rm -rf
 
-GCOVR = ~/.local/bin/gcovr
+GCOVR = gcovr
 # GCOVR = gcovr # pip install gcovr
+# GCOVR = ~/.local/bin/gcovr
 
 
 # имя исполняемого файла
