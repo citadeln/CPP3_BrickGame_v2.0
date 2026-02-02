@@ -1,8 +1,8 @@
 #include "../../brick_game/tetris/backend.h"
 #include "tetris_test.h"
 
-static UserAction_t array1[] = {Start, Pause, Terminate, Left, Right,
-                                Up,    Down,  Action, ERRENUM};
+static UserAction_t array1[] = {Start, Pause, Terminate, Left,   Right,
+                                Up,    Down,  Action,    ERRENUM};
 
 static bool array2[] = {0, 1, 0, 1, 0, 1, 0, 1, 0};
 

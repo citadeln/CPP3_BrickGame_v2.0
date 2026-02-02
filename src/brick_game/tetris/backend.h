@@ -17,7 +17,7 @@
 
 void userInput(UserAction_t action, bool hold);
 
-Params_t *create_prms(Params_t*);
+Params_t *create_prms(Params_t *);
 Figureinfo_t *create_figure_info();
 GameInfo_t *get_field_info(Figureinfo_t *figureinfo);
 GameInfo_t *create_field_info(Figureinfo_t *figure_info);

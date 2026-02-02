@@ -89,9 +89,11 @@ gcov_report: clean_gcov clean_report $(ТESTS_GCOV_NAME)
 $(ТESTS_GCOV_NAME):$(TEST_SRC) $(BACK_LIB_SOURCES)
 	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(NCURSES_FLAGS) $(CHECK_FLAGS)
 
-clang:
+style:
 	clang-format -n $(shell find $(MAIN_DIR) -name "*.cc")
 	clang-format -n $(shell find $(MAIN_DIR) -name "*.h")
+	clang-format -i $(shell find $(MAIN_DIR) -name "*.cc")
+	clang-format -i $(shell find $(MAIN_DIR) -name "*.h")
 
 cpp:
 	cppcheck --enable=all --suppress=missingIncludeSystem --check-config tetris.cc ./brick_game/tetris/ ./gui/cli/
