@@ -1,6 +1,7 @@
 CC = g++
 CCFLAGS = -Wall -Wextra -std=c++17 -g
 NCURSES_FLAGS = -lncurses
+CHECK_FLAGS = -lcheck -lsubunit
 LIBFLAGS = -L. -L/usr/local/lib -L/usr/include
 RM = rm -rf
 
@@ -70,12 +71,12 @@ dist: build
 	cp -p $(GAME_NAME) $(TAR_DIR)
 	tar czf $(TAR_DIR).tar.gz $(TAR_DIR)
 	$(RM) $(TAR_DIR)
-
+	
 test: clean $(ТESTS_NAME)
 	./$(ТESTS_NAME)
 
 $(ТESTS_NAME): $(TEST_OBJ) $(BACK_LIB_NAME)
-	$(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(BACK_LIB_NAME) -o $@ $(NCURSES_FLAGS)
+	$(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(CHECK_FLAGS) -o $@ $(NCURSES_FLAGS)
 
 gcov_report: clean_gcov clean_report $(ТESTS_GCOV_NAME)
 	./$(ТESTS_GCOV_NAME)
@@ -85,14 +86,14 @@ gcov_report: clean_gcov clean_report $(ТESTS_GCOV_NAME)
 	open report/coverage.html
 
 $(ТESTS_GCOV_NAME):$(TEST_SRC) $(BACK_LIB_SOURCES)
-	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(NCURSES_FLAGS)
+	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(NCURSES_FLAGS) $(CHECK_FLAGS)
 
 clang:
 	clang-format -n $(shell find $(MAIN_DIR) -name "*.cc")
 	clang-format -n $(shell find $(MAIN_DIR) -name "*.h")
 
 cpp:
-	cppcheck --enable=all --suppress=missingIncludeSystem --check-config tetris.c ./brick_game/tetris/ ./gui/cli/
+	cppcheck --enable=all --suppress=missingIncludeSystem --check-config tetris.cc ./brick_game/tetris/ ./gui/cli/
 
 valgrind: test
 	valgrind --tool=memcheck --leak-check=yes ./$(ТESTS_NAME)
