@@ -37,8 +37,19 @@ int main(void) {
   curs_set(1);
   endwin();
 
+  // exitstate(create_prms(nullptr));
+
   return 0;
 }
+
+// void exitstate(Params_t *prms) {
+//   hi_score(prms->gameinfo);
+//   prms->gameinfo->pause = -1;
+
+//   // Необязательная очистка для Valgrind (статическая память и так очищается)
+//   // prms->gameinfo->field = nullptr;
+//   // prms->figureinfo = nullptr;
+// }
 
 /**
  * @brief Функция цикла игры.
