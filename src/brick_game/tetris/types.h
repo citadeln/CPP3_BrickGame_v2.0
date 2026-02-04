@@ -11,7 +11,7 @@
 /**
  * @brief enum для состояний КА в данный момент
  */
-typedef enum {
+enum class GameState_t : int {
   START = 0,  ///< 0 - начало игры
   SPAWN,      ///< 1 - ввод в игру новой фигуры
   MOVING,  ///< 2 - стадия движение в бок или поворот
@@ -20,12 +20,12 @@ typedef enum {
   PAUSE,    ///< 5 - пауза
   GAMEOVER,   ///< 6 - game over
   EXIT_STATE  ///< 7 - выход из программы
-} GameState_t;
+};
 
 /**
  * @brief enum для действий ввода пользователя
  */
-typedef enum {
+enum class UserAction_t : int {
   Start = 0,  ///< 'enter', начало игры
   Pause,      ///< 'p', пауза
   Terminate,  ///< 'q', выход из программы
@@ -35,7 +35,7 @@ typedef enum {
   Down,  ///< стрелка вниз, мгновенное перемещение фигуры максимально вниз
   Action,  ///< 'space', поворот фигуры
   ERRENUM  ///< Специальная константа для ошибки
-} UserAction_t;
+};
 
 /**
  * @brief структура для данных о текущей и следующей фигуре

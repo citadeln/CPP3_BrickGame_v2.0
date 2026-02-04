@@ -18,8 +18,7 @@
  * @return function Возвращает функцию для выполнения.
  */
 function fsm_table(GameState_t state, UserAction_t action) {
-  if ((int)action == -1)
-    action = UserAction_t::Action;  // было if ((int)action == -1) action = 8;
+  if (static_cast<int>(action) == -1) action = UserAction_t::Action;
 
   static const function fsm_table[8][9] = {
       // START
@@ -45,7 +44,7 @@ function fsm_table(GameState_t state, UserAction_t action) {
       {exitstate, exitstate, exitstate, exitstate, exitstate, exitstate,
        exitstate, exitstate, exitstate}};
 
-  return fsm_table[state][action];
+  return fsm_table[static_cast<int>(state)][static_cast<int>(action)];
 }
 
 /**
@@ -84,12 +83,12 @@ void spawn(Params_t *prms) {
   }
 
   if (collide_while_moving(prms, 1, 0))
-    prms->state = GAMEOVER;
+    prms->state = GameState_t::GAMEOVER;
   else if (collide_while_moving(prms, 2, 0)) {
-    prms->state = GAMEOVER;
+    prms->state = GameState_t::GAMEOVER;
     prms->figureinfo->y++;
   } else {
-    prms->state = MOVING;
+    prms->state = GameState_t::MOVING;
     prms->figureinfo->y += 2;
     timespec_get(&prms->start_time, TIME_UTC);
     prms->hold = false;
@@ -112,10 +111,10 @@ void move_down(Params_t *prms) {
   clear_or_draw_position(prms, 0);
 
   if (collide_while_moving(prms, 1, 0)) {
-    prms->state = COLLIDE;
+    prms->state = GameState_t::COLLIDE;
   } else {
     prms->figureinfo->y++;
-    prms->state = MOVING;
+    prms->state = GameState_t::MOVING;
     timespec_get(&prms->start_time, TIME_UTC);
   }
   clear_or_draw_position(prms, 1);
@@ -217,13 +216,13 @@ void fast_move_down(Params_t *prms) {
     prms->figureinfo->y += new_y - 1;
     clear_or_draw_position(prms, 1);
     timespec_get(&prms->start_time, TIME_UTC);
-    prms->state = COLLIDE;
+    prms->state = GameState_t::COLLIDE;
   } else {
     if (collide_while_moving(prms, 1, 0)) {
-      prms->state = COLLIDE;
+      prms->state = GameState_t::COLLIDE;
     } else {
       prms->figureinfo->y++;
-      prms->state = MOVING;
+      prms->state = GameState_t::MOVING;
       timespec_get(&prms->start_time, TIME_UTC);
     }
     clear_or_draw_position(prms, 1);
@@ -290,10 +289,8 @@ int collide_while_rotating(Params_t *prms, int new_state) {
   for (int i = 0; i < BLOCKS && !return_code; i++) {
     int y = prms->figureinfo->y +
             get_block_coord(prms->figureinfo->figure_type, new_state, i, 0);
-    ;
     int x = prms->figureinfo->x +
             get_block_coord(prms->figureinfo->figure_type, new_state, i, 1);
-    ;
     if (x < X_START) {
       int shift_x = (prms->figureinfo->figure_type == 0) ? 2 : 1;
       if (collide_while_moving(prms, 0, shift_x))
@@ -317,7 +314,7 @@ int collide_while_rotating(Params_t *prms, int new_state) {
 /**
  * @brief Функция присоединения фигуры при столкновении.
  *
- * Функция срабатывет при движении вниз и столкновении фигуры с нижней границей
+ * Функция срабатывает при движении вниз и столкновении фигуры с нижней границей
  * поля или с другой фигурой.
  *
  * Функция проверяет игровое поле на заполненные линии, удаляет их,
@@ -329,7 +326,7 @@ int collide_while_rotating(Params_t *prms, int new_state) {
  *
  * Функция просчитывает скорость в зависимости от текущего уровня.
  *
- * После переводит состоянии игры в состояние появления новой фигуры на поле.
+ * После переводит состояние игры в состояние появления новой фигуры на поле.
  *
  * @param prms Указатель на структуру со всеми данными по игре.
  */
@@ -362,13 +359,13 @@ void collide(Params_t *prms) {
 
   prms->gameinfo->speed = ((11 - prms->gameinfo->level) * 50000000);
 
-  prms->state = SPAWN;
+  prms->state = GameState_t::SPAWN;
 }
 
 /**
  * @brief Функция удаления заполненной линии.
  *
- * Функция cдвигает все строки выше Y вниз на 1, затирая строку Y.
+ * Функция сдвигает все строки выше Y вниз на 1, затирая строку Y.
  *
  * @param prms Указатель на структуру со всеми данными по игре.
  * @param y Номер строки для удаления в матрице поля.
@@ -389,7 +386,7 @@ void remove_full_line(Params_t *prms, int y) {
  * @param prms Указатель на структуру со всеми данными по игре.
  */
 void pause(Params_t *prms) {
-  prms->state = PAUSE;
+  prms->state = GameState_t::PAUSE;
   prms->gameinfo->pause = 1;
 }
 
@@ -404,7 +401,7 @@ void pause(Params_t *prms) {
 void unpause(Params_t *prms) {
   prms->gameinfo->pause = 0;
   timespec_get(&prms->start_time, TIME_UTC);
-  prms->state = MOVING;
+  prms->state = GameState_t::MOVING;
 }
 
 /**
@@ -418,7 +415,7 @@ void unpause(Params_t *prms) {
 void gameover(Params_t *prms) {
   hi_score(prms->gameinfo);
   prms->gameinfo->pause = 3;
-  prms->state = START;
+  prms->state = GameState_t::START;
 }
 
 /**
