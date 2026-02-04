@@ -5,7 +5,7 @@ static int array1[] = {0, 1, 2};
 
 START_TEST(test_chech_timer) {
   Params_t *prms = create_prms(NULL);
-  prms->state = MOVING;
+  prms->state = GameState_t::MOVING;
   prms->start_time.tv_sec -= array1[_i];
   chech_timer(prms);
 }

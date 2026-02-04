@@ -130,17 +130,17 @@ int get_block_coord(int figure_type, int figure_state, int block_number,
  */
 Params_t *create_prms(Params_t *pointer) {
   static Params_t prms = {
-      nullptr,  // figureinfo
-      nullptr,  // gameinfo
-      START,    // state
-      {},       // start_time
-      false     // hold
+      nullptr,             // figureinfo
+      nullptr,             // gameinfo
+      GameState_t::START,  // state
+      {},                  // start_time
+      false                // hold
   };
 
   if (pointer == NULL) {
     prms.figureinfo = create_figure_info();
     prms.gameinfo = get_field_info(prms.figureinfo);
-    prms.state = START;
+    prms.state = GameState_t::START;
     timespec_get(&prms.start_time, TIME_UTC);
     prms.hold = false;
   }
@@ -316,7 +316,7 @@ void clear_or_draw_position(Params_t *prms, bool param) {
  * @param prms Указатель на структуру со всеми данными по игре.
  */
 void chech_timer(Params_t *prms) {
-  if (prms->state == MOVING) {
+  if (prms->state == GameState_t::MOVING) {
     struct timespec current_time;
     timespec_get(&current_time, TIME_UTC);
 
@@ -324,7 +324,7 @@ void chech_timer(Params_t *prms) {
         ((current_time.tv_sec) * 1000000000 + current_time.tv_nsec) -
         ((prms->start_time.tv_sec) * 1000000000 + prms->start_time.tv_nsec);
 
-    if (diff >= prms->gameinfo->speed) prms->state = SHIFTING;
+    if (diff >= prms->gameinfo->speed) prms->state = GameState_t::SHIFTING;
   }
 }
 
