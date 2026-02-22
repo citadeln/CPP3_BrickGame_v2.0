@@ -3,22 +3,22 @@
  * @brief Заголовочный файл функций конечного автомата.
  */
 
+#pragma once
+
 #include "backend.h"
 
 namespace s21 {
 
-SnakeController::SnakeController(SnakeModel& model) : model_(model) {}
+class SnakeController {
+ public:
+  SnakeController(SnakeModel& model);
+  ~SnakeController();
 
-SnakeController::~SnakeController() {}
+  void ProcessUserInput(char input);
+  void UpdateGameState();
 
-void SnakeController::ProcessUserInput(char input) {
-  // Обработчик действий пользователя
-  model_.ChangeDirection(input);
-}
-
-void SnakeController::UpdateGameState() {
-  // Обновление состояния игры
-  model_.MoveForward();
-}
+ private:
+  SnakeModel& model_;
+};
 
 }  // namespace s21

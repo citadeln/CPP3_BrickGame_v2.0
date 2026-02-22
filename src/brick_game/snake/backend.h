@@ -8,6 +8,8 @@
 #include <random>
 #include <vector>
 
+#include "fsm.h"
+
 namespace s21 {
 
 class SnakeModel {

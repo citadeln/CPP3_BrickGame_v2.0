@@ -195,7 +195,7 @@ void print_rectangle(int y1, int y2, int x1, int x2) {
 
 namespace s21 {
 
-SnakeFrontend::SnakeFrontend(const SnakeModel& model) : model_(model) {}
+SnakeFrontend::SnakeFrontend(SnakeModel& model) : model_(model) {}
 
 SnakeFrontend::~SnakeFrontend() {}
 

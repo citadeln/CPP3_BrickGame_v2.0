@@ -9,7 +9,7 @@ namespace s21 {
 
 class SnakeFrontend {
  public:
-  SnakeFrontend(SnakeModel&);
+  SnakeFrontend(SnakeModel& model);
   virtual ~SnakeFrontend();
 
   void RenderGame();

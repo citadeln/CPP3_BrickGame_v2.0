@@ -4,9 +4,9 @@
  * работающий с вводом пользователя.
  */
 
-#include <iostream>
+#include "main.h"
 
-#include "tetris.h"
+#include <iostream>
 
 using namespace s21;
 

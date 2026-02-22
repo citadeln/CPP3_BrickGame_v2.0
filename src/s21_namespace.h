@@ -1,4 +1,3 @@
-// s21_namespace.h
 #ifndef S21_NAMESPACE_H
 #define S21_NAMESPACE_H
 

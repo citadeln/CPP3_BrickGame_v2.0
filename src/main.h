@@ -17,8 +17,10 @@
 // Определение пространства имён s21
 namespace s21 {};
 
+#include "./brick_game/snake/backend.h"
 #include "./brick_game/tetris/backend.h"
 #include "./gui/cli/frontend.h"
+#include "./gui/cli/snake_frontend.h"
 
 void game_loop();
 UserAction_t get_signal();
