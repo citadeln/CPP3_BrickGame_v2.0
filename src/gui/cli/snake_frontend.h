@@ -3,7 +3,8 @@
 
 #include <ncurses.h>
 
-#include "./../../brick_game/snake/backend.h"
+// #include "./../../brick_game/snake/backend.h"
+#include "./../../brick_game/snake/fsm.h"
 
 namespace s21 {
 
@@ -17,6 +18,15 @@ class SnakeFrontend {
 
  private:
   SnakeModel& model_;
+};
+
+class SnakeView {
+ public:
+  explicit SnakeView(SnakeController& controller);
+  void startEventLoop();
+
+ private:
+  SnakeController& controller_;
 };
 
 }  // namespace s21

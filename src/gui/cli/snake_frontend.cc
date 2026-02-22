@@ -1,6 +1,8 @@
 // snake_frontend.cc
 #include "snake_frontend.h"
 
+#include "./../../brick_game/snake/fsm.h"
+
 namespace s21 {
 
 SnakeFrontend::SnakeFrontend(SnakeModel& model) : model_(model) {}
@@ -29,6 +31,12 @@ void SnakeFrontend::HandleInput(int ch) {
   } else if (ch == KEY_RIGHT) {
     model_.ChangeDirection('R');
   }
+}
+
+SnakeView::SnakeView(SnakeController& controller) : controller_(controller) {}
+
+void SnakeView::startEventLoop() {
+  // здесь запускаешь цикл событий (Qt/GTK/ncurses — как у тебя)
 }
 
 }  // namespace s21

@@ -11,7 +11,7 @@ namespace s21 {
 
 class SnakeController {
  public:
-  SnakeController(SnakeModel& model);
+  explicit SnakeController(SnakeModel& model);
   ~SnakeController();
 
   void ProcessUserInput(char input);

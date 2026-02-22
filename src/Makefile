@@ -9,7 +9,6 @@ GCOVR = gcovr
 # GCOVR = gcovr # pip install gcovr
 # GCOVR = ~/.local/bin/gcovr
 
-
 # имя исполняемого файла
 GAME_NAME = tetris
 # имя тестового файла
@@ -46,6 +45,13 @@ TEST_HEADER_NAME = tetris_test.h
 TEST_SRC = $(shell find $(TEST_DIR) -name "*.cc")
 TEST_OBJ = $(TEST_SRC:.cc=.o)
 
+
+SNAKE_LIB_NAME = snake_backend.a
+SNAKE_LIB_DIR = ./brick_game/snake
+SNAKE_LIB_SOURCES = $(shell find $(SNAKE_LIB_DIR) -name "*.cc")
+SNAKE_OBJECTS = $(SNAKE_LIB_SOURCES:.cc=.o)
+
+
 .PHONY: all build clean install uninstall dvi dist
 
 all: clean build
@@ -53,8 +59,15 @@ all: clean build
 %.o: %.cc
 	$(CC) $(CCFLAGS) -c $< -o $@
 
-build: $(BACK_LIB_NAME) $(FRONT_OBJECTS) $(MAIN_OBJECTS)
-	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(FRONT_OBJECTS) $(NCURSES_FLAGS) -o $(GAME_NAME)
+$(SNAKE_LIB_NAME): $(SNAKE_OBJECTS)
+	ar rc $@ $^
+	ranlib $@
+
+#build: $(BACK_LIB_NAME) $(FRONT_OBJECTS) $(MAIN_OBJECTS)
+#	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(FRONT_OBJECTS) $(NCURSES_FLAGS) -o $(GAME_NAME)
+
+build: $(BACK_LIB_NAME) $(SNAKE_LIB_NAME) $(FRONT_OBJECTS) $(MAIN_OBJECTS)
+	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) -l:$(SNAKE_LIB_NAME) $(FRONT_OBJECTS) $(NCURSES_FLAGS) -o $(GAME_NAME)
 
 install: build
 	mkdir $(INSTALL_DIR)
