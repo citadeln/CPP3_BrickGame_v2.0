@@ -23,7 +23,7 @@ INSTALL_DIR = ./install
 
 # основные файлы и директории
 MAIN_DIR = ./
-MAIN_SOURCES = ./tetris.cc
+MAIN_SOURCES = ./main.cc
 MAIN_OBJECTS = $(MAIN_SOURCES:.cc=.o)
 
 
@@ -96,7 +96,7 @@ style:
 	clang-format -i $(shell find $(MAIN_DIR) -name "*.h")
 
 cpp:
-	cppcheck --enable=all --suppress=missingIncludeSystem --check-config tetris.cc ./brick_game/tetris/ ./gui/cli/
+	cppcheck --enable=all --suppress=missingIncludeSystem --check-config main.cc ./brick_game/tetris/ ./gui/cli/
 
 valgrind: test
 	valgrind --tool=memcheck --leak-check=yes ./$(ТESTS_NAME)

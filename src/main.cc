@@ -4,9 +4,24 @@
  * работающий с вводом пользователя.
  */
 
+#include <iostream>
+
 #include "tetris.h"
 
 using namespace s21;
+
+/**
+ * @brief Выбор игры: Тетрис или Змейка.
+ */
+char select_game() {
+  std::cout << "\nSelect the game:\n";
+  std::cout << "1. Tetris\n";
+  std::cout << "2. Snake\n";
+  std::cout << "Your choice: ";
+  char choice;
+  std::cin >> choice;
+  return choice;
+}
 
 /**
  * @brief Вход в программу.
@@ -32,12 +47,23 @@ int main(void) {
   nodelay(stdscr, TRUE);
   color_pairs();
 
-  game_loop();
+  char game_choice = select_game();
+
+  if (game_choice == '1') {
+    // Запускаем Tetris
+    game_loop();
+  } else if (game_choice == '2') {
+    // Запускаем Snake
+    SnakeModel snake_model;
+    SnakeController snake_controller(snake_model);
+    SnakeView snake_view(snake_controller);
+    snake_view.startEventLoop();
+  } else {
+    std::cerr << "Invalid choice.\n";
+  }
 
   curs_set(1);
   endwin();
-
-  // exitstate(create_prms(nullptr));
 
   return 0;
 }
