@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief Основной файл, задающий стартовые настройки библиотеки ncursed и
+ * @brief Основной файл, задающий стартовые настройки библиотеки ncurses и
  * работающий с вводом пользователя.
  */
 
@@ -12,17 +12,16 @@ using namespace s21;
  * @brief Вход в программу.
  *
  * Основная функция, в которой инициализируются стартовые параметры
- * библиотеки ncursed и запускается цикл игры.
+ * библиотеки ncurses и запускается цикл игры.
  *
- * - initscr() - инициализация библиотеки ncursed
- * - noecho() - отключение отображение введеных символом пользователем
+ * - initscr() - инициализация библиотеки ncurses
+ * - noecho() - отключение отображения введенных символов пользователем
  * - curs_set(0) - настройка видимости курсора: 0 - невидимый, 1 - видимый
- * - keypad(stdscr, TRUE) - включение режима чтения спец клавиш (стрелки, F1-F12
- * и т.д.)
- * - nodelay(stdscr, TRUE) - убирают задержку ожидания ввода пользователя
- * функции getch()
- * - endwin() - завершение работы библиотеки ncursed
- *
+ * - keypad(stdscr, TRUE) - включение режима чтения спец. клавиш (стрелки,
+ * F1-F12 и т.д.)
+ * - nodelay(stdscr, TRUE) - убирают задержку ожидания ввода пользователя в
+ * getch()
+ * - endwin() - завершение работы библиотеки ncurses
  */
 int main(void) {
   srand(time(0));
@@ -38,8 +37,19 @@ int main(void) {
   curs_set(1);
   endwin();
 
+  // exitstate(create_prms(nullptr));
+
   return 0;
 }
+
+// void exitstate(Params_t *prms) {
+//   hi_score(prms->gameinfo);
+//   prms->gameinfo->pause = -1;
+
+//   // Необязательная очистка для Valgrind (статическая память и так очищается)
+//   // prms->gameinfo->field = nullptr;
+//   // prms->figureinfo = nullptr;
+// }
 
 /**
  * @brief Функция цикла игры.
@@ -64,39 +74,39 @@ void game_loop() {
  * Функция получает ввод от пользователя и возвращает соответствующее значение
  * действия.
  *
- * @return UserAction_t Возвращает значение ввода или отсутсвие ввода от
+ * @return UserAction_t Возвращает значение ввода или отсутствие ввода от
  * пользователя.
  */
 UserAction_t get_signal() {
-  UserAction_t action = ERRENUM;
+  UserAction_t action = UserAction_t::ERRENUM;
 
   switch (getch()) {
     case '\n':
-      action = Start;
+      action = UserAction_t::Start;
       break;
     case 'p':
-      action = Pause;
+      action = UserAction_t::Pause;
       break;
     case 'q':
-      action = Terminate;
+      action = UserAction_t::Terminate;
       break;
     case KEY_LEFT:
-      action = Left;
+      action = UserAction_t::Left;
       break;
     case KEY_RIGHT:
-      action = Right;
+      action = UserAction_t::Right;
       break;
     case KEY_UP:
-      action = Up;
+      action = UserAction_t::Up;
       break;
     case KEY_DOWN:
-      action = Down;
+      action = UserAction_t::Down;
       break;
     case ' ':
-      action = Action;
+      action = UserAction_t::Action;
       break;
     default:
-      action = ERRENUM;
+      action = UserAction_t::ERRENUM;
       break;
   }
 
