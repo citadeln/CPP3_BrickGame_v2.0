@@ -1,25 +1,29 @@
-// snake_frontend.h
 #pragma once
 
 #include <ncurses.h>
-
-// #include "./../../brick_game/snake/backend.h"
-#include "./../../brick_game/snake/fsm.h"
+#include "./../../brick_game/snake/fsm.h"  // используем SnakeController
 
 namespace s21 {
 
+/**
+ * @brief Класс для отрисовки игры (View).
+ * Работает исключительно через SnakeController (ViewModel).
+ */
 class SnakeFrontend {
  public:
-  SnakeFrontend(SnakeModel& model);
+  explicit SnakeFrontend(SnakeController& controller);
   virtual ~SnakeFrontend();
 
   void RenderGame();
-  void HandleInput(int ch);
 
  private:
-  SnakeModel& model_;
+  SnakeController& controller_;  ///< Ссылка на ViewModel
 };
 
+
+/**
+ * @brief Класс для управления циклом событий ncurses.
+ */
 class SnakeView {
  public:
   explicit SnakeView(SnakeController& controller);

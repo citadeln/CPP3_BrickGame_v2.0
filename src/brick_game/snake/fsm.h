@@ -11,10 +11,13 @@
 #pragma once
 
 #include <ctime>
-
-#include "backend.h"
+#include <vector>
+#include <utility>
 
 namespace s21 {
+
+// Forward declaration, чтобы разорвать циклическую зависимость с backend.h
+class SnakeModel; 
 
 /**
  * @brief Состояния конечного автомата (FSM) Змейки.
@@ -47,7 +50,7 @@ enum class SnakeState : int {
  */
 class SnakeController {
  public:
-  explicit SnakeController(SnakeModel &model);
+  explicit SnakeController(SnakeModel& model);
   ~SnakeController();
 
   // ─── Команды от View (двусторонняя привязка) ──────────────────────────────
@@ -86,9 +89,9 @@ class SnakeController {
   long long GetSpeed() const;
 
  private:
-  SnakeModel &model_;
+  SnakeModel& model_;
   SnakeState state_{SnakeState::START};
-  int pause_status_{2};  ///< -1/0/1/2/3 — статус для View
+  int pause_status_{2}; ///< -1/0/1/2/3 — статус для View
   struct timespec last_tick_ {};
 
   // ─── Переходы FSM ─────────────────────────────────────────────────────────
@@ -113,4 +116,4 @@ class SnakeController {
   void ResetTimer();
 };
 
-}  // namespace s21
+} // namespace s21

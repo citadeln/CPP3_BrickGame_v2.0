@@ -2,18 +2,11 @@
  * @file
  * @brief Реализация ViewModel игры Змейка (MVVM: ViewModel).
  *
- * SnakeController реализует FSM согласно диаграмме:
- *
- * START → SPAWN → MOVING ──(timer)──► SHIFTING ──(no collide)──► MOVING
- *                                             └──(apple eaten)──► COLLIDE → SPAWN
- *                                             └──(wall/body)───► GAMEOVER
- * MOVING ──(p)──► PAUSE ──(p/Enter)──► MOVING
- * MOVING ──(q)──► EXIT_STATE
- * GAMEOVER ──(Enter)──► SPAWN
- * GAMEOVER ──(q)──────► EXIT_STATE
+ * Содержит реализацию конечного автомата (FSM).
  */
 
 #include "fsm.h"
+#include "backend.h" // Полное объявление SnakeModel для реализации методов
 
 namespace s21 {
 
@@ -21,7 +14,7 @@ namespace s21 {
 // Конструктор / деструктор
 // ─────────────────────────────────────────────────────────────────────────────
 
-SnakeController::SnakeController(SnakeModel &model)
+SnakeController::SnakeController(SnakeModel& model)
     : model_(model), state_(SnakeState::START), pause_status_(2) {
   timespec_get(&last_tick_, TIME_UTC);
 }
@@ -34,9 +27,6 @@ SnakeController::~SnakeController() {}
 
 /**
  * @brief Обрабатывает ввод пользователя согласно текущему состоянию FSM.
- *
- * View отправляет команду → ViewModel решает, как изменить Model / состояние.
- * Это реализует двустороннюю привязку: View → ViewModel → Model.
  */
 void SnakeController::ProcessUserInput(char input) {
   switch (state_) {
@@ -93,51 +83,32 @@ void SnakeController::Tick() {
 }
 
 int SnakeController::GetPauseStatus() const { return pause_status_; }
-
 SnakeState SnakeController::GetState() const { return state_; }
 
+// Прокси-методы к данным модели для View
 std::vector<std::pair<int, int>> SnakeController::GetSnakePositions() const {
   return model_.GetSnakePositions();
 }
-
 std::pair<int, int> SnakeController::GetApplePosition() const {
   return model_.GetApplePosition();
 }
-
 int SnakeController::GetScore() const { return model_.GetScore(); }
-
 int SnakeController::GetHighScore() const { return model_.GetHighScore(); }
-
 int SnakeController::GetLevel() const { return model_.GetLevel(); }
-
 long long SnakeController::GetSpeed() const { return model_.GetSpeed(); }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Переходы FSM (приватные)
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * @brief START/GAMEOVER → SPAWN → MOVING.
- *
- * Инициализирует новую игру и немедленно переходит в MOVING.
- */
 void SnakeController::DoSpawn() {
   state_ = SnakeState::SPAWN;
   pause_status_ = 0;
   ResetTimer();
-  // SPAWN → MOVING (яблоко уже создано в Reset/конструкторе)
+  // Переход SPAWN -> MOVING (яблоко уже создано в Reset/конструкторе)
   state_ = SnakeState::MOVING;
 }
 
-/**
- * @brief MOVING → SHIFTING: продвигает змейку на один шаг.
- *
- * После шага проверяет:
- *  - столкновение → GAMEOVER
- *  - поедание яблока + победа → GAMEOVER
- *  - поедание яблока → COLLIDE (обработка) → MOVING
- *  - нет событий → MOVING
- */
 void SnakeController::DoShifting() {
   state_ = SnakeState::SHIFTING;
   model_.MoveForward();
@@ -156,19 +127,13 @@ void SnakeController::DoShifting() {
   state_ = SnakeState::MOVING;
 }
 
-/**
- * @brief SHIFTING → COLLIDE: обработка поедания яблока.
- *
- * Яблоко уже съедено внутри MoveForward(), счёт/уровень/скорость обновлены,
- * новое яблоко сгенерировано. Проверяем условие победы.
- */
 void SnakeController::DoCollide() {
   state_ = SnakeState::COLLIDE;
 
   if (model_.HasWon()) {
     DoGameOver();
   } else {
-    // COLLIDE → SPAWN (новое яблоко уже сгенерировано) → MOVING
+    // COLLIDE -> MOVING (новое яблоко уже сгенерировано)
     state_ = SnakeState::MOVING;
   }
 }
@@ -213,4 +178,4 @@ void SnakeController::ResetTimer() {
   timespec_get(&last_tick_, TIME_UTC);
 }
 
-}  // namespace s21
+} // namespace s21

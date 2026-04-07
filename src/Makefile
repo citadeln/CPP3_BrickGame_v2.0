@@ -10,7 +10,7 @@ GCOVR = gcovr
 # GCOVR = ~/.local/bin/gcovr
 
 # ── Имена исполняемых файлов ──────────────────────────────────────────────────
-GAME_NAME	 = tetris
+GAME_NAME	 = brickgame
 SNAKE_TEST_NAME   = snake_test
 TETRIS_TEST_NAME  = tetris_test
 

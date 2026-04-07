@@ -331,7 +331,7 @@ void chech_timer(Params_t *prms) {
 /**
  * @brief Функция работы с рекордом очков.
  *
- * Функция получения или записи рекорда из файла hi-score.txt.
+ * Функция получения или записи рекорда из файла hi-score-tetris.txt.
  *
  * Если текущий счет больше рекорда из файла, то перезаписывает файл с новым
  * значением.
@@ -342,7 +342,7 @@ void hi_score(GameInfo_t *gameinfo) {
   FILE *file;
 
   if (gameinfo->high_score >= gameinfo->score) {
-    file = fopen("hi-score.txt", "r");
+    file = fopen("hi-score-tetris.txt", "r");
     if (file) {
       fscanf(file, "%d", &gameinfo->high_score);
       fclose(file);
@@ -350,7 +350,7 @@ void hi_score(GameInfo_t *gameinfo) {
       gameinfo->high_score = 0;
 
   } else {
-    file = fopen("hi-score.txt", "w");
+    file = fopen("hi-score-tetris.txt", "w");
     fprintf(file, "%d", gameinfo->score);
     fclose(file);
   }

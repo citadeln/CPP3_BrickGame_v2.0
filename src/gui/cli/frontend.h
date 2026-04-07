@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief Заголовочныый файл библиотеки отрисовки интерфейса.
+ * @brief Заголовочный файл библиотеки отрисовки интерфейса Tetris (CLI).
  */
 #ifndef FRONTEND_H
 #define FRONTEND_H
@@ -12,13 +12,14 @@
 
 #define HUD_WIDTH 11  ///< Ширина панели со статистикой
 
+// Tetris CLI view
 void print_game(GameInfo_t gameinfo);
 void print_stats(GameInfo_t gameinfo);
 void print_overlay(void);
 void print_start(void);
-void print_pause();
-void print_gameover();
-void print_exit();
+void print_pause(void);
+void print_gameover(void);
+void print_exit(void);
 void print_rectangle(int y1, int y2, int x1, int x2);
 
 #endif  // FRONTEND_H
