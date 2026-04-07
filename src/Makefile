@@ -1,134 +1,148 @@
-CC = g++
-CCFLAGS = -Wall -Wextra -std=c++17 -g
-NCURSES_FLAGS = -lncurses
-CHECK_FLAGS = -lcheck -lsubunit
-LIBFLAGS = -L. -L/usr/local/lib -L/usr/include
-RM = rm -rf
+CC         = g++
+CCFLAGS    = -Wall -Wextra -std=c++17 -g
+NCURSES    = -lncurses
+CHECK_FLAGS= -lcheck
+LIBFLAGS   = -L. -L/usr/local/lib
+RM         = rm -rf
 
 GCOVR = gcovr
 # GCOVR = gcovr # pip install gcovr
 # GCOVR = ~/.local/bin/gcovr
 
-# имя исполняемого файла
-GAME_NAME = tetris
-# имя тестового файла
-ТESTS_NAME = tetris_test
-# имя тестового файла c тестами покрытия кода gcovr
-ТESTS_GCOV_NAME = tetris_tests_gcov
-# имя директории для цели dist
-TAR_DIR = s21_tetris-1.0
-# директория установки
+# ── Имена исполняемых файлов ──────────────────────────────────────────────────
+GAME_NAME         = tetris
+SNAKE_TEST_NAME   = snake_test
+TETRIS_TEST_NAME  = tetris_test
+
+# ── Основные исходники ────────────────────────────────────────────────────────
+MAIN_SRC = ./main.cc
+
+# ── Tetris backend ────────────────────────────────────────────────────────────
+TETRIS_LIB   = tetris_backend.a
+TETRIS_DIR   = ./brick_game/tetris
+TETRIS_SRC   = $(shell find $(TETRIS_DIR) -name "*.cc")
+TETRIS_OBJ   = $(TETRIS_SRC:.cc=.o)
+
+# ── Snake backend (Model + ViewModel) ────────────────────────────────────────
+SNAKE_LIB    = snake_backend.a
+SNAKE_DIR    = ./brick_game/snake
+SNAKE_SRC    = $(shell find $(SNAKE_DIR) -name "*.cc")
+SNAKE_OBJ    = $(SNAKE_SRC:.cc=.o)
+
+# ── GUI (frontend) ────────────────────────────────────────────────────────────
+GUI_DIR  = ./gui/cli
+GUI_SRC  = $(shell find $(GUI_DIR) -name "*.cc")
+GUI_OBJ  = $(GUI_SRC:.cc=.o)
+
+# ── Тесты Змейки ─────────────────────────────────────────────────────────────
+SNAKE_TEST_DIR = ./tests/snake
+SNAKE_TEST_SRC = $(shell find $(SNAKE_TEST_DIR) -name "*.cc")
+SNAKE_TEST_OBJ = $(SNAKE_TEST_SRC:.cc=.o)
+
+# ── Тесты Тетриса ─────────────────────────────────────────────────────────────
+TETRIS_TEST_DIR = ./tests/tetris
+TETRIS_TEST_SRC = $(shell find $(TETRIS_TEST_DIR) -name "*.cc")
+TETRIS_TEST_OBJ = $(TETRIS_TEST_SRC:.cc=.o)
+
+# ── Установка ─────────────────────────────────────────────────────────────────
 INSTALL_DIR = ./install
+TAR_DIR     = s21_brickgame-1.0
 
-# основные файлы и директории
-MAIN_DIR = ./
-MAIN_SOURCES = ./main.cc
-MAIN_OBJECTS = $(MAIN_SOURCES:.cc=.o)
-
-
-# файлы и директории функций библиотеки backend'a
-BACK_LIB_NAME = backend.a
-BACK_LIB_DIR = ./brick_game/tetris
-BACK_LIB_SOURCES = $(shell find $(BACK_LIB_DIR) -name "*.cc")
-BACK_OBJECTS = $(BACK_LIB_SOURCES:.cc=.o)
-
-
-# файлы и директории функций frontend'a
-FRONT_DIR = ./gui/cli
-FRONT_SOURCES = $(shell find $(FRONT_DIR) -name "*.cc")
-FRONT_OBJECTS = $(FRONT_SOURCES:.cc=.o)
-
-
-# файлы и директории тестов
-TEST_DIR = tests/tetris
-TEST_HEADER_NAME = tetris_test.h
-TEST_SRC = $(shell find $(TEST_DIR) -name "*.cc")
-TEST_OBJ = $(TEST_SRC:.cc=.o)
-
-
-SNAKE_LIB_NAME = snake_backend.a
-SNAKE_LIB_DIR = ./brick_game/snake
-SNAKE_LIB_SOURCES = $(shell find $(SNAKE_LIB_DIR) -name "*.cc")
-SNAKE_OBJECTS = $(SNAKE_LIB_SOURCES:.cc=.o)
-
-
-.PHONY: all build clean install uninstall dvi dist
+# ─────────────────────────────────────────────────────────────────────────────
+.PHONY: all build clean install uninstall dvi dist test test_snake test_tetris \
+        gcov_report style cpp valgrind
 
 all: clean build
 
+# ── Шаблонные правила ─────────────────────────────────────────────────────────
 %.o: %.cc
-	$(CC) $(CCFLAGS) -c $< -o $@
+        $(CC) $(CCFLAGS) -c $< -o $@
 
-$(SNAKE_LIB_NAME): $(SNAKE_OBJECTS)
-	ar rc $@ $^
-	ranlib $@
+# ── Библиотеки ────────────────────────────────────────────────────────────────
+$(TETRIS_LIB): $(TETRIS_OBJ)
+        ar rc $@ $^
+        ranlib $@
 
-#build: $(BACK_LIB_NAME) $(FRONT_OBJECTS) $(MAIN_OBJECTS)
-#	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(FRONT_OBJECTS) $(NCURSES_FLAGS) -o $(GAME_NAME)
+$(SNAKE_LIB): $(SNAKE_OBJ)
+        ar rc $@ $^
+        ranlib $@
 
-build: $(BACK_LIB_NAME) $(SNAKE_LIB_NAME) $(FRONT_OBJECTS) $(MAIN_OBJECTS)
-	$(CC) $(CCFLAGS) $(MAIN_OBJECTS) $(LIBFLAGS) -l:$(BACK_LIB_NAME) -l:$(SNAKE_LIB_NAME) $(FRONT_OBJECTS) $(NCURSES_FLAGS) -o $(GAME_NAME)
+# ── Основная сборка ───────────────────────────────────────────────────────────
+build: $(TETRIS_LIB) $(SNAKE_LIB) $(GUI_OBJ) $(MAIN_SRC:.cc=.o)
+        $(CC) $(CCFLAGS) $(MAIN_SRC:.cc=.o) $(LIBFLAGS) \
+            -l:$(TETRIS_LIB) -l:$(SNAKE_LIB) $(GUI_OBJ) $(NCURSES) -o $(GAME_NAME)
 
 install: build
-	mkdir $(INSTALL_DIR)
-	cp -p $(GAME_NAME) $(INSTALL_DIR)
+        mkdir -p $(INSTALL_DIR)
+        cp -p $(GAME_NAME) $(INSTALL_DIR)
 
-uninstall: 
-	$(RM) $(INSTALL_DIR)
+uninstall:
+        $(RM) $(INSTALL_DIR)
 
 dvi:
-	open ./doxygen/html/index.html
+        open ./doxygen/html/index.html
 
 dist: build
-	$(RM) $(TAR_DIR)
-	mkdir $(TAR_DIR)
-	cp -p $(GAME_NAME) $(TAR_DIR)
-	tar czf $(TAR_DIR).tar.gz $(TAR_DIR)
-	$(RM) $(TAR_DIR)
-	
-test: clean $(ТESTS_NAME)
-	./$(ТESTS_NAME)
+        $(RM) $(TAR_DIR)
+        mkdir $(TAR_DIR)
+        cp -p $(GAME_NAME) $(TAR_DIR)
+        tar czf $(TAR_DIR).tar.gz $(TAR_DIR)
+        $(RM) $(TAR_DIR)
 
-$(ТESTS_NAME): $(TEST_OBJ) $(BACK_LIB_NAME)
-	$(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(BACK_LIB_NAME) $(CHECK_FLAGS) -o $@ $(NCURSES_FLAGS)
+# ── Тесты ─────────────────────────────────────────────────────────────────────
+test: test_snake test_tetris
 
-gcov_report: clean_gcov clean_report $(ТESTS_GCOV_NAME)
-	./$(ТESTS_GCOV_NAME)
-	mkdir report
-	$(GCOVR) -r . --html --html-details -o report/coverage.html --exclude=$(TEST_DIR)
-	make clean_gcov
-	open report/coverage.html
+test_snake: clean $(SNAKE_TEST_NAME)
+        ./$(SNAKE_TEST_NAME)
 
-$(ТESTS_GCOV_NAME):$(TEST_SRC) $(BACK_LIB_SOURCES)
-	$(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ -o $@ $(NCURSES_FLAGS) $(CHECK_FLAGS)
+$(SNAKE_TEST_NAME): $(SNAKE_TEST_OBJ) $(SNAKE_LIB)
+        $(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(SNAKE_LIB) $(CHECK_FLAGS) -o $@
 
+test_tetris: clean $(TETRIS_TEST_NAME)
+        ./$(TETRIS_TEST_NAME)
+
+$(TETRIS_TEST_NAME): $(TETRIS_TEST_OBJ) $(TETRIS_LIB)
+        $(CC) $(CCFLAGS) $^ $(LIBFLAGS) -l:$(TETRIS_LIB) $(CHECK_FLAGS) -o $@ $(NCURSES)
+
+# ── Покрытие кода ─────────────────────────────────────────────────────────────
+SNAKE_GCOV_NAME = snake_tests_gcov
+
+gcov_report: clean_gcov clean_report $(SNAKE_GCOV_NAME)
+        ./$(SNAKE_GCOV_NAME)
+        mkdir report
+        $(GCOVR) -r . --html --html-details -o report/coverage.html \
+            --exclude=$(SNAKE_TEST_DIR)
+        make clean_gcov
+        open report/coverage.html
+
+$(SNAKE_GCOV_NAME): $(SNAKE_TEST_SRC) $(SNAKE_SRC)
+        $(CC) $(CCFLAGS) -g -fprofile-arcs -ftest-coverage $^ \
+            -o $@ $(CHECK_FLAGS)
+
+# ── Стиль кода ────────────────────────────────────────────────────────────────
 style:
-	clang-format -n $(shell find $(MAIN_DIR) -name "*.cc")
-	clang-format -n $(shell find $(MAIN_DIR) -name "*.h")
-	clang-format -i $(shell find $(MAIN_DIR) -name "*.cc")
-	clang-format -i $(shell find $(MAIN_DIR) -name "*.h")
+        clang-format -n $(shell find . -name "*.cc" -o -name "*.h")
+        clang-format -i $(shell find . -name "*.cc" -o -name "*.h")
 
+# ── Статический анализ ────────────────────────────────────────────────────────
 cpp:
-	cppcheck --enable=all --suppress=missingIncludeSystem --check-config main.cc ./brick_game/tetris/ ./gui/cli/
+        cppcheck --enable=all --suppress=missingIncludeSystem \
+            main.cc ./brick_game/snake/ ./brick_game/tetris/ ./gui/cli/
 
-valgrind: test
-	valgrind --tool=memcheck --leak-check=yes ./$(ТESTS_NAME)
+# ── Valgrind ──────────────────────────────────────────────────────────────────
+valgrind: test_snake
+        valgrind --tool=memcheck --leak-check=yes ./$(SNAKE_TEST_NAME)
 
+# ── Очистка ───────────────────────────────────────────────────────────────────
 clean: clean_gcov clean_report
-	$(RM) $(GAME_NAME)
-	$(RM) $(ТESTS_NAME)
-	$(RM) $(shell find $(DIR) -name "*.a")
-	$(RM) $(shell find $(DIR) -name "*.o")
-	$(RM) $(shell find $(DIR) -name "*.gz")
+        $(RM) $(GAME_NAME) $(SNAKE_TEST_NAME) $(TETRIS_TEST_NAME)
+        $(RM) $(shell find . -name "*.a" 2>/dev/null)
+        $(RM) $(shell find . -name "*.o" 2>/dev/null)
+        $(RM) $(shell find . -name "*.gz" 2>/dev/null)
 
 clean_report:
-	$(RM) report
+        $(RM) report
 
 clean_gcov:
-	$(RM) $(ТESTS_GCOV_NAME)
-	$(RM) *.gcda
-	$(RM) *.gcno
-
-$(BACK_LIB_NAME): $(BACK_OBJECTS)
-	ar rc $@ $^
-	ranlib $@
+        $(RM) $(SNAKE_GCOV_NAME)
+        $(RM) *.gcda *.gcno

@@ -1,7 +1,6 @@
 /**
  * @file
- * @brief Основной файл, задающий стартовые настройки библиотеки ncurses и
- * работающий с вводом пользователя.
+ * @brief Основной файл: выбор игры, инициализация ncurses, цикл игры.
  */
 
 #include "main.h"
@@ -26,20 +25,20 @@ char select_game() {
 /**
  * @brief Вход в программу.
  *
- * Основная функция, в которой инициализируются стартовые параметры
- * библиотеки ncurses и запускается цикл игры.
+ * Инициализирует ncurses и запускает выбранную игру.
  *
- * - initscr() - инициализация библиотеки ncurses
- * - noecho() - отключение отображения введенных символов пользователем
- * - curs_set(0) - настройка видимости курсора: 0 - невидимый, 1 - видимый
- * - keypad(stdscr, TRUE) - включение режима чтения спец. клавиш (стрелки,
- * F1-F12 и т.д.)
- * - nodelay(stdscr, TRUE) - убирают задержку ожидания ввода пользователя в
- * getch()
- * - endwin() - завершение работы библиотеки ncurses
+ * - initscr()           — инициализация ncurses
+ * - noecho()            — скрыть ввод пользователя
+ * - curs_set(0)         — скрыть курсор
+ * - keypad(stdscr,TRUE) — поддержка спецклавиш (стрелки и т.д.)
+ * - nodelay(stdscr,TRUE)— неблокирующий getch()
+ * - endwin()            — завершение ncurses
  */
 int main(void) {
-  srand(time(0));
+  srand(static_cast<unsigned>(time(nullptr)));
+
+  char game_choice = select_game();
+
   initscr();
   noecho();
   curs_set(0);
@@ -47,19 +46,24 @@ int main(void) {
   nodelay(stdscr, TRUE);
   color_pairs();
 
-  char game_choice = select_game();
-
   if (game_choice == '1') {
-    // Запускаем Tetris
+    // ── Тетрис ──────────────────────────────────────────────────────────────
     game_loop();
+
   } else if (game_choice == '2') {
-    // Запускаем Snake
+    // ── Змейка (MVVM) ────────────────────────────────────────────────────────
+    // Model:     SnakeModel     — бизнес-логика, данные
+    // ViewModel: SnakeController — FSM, привязка данных
+    // View:      SnakeView      — ncurses-цикл событий + SnakeFrontend-рендер
     SnakeModel snake_model;
     SnakeController snake_controller(snake_model);
     SnakeView snake_view(snake_controller);
     snake_view.startEventLoop();
+
   } else {
+    endwin();
     std::cerr << "Invalid choice.\n";
+    return 1;
   }
 
   curs_set(1);
@@ -68,19 +72,8 @@ int main(void) {
   return 0;
 }
 
-// void exitstate(Params_t *prms) {
-//   hi_score(prms->gameinfo);
-//   prms->gameinfo->pause = -1;
-
-//   // Необязательная очистка для Valgrind (статическая память и так очищается)
-//   // prms->gameinfo->field = nullptr;
-//   // prms->figureinfo = nullptr;
-// }
-
 /**
- * @brief Функция цикла игры.
- *
- * Основной цикл игры.
+ * @brief Цикл игры Тетрис.
  */
 void game_loop() {
   GameInfo_t gameinfo;
@@ -88,20 +81,15 @@ void game_loop() {
 
   while (gameinfo.pause != -1) {
     userInput(get_signal(), 0);
-
     gameinfo = updateCurrentState();
     print_game(gameinfo);
   }
 }
 
 /**
- * @brief Функция получения ввода от пользователя.
+ * @brief Получение ввода пользователя для Тетриса.
  *
- * Функция получает ввод от пользователя и возвращает соответствующее значение
- * действия.
- *
- * @return UserAction_t Возвращает значение ввода или отсутствие ввода от
- * пользователя.
+ * @return UserAction_t Действие пользователя или ERRENUM при отсутствии ввода.
  */
 UserAction_t get_signal() {
   UserAction_t action = UserAction_t::ERRENUM;
@@ -140,9 +128,7 @@ UserAction_t get_signal() {
 }
 
 /**
- * @brief Функция инициализации цветов.
- *
- * Функция инициализирует пары цветов для покраски фигур.
+ * @brief Инициализация цветовых пар ncurses.
  */
 void color_pairs() {
   start_color();
