@@ -123,8 +123,6 @@ int SnakeModel::GetLevel() const { return level_; }
 
 long long SnakeModel::GetSpeed() const { return speed_; }
 
-char SnakeModel::GetDirection() const { return dir_; }
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Приватные методы
 // ─────────────────────────────────────────────────────────────────────────────
