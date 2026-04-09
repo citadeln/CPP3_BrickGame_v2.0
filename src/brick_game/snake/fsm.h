@@ -11,13 +11,13 @@
 #pragma once
 
 #include <ctime>
-#include <vector>
 #include <utility>
+#include <vector>
 
 namespace s21 {
 
 // Forward declaration, чтобы разорвать циклическую зависимость с backend.h
-class SnakeModel; 
+class SnakeModel;
 
 /**
  * @brief Состояния конечного автомата (FSM) Змейки.
@@ -26,14 +26,14 @@ class SnakeModel;
  * START → SPAWN → MOVING → SHIFTING → COLLIDE → SPAWN | GAMEOVER
  */
 enum class SnakeState : int {
-  START = 0,   ///< Начальный экран (ожидание Enter)
-  SPAWN,       ///< Инициализация / рестарт игры
-  MOVING,      ///< Движение: ожидание таймера и ввода пользователя
-  SHIFTING,    ///< Принудительный шаг вперёд (таймер сработал)
-  COLLIDE,     ///< Обработка столкновения (съедено яблоко)
-  PAUSE,       ///< Пауза
-  GAMEOVER,    ///< Конец игры
-  EXIT_STATE   ///< Выход из программы
+  START = 0,  ///< Начальный экран (ожидание Enter)
+  SPAWN,      ///< Инициализация / рестарт игры
+  MOVING,  ///< Движение: ожидание таймера и ввода пользователя
+  SHIFTING,  ///< Принудительный шаг вперёд (таймер сработал)
+  COLLIDE,  ///< Обработка столкновения (съедено яблоко)
+  PAUSE,      ///< Пауза
+  GAMEOVER,   ///< Конец игры
+  EXIT_STATE  ///< Выход из программы
 };
 
 /**
@@ -91,7 +91,7 @@ class SnakeController {
  private:
   SnakeModel& model_;
   SnakeState state_{SnakeState::START};
-  int pause_status_{2}; ///< -1/0/1/2/3 — статус для View
+  int pause_status_{2};  ///< -1/0/1/2/3 — статус для View
   struct timespec last_tick_ {};
 
   // ─── Переходы FSM ─────────────────────────────────────────────────────────
@@ -116,4 +116,4 @@ class SnakeController {
   void ResetTimer();
 };
 
-} // namespace s21
+}  // namespace s21

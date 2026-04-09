@@ -92,7 +92,7 @@ void print_overlay() {
  * @brief Функция отрисовки стартового сообщения.
  */
 void print_start() {
-  mvprintw(Y_FIELD / 2,     X_FIELD - 4, "Press ENTER");
+  mvprintw(Y_FIELD / 2, X_FIELD - 4, "Press ENTER");
   mvprintw(Y_FIELD / 2 + 1, X_FIELD - 4, " to start! ");
 }
 
@@ -109,7 +109,7 @@ void print_pause() {
  */
 void print_gameover() {
   print_rectangle(Y_FIELD / 2 - 1, Y_FIELD / 2 + 2, X_FIELD - 7, X_FIELD + 7);
-  mvprintw(Y_FIELD / 2,     X_FIELD - 6, "  GAME OVER  ");
+  mvprintw(Y_FIELD / 2, X_FIELD - 6, "  GAME OVER  ");
   mvprintw(Y_FIELD / 2 + 1, X_FIELD - 6, "Press any key");
   refresh();
   nodelay(stdscr, FALSE);
@@ -121,12 +121,12 @@ void print_gameover() {
  * @brief Функция отрисовки сообщения выхода.
  */
 void print_exit() {
-  mvaddch(Y_FIELD / 2 - 1, 0,             ACS_LTEE);
+  mvaddch(Y_FIELD / 2 - 1, 0, ACS_LTEE);
   mvaddch(Y_FIELD / 2 - 1, X_FIELD * 2 + 1, ACS_RTEE);
   mvhline(Y_FIELD / 2 - 1, 1, ACS_HLINE, X_FIELD * 2);
-  mvprintw(Y_FIELD / 2,     X_FIELD - 9, " THANKS FOR PLAYING ");
+  mvprintw(Y_FIELD / 2, X_FIELD - 9, " THANKS FOR PLAYING ");
   mvprintw(Y_FIELD / 2 + 1, X_FIELD - 9, "   Press any key    ");
-  mvaddch(Y_FIELD / 2 + 2, 0,             ACS_LTEE);
+  mvaddch(Y_FIELD / 2 + 2, 0, ACS_LTEE);
   mvaddch(Y_FIELD / 2 + 2, X_FIELD * 2 + 1, ACS_RTEE);
   mvhline(Y_FIELD / 2 + 2, 1, ACS_HLINE, X_FIELD * 2);
   refresh();
@@ -144,8 +144,8 @@ void print_stats(GameInfo_t gameinfo) {
   else
     mvprintw(2, X_FIELD * 2 + HUD_WIDTH / 2 + 1, "%04d", gameinfo.score);
 
-  mvprintw(5,  X_FIELD * 2 + HUD_WIDTH / 2 + 1, "%04d", gameinfo.score);
-  mvprintw(8,  X_FIELD * 2 + HUD_WIDTH / 2 + 3, "%d ",  gameinfo.level);
+  mvprintw(5, X_FIELD * 2 + HUD_WIDTH / 2 + 1, "%04d", gameinfo.score);
+  mvprintw(8, X_FIELD * 2 + HUD_WIDTH / 2 + 3, "%d ", gameinfo.level);
   mvprintw(11, X_FIELD * 2 + HUD_WIDTH / 2 + 1, "0.%d",
            gameinfo.speed / 10000000);
 }

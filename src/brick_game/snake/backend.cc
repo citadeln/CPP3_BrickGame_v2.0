@@ -48,10 +48,14 @@ void SnakeModel::MoveForward() {
 
   // Вычисляем новую позицию головы
   auto [row, col] = snake_.front();
-  if (dir_ == 'U') --row;
-  else if (dir_ == 'D') ++row;
-  else if (dir_ == 'L') --col;
-  else if (dir_ == 'R') ++col;
+  if (dir_ == 'U')
+    --row;
+  else if (dir_ == 'D')
+    ++row;
+  else if (dir_ == 'L')
+    --col;
+  else if (dir_ == 'R')
+    ++col;
 
   std::pair<int, int> new_head = {row, col};
 

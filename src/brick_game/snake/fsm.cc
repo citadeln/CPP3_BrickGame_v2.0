@@ -6,7 +6,8 @@
  */
 
 #include "fsm.h"
-#include "backend.h" // Полное объявление SnakeModel для реализации методов
+
+#include "backend.h"  // Полное объявление SnakeModel для реализации методов
 
 namespace s21 {
 
@@ -74,7 +75,8 @@ void SnakeController::ProcessUserInput(char input) {
  * @brief Обновляет состояние FSM.
  *
  * Вызывается из цикла событий View на каждой итерации.
- * Реализует автоматические переходы: MOVING → SHIFTING → MOVING/COLLIDE/GAMEOVER.
+ * Реализует автоматические переходы: MOVING → SHIFTING →
+ * MOVING/COLLIDE/GAMEOVER.
  */
 void SnakeController::Tick() {
   if (state_ == SnakeState::MOVING && IsTimerExpired()) {
@@ -167,15 +169,12 @@ bool SnakeController::IsTimerExpired() const {
   struct timespec current_time;
   timespec_get(&current_time, TIME_UTC);
 
-  long long diff =
-      (current_time.tv_sec * 1000000000LL + current_time.tv_nsec) -
-      (last_tick_.tv_sec * 1000000000LL + last_tick_.tv_nsec);
+  long long diff = (current_time.tv_sec * 1000000000LL + current_time.tv_nsec) -
+                   (last_tick_.tv_sec * 1000000000LL + last_tick_.tv_nsec);
 
   return diff >= model_.GetSpeed();
 }
 
-void SnakeController::ResetTimer() {
-  timespec_get(&last_tick_, TIME_UTC);
-}
+void SnakeController::ResetTimer() { timespec_get(&last_tick_, TIME_UTC); }
 
-} // namespace s21
+}  // namespace s21

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ncurses.h>
+
 #include "./../../brick_game/snake/fsm.h"  // используем SnakeController
 
 namespace s21 {
@@ -19,7 +20,6 @@ class SnakeFrontend {
  private:
   SnakeController& controller_;  ///< Ссылка на ViewModel
 };
-
 
 /**
  * @brief Класс для управления циклом событий ncurses.

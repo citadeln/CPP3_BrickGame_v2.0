@@ -5,8 +5,8 @@
 
 #include "snake_frontend.h"
 
-#include <thread>
 #include <chrono>
+#include <thread>
 
 namespace s21 {
 
@@ -44,21 +44,17 @@ void SnakeFrontend::RenderGame() {
   mvaddch(apple.first + 1, apple.second + 1, '*');
 
   // HUD
-  mvprintw(0, 0, "Score: %d | Hi: %d | Level: %d",
-           controller_.GetScore(),
-           controller_.GetHighScore(),
-           controller_.GetLevel());
+  mvprintw(0, 0, "Score: %d | Hi: %d | Level: %d", controller_.GetScore(),
+           controller_.GetHighScore(), controller_.GetLevel());
 
   refresh();
 }
-
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SnakeView
 // ─────────────────────────────────────────────────────────────────────────────
 
-SnakeView::SnakeView(SnakeController& controller)
-    : controller_(controller) {}
+SnakeView::SnakeView(SnakeController& controller) : controller_(controller) {}
 
 void SnakeView::startEventLoop() {
   SnakeFrontend frontend(controller_);

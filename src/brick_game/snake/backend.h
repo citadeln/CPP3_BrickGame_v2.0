@@ -85,7 +85,7 @@ class SnakeModel {
   int high_score_{0};
   int level_{1};
   long long speed_{kBaseSpeed};
-  char dir_{'U'};       ///< Текущее направление движения
+  char dir_{'U'};  ///< Текущее направление движения
   char next_dir_{'U'};  ///< Буферизированное следующее направление
   bool game_over_{false};
   bool apple_eaten_{false};

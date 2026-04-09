@@ -1,7 +1,7 @@
 CC	 = g++
 CCFLAGS    = -Wall -Wextra -std=c++17 -g
 NCURSES    = -lncurses
-CHECK_FLAGS= -lcheck
+CHECK_FLAGS= -lcheck -lcheck -lsubunit -lm -lpthread -lrt
 LIBFLAGS   = -L. -L/usr/local/lib
 RM	 = rm -rf
 
@@ -121,8 +121,10 @@ $(SNAKE_GCOV_NAME): $(SNAKE_TEST_SRC) $(SNAKE_SRC)
 
 # ── Стиль кода ────────────────────────────────────────────────────────────────
 style:
+	cp ../materials/linters/.clang-format .
 	clang-format -n $(shell find . -name "*.cc" -o -name "*.h")
 	clang-format -i $(shell find . -name "*.cc" -o -name "*.h")
+	rm .clang-format
 
 # ── Статический анализ ────────────────────────────────────────────────────────
 cpp:
