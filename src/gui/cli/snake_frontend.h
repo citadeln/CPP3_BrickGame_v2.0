@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ncurses.h>
+
 #include "./../../brick_game/snake/fsm.h"
 #include "frontend.h"  // для print_rectangle и т.д.
 
@@ -16,7 +17,7 @@ class SnakeFrontend {
   virtual ~SnakeFrontend();
 
   void RenderGame();
-  void DrawOverlay();    // рамка + HUD
+  void DrawOverlay();  // рамка + HUD
 
  private:
   SnakeController& controller_;
@@ -26,11 +27,11 @@ class SnakeFrontend {
   static constexpr int kFieldWidth = 10;
   static constexpr int kHudWidth = 11;
 
-  void DrawField();      // очистка поля
-  void DrawSnake();      // змейка
-  void DrawApple();      // яблоко
-  void DrawStats();      // статистика
-  void DrawStatus();     // START/PAUSE/GAMEOVER
+  void DrawField();   // очистка поля
+  void DrawSnake();   // змейка
+  void DrawApple();   // яблоко
+  void DrawStats();   // статистика
+  void DrawStatus();  // START/PAUSE/GAMEOVER
 };
 
 /**
