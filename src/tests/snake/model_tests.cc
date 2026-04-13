@@ -1,19 +1,20 @@
 /**
  * @file
- * @brief Юнит-тесты для SnakeModel (MVVM: Model).
+ * @brief Полные тесты SnakeModel + SnakeController FSM.
  */
 
 #include <check.h>
-
-#include "../../brick_game/snake/backend.h"
 #ifdef fail
 #undef fail
 #endif
 
+#include "../../brick_game/snake/backend.h"
+#include "../../brick_game/snake/fsm.h"
+
 using namespace s21;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Тесты начального состояния (4 сегмента!)
+// Тесты SnakeModel - ВАШИ РАБОЧИЕ (БЕЗ ИЗМЕНЕНИЙ)
 // ─────────────────────────────────────────────────────────────────────────────
 
 START_TEST(test_initial_length) {
@@ -47,10 +48,6 @@ START_TEST(test_apple_on_field) {
   ck_assert(c >= 0 && c < SnakeModel::kFieldWidth);
 }
 END_TEST
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Тесты движения
-// ─────────────────────────────────────────────────────────────────────────────
 
 START_TEST(test_move_forward_up) {
   SnakeModel m;
@@ -112,10 +109,6 @@ START_TEST(test_length_preserved_without_apple) {
 }
 END_TEST
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Тесты запрета разворота
-// ─────────────────────────────────────────────────────────────────────────────
-
 START_TEST(test_no_reverse_u_d) {
   SnakeModel m;
   m.ChangeDirection('D');  // Разворот 'U'→'D' — игнорируется
@@ -136,10 +129,6 @@ START_TEST(test_no_reverse_l_r) {
   ck_assert_int_eq(new_col, old_col + 1);  // Продолжает вправо!
 }
 END_TEST
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Тесты столкновений (kFieldWidth=20)
-// ─────────────────────────────────────────────────────────────────────────────
 
 START_TEST(test_collision_with_top_wall) {
   SnakeModel m;
@@ -190,10 +179,6 @@ START_TEST(test_collision_with_left_wall) {
 }
 END_TEST
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Остальные тесты
-// ─────────────────────────────────────────────────────────────────────────────
-
 START_TEST(test_speed_level1) {
   SnakeModel m;
   ck_assert_int_eq(static_cast<int>(m.GetSpeed()), 500000000);
@@ -218,7 +203,60 @@ START_TEST(test_has_won_false) {
 END_TEST
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Сьют
+// НОВЫЕ Тесты SnakeController FSM (исправленные)
+// ─────────────────────────────────────────────────────────────────────────────
+
+START_TEST(test_fsm_start_enter) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ck_assert_int_eq(ctrl.GetPauseStatus(), 2);
+  ck_assert(ctrl.GetState() == SnakeState::START);
+}
+END_TEST
+
+START_TEST(test_fsm_spawn_to_moving) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ctrl.ProcessUserInput('\n');
+  ck_assert_int_eq(ctrl.GetPauseStatus(), 0);
+  ck_assert(ctrl.GetState() == SnakeState::MOVING);
+}
+END_TEST
+
+START_TEST(test_fsm_pause_unpause) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ctrl.ProcessUserInput('\n');
+  ctrl.ProcessUserInput('p');
+  ck_assert_int_eq(ctrl.GetPauseStatus(), 1);
+  ck_assert(ctrl.GetState() == SnakeState::PAUSE);
+
+  ctrl.ProcessUserInput('p');
+  ck_assert_int_eq(ctrl.GetPauseStatus(), 0);
+  ck_assert(ctrl.GetState() == SnakeState::MOVING);
+}
+END_TEST
+
+START_TEST(test_proxy_methods) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ck_assert_int_eq(ctrl.GetScore(), model.GetScore());
+  ck_assert_int_eq(ctrl.GetHighScore(), model.GetHighScore());
+  ck_assert_int_eq(ctrl.GetLevel(), model.GetLevel());
+}
+END_TEST
+
+START_TEST(test_fsm_exit_q) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ctrl.ProcessUserInput('q');
+  ck_assert(ctrl.GetState() == SnakeState::EXIT_STATE);
+  ck_assert_int_eq(ctrl.GetPauseStatus(), -1);
+}
+END_TEST
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Сьюты
 // ─────────────────────────────────────────────────────────────────────────────
 
 Suite* snake_model_suite(void) {
@@ -264,14 +302,34 @@ Suite* snake_model_suite(void) {
   return s;
 }
 
+Suite* fsm_suite(void) {
+  Suite* s = suite_create("SnakeController FSM");
+
+  TCase* tc_states = tcase_create("FSM States");
+  tcase_add_test(tc_states, test_fsm_start_enter);
+  tcase_add_test(tc_states, test_fsm_spawn_to_moving);
+  tcase_add_test(tc_states, test_fsm_pause_unpause);
+  tcase_add_test(tc_states, test_proxy_methods);
+  tcase_add_test(tc_states, test_fsm_exit_q);
+  suite_add_tcase(s, tc_states);
+
+  return s;
+}
+
 int main(void) {
   int failed = 0;
-  Suite* s = snake_model_suite();
-  SRunner* sr = srunner_create(s);
 
-  srunner_run_all(sr, CK_NORMAL);
-  failed = srunner_ntests_failed(sr);
-  srunner_free(sr);
+  Suite* model_suite = snake_model_suite();
+  SRunner* model_runner = srunner_create(model_suite);
+  srunner_run_all(model_runner, CK_NORMAL);
+  failed += srunner_ntests_failed(model_runner);
+  srunner_free(model_runner);
+
+  Suite* fsm_s = fsm_suite();
+  SRunner* fsm_runner = srunner_create(fsm_s);
+  srunner_run_all(fsm_runner, CK_NORMAL);
+  failed += srunner_ntests_failed(fsm_runner);
+  srunner_free(fsm_runner);
 
   return (failed == 0) ? 0 : 1;
 }
