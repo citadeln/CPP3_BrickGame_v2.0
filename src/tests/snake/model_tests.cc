@@ -14,33 +14,38 @@
 using namespace s21;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Тесты SnakeModel - ВАШИ РАБОЧИЕ (БЕЗ ИЗМЕНЕНИЙ)
+// ТЕСТЫ SnakeModel
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Проверяет начальную длину змейки = 4 сегмента
 START_TEST(test_initial_length) {
   SnakeModel m;
   ck_assert_int_eq(static_cast<int>(m.GetSnakePositions().size()), 4);
 }
 END_TEST
 
+// Проверяет начальный счёт = 0
 START_TEST(test_initial_score) {
   SnakeModel m;
   ck_assert_int_eq(m.GetScore(), 0);
 }
 END_TEST
 
+// Проверяет начальный уровень = 1
 START_TEST(test_initial_level) {
   SnakeModel m;
   ck_assert_int_eq(m.GetLevel(), 1);
 }
 END_TEST
 
+// Проверяет что игра не окончена в начале
 START_TEST(test_initial_not_game_over) {
   SnakeModel m;
   ck_assert(!m.IsGameOver());
 }
 END_TEST
 
+// Проверяет что яблоко спавнится внутри поля 20x20
 START_TEST(test_apple_on_field) {
   SnakeModel m;
   auto [r, c] = m.GetApplePosition();
@@ -49,29 +54,32 @@ START_TEST(test_apple_on_field) {
 }
 END_TEST
 
+// Движение вверх: голова перемещается на строку выше
 START_TEST(test_move_forward_up) {
   SnakeModel m;
-  int old_row = m.GetSnakePositions().front().first;  // строка 5
+  int old_row = m.GetSnakePositions().front().first;
   m.MoveForward();
   int new_row = m.GetSnakePositions().front().first;
-  ck_assert_int_eq(new_row, old_row - 1);  // 5 → 4
+  ck_assert_int_eq(new_row, old_row - 1);
 }
 END_TEST
 
+// Движение вправо: голова перемещается на столбец правее
 START_TEST(test_move_forward_right) {
   SnakeModel m;
   m.ChangeDirection('R');
-  int old_col = m.GetSnakePositions().front().second;  // столбец 10
+  int old_col = m.GetSnakePositions().front().second;
   m.MoveForward();
   int new_col = m.GetSnakePositions().front().second;
-  ck_assert_int_eq(new_col, old_col + 1);  // 10 → 11
+  ck_assert_int_eq(new_col, old_col + 1);
 }
 END_TEST
 
+// Комплексное движение: R→D→L, проверка поворота влево
 START_TEST(test_move_forward_left) {
   SnakeModel m;
   m.ChangeDirection('R');
-  m.MoveForward();  // 10→11
+  m.MoveForward();
   m.ChangeDirection('D');
   m.MoveForward();
   m.ChangeDirection('L');
@@ -82,6 +90,7 @@ START_TEST(test_move_forward_left) {
 }
 END_TEST
 
+// Движение вниз: голова перемещается на строку ниже
 START_TEST(test_move_forward_down) {
   SnakeModel m;
   m.ChangeDirection('R');
@@ -94,6 +103,7 @@ START_TEST(test_move_forward_down) {
 }
 END_TEST
 
+// Длина сохраняется без поедания яблока (хвост удаляется)
 START_TEST(test_length_preserved_without_apple) {
   SnakeModel m;
   int old_len = static_cast<int>(m.GetSnakePositions().size());
@@ -109,30 +119,32 @@ START_TEST(test_length_preserved_without_apple) {
 }
 END_TEST
 
+// Запрет разворота U→D (игнорируется, движется вверх)
 START_TEST(test_no_reverse_u_d) {
   SnakeModel m;
-  m.ChangeDirection('D');  // Разворот 'U'→'D' — игнорируется
+  m.ChangeDirection('D');
   m.MoveForward();
   int head_row = m.GetSnakePositions().front().first;
-  ck_assert_int_eq(head_row, 4);  // 5-1=4, не вниз!
+  ck_assert_int_eq(head_row, 4);
 }
 END_TEST
 
+// Запрет разворота R→L (игнорируется, движется вправо)
 START_TEST(test_no_reverse_l_r) {
   SnakeModel m;
   m.ChangeDirection('R');
   m.MoveForward();
-  m.ChangeDirection('L');  // Разворот → игнорируется
+  m.ChangeDirection('L');
   int old_col = m.GetSnakePositions().front().second;
   m.MoveForward();
   int new_col = m.GetSnakePositions().front().second;
-  ck_assert_int_eq(new_col, old_col + 1);  // Продолжает вправо!
+  ck_assert_int_eq(new_col, old_col + 1);
 }
 END_TEST
 
+// Столкновение с верхней стеной (row < 0)
 START_TEST(test_collision_with_top_wall) {
   SnakeModel m;
-  // Из строки 5 вверх 6 шагов → row=-1
   for (int i = 0; i < 6; ++i) {
     m.MoveForward();
     if (m.IsGameOver()) break;
@@ -141,10 +153,10 @@ START_TEST(test_collision_with_top_wall) {
 }
 END_TEST
 
+// Столкновение с правой стеной (col >= 20)
 START_TEST(test_collision_with_right_wall) {
   SnakeModel m;
   m.ChangeDirection('R');
-  // Из столбца 10 вправо 11 шагов → col=21 >=20
   for (int i = 0; i < 11; ++i) {
     m.MoveForward();
     if (m.IsGameOver()) break;
@@ -153,12 +165,12 @@ START_TEST(test_collision_with_right_wall) {
 }
 END_TEST
 
+// Столкновение с нижней стеной (row >= 20)
 START_TEST(test_collision_with_bottom_wall) {
   SnakeModel m;
   m.ChangeDirection('R');
   m.MoveForward();
   m.ChangeDirection('D');
-  // Из строки ~6 вниз 15 шагов → row=21 >=20
   for (int i = 0; i < 15; ++i) {
     m.MoveForward();
     if (m.IsGameOver()) break;
@@ -167,10 +179,10 @@ START_TEST(test_collision_with_bottom_wall) {
 }
 END_TEST
 
+// Столкновение с левой стеной (col < 0)
 START_TEST(test_collision_with_left_wall) {
   SnakeModel m;
   m.ChangeDirection('L');
-  // Из столбца 10 влево 11 шагов → col=-1
   for (int i = 0; i < 11; ++i) {
     m.MoveForward();
     if (m.IsGameOver()) break;
@@ -179,12 +191,14 @@ START_TEST(test_collision_with_left_wall) {
 }
 END_TEST
 
+// Базовая скорость на уровне 1 = 500мс (500000000нс)
 START_TEST(test_speed_level1) {
   SnakeModel m;
   ck_assert_int_eq(static_cast<int>(m.GetSpeed()), 500000000);
 }
 END_TEST
 
+// Reset возвращает начальное состояние
 START_TEST(test_reset) {
   SnakeModel m;
   m.ChangeDirection('R');
@@ -196,6 +210,7 @@ START_TEST(test_reset) {
 }
 END_TEST
 
+// Победа требует 200 сегментов (начальная длина < 200)
 START_TEST(test_has_won_false) {
   SnakeModel m;
   ck_assert(!m.HasWon());
@@ -203,9 +218,10 @@ START_TEST(test_has_won_false) {
 END_TEST
 
 // ─────────────────────────────────────────────────────────────────────────────
-// НОВЫЕ Тесты SnakeController FSM (исправленные)
+// ТЕСТЫ SnakeController FSM
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Начальное состояние START, pause_status=2
 START_TEST(test_fsm_start_enter) {
   SnakeModel model;
   SnakeController ctrl(model);
@@ -214,6 +230,7 @@ START_TEST(test_fsm_start_enter) {
 }
 END_TEST
 
+// Enter: START → SPAWN → MOVING, pause_status=0
 START_TEST(test_fsm_spawn_to_moving) {
   SnakeModel model;
   SnakeController ctrl(model);
@@ -223,6 +240,7 @@ START_TEST(test_fsm_spawn_to_moving) {
 }
 END_TEST
 
+// 'p': MOVING ↔ PAUSE (pause_status 0↔1)
 START_TEST(test_fsm_pause_unpause) {
   SnakeModel model;
   SnakeController ctrl(model);
@@ -237,21 +255,59 @@ START_TEST(test_fsm_pause_unpause) {
 }
 END_TEST
 
+// Прокси-геттеры возвращают данные Model
 START_TEST(test_proxy_methods) {
   SnakeModel model;
   SnakeController ctrl(model);
   ck_assert_int_eq(ctrl.GetScore(), model.GetScore());
   ck_assert_int_eq(ctrl.GetHighScore(), model.GetHighScore());
   ck_assert_int_eq(ctrl.GetLevel(), model.GetLevel());
+  ck_assert(!ctrl.GetSnakePositions().empty());
+  auto apple = ctrl.GetApplePosition();
+  ck_assert(apple.first >= 0 && apple.second >= 0);
 }
 END_TEST
 
-START_TEST(test_fsm_exit_q) {
+// 'q' из START → EXIT_STATE (pause_status=-1)
+START_TEST(test_fsm_exit_q_start) {
   SnakeModel model;
   SnakeController ctrl(model);
   ctrl.ProcessUserInput('q');
   ck_assert(ctrl.GetState() == SnakeState::EXIT_STATE);
   ck_assert_int_eq(ctrl.GetPauseStatus(), -1);
+}
+END_TEST
+
+// 'q' из PAUSE → EXIT_STATE (pause_status=-1)
+START_TEST(test_fsm_exit_q_pause) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ctrl.ProcessUserInput('\n');  // MOVING
+  ctrl.ProcessUserInput('p');   // PAUSE
+  ctrl.ProcessUserInput('q');   // PAUSE → EXIT
+  ck_assert(ctrl.GetState() == SnakeState::EXIT_STATE);
+  ck_assert_int_eq(ctrl.GetPauseStatus(), -1);
+}
+END_TEST
+
+// Неизвестная клавиша 'x' → default: (состояние не меняется)
+START_TEST(test_fsm_default_case) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ctrl.ProcessUserInput('x');
+  ck_assert_int_eq(ctrl.GetPauseStatus(), 2);
+  ck_assert(ctrl.GetState() == SnakeState::START);
+}
+END_TEST
+
+// Направление 'R' в MOVING не меняет состояние FSM
+START_TEST(test_fsm_direction_change) {
+  SnakeModel model;
+  SnakeController ctrl(model);
+  ctrl.ProcessUserInput('\n');  // MOVING
+  ctrl.ProcessUserInput('R');   // Направление
+  ck_assert_int_eq(ctrl.GetPauseStatus(), 0);
+  ck_assert(ctrl.GetState() == SnakeState::MOVING);
 }
 END_TEST
 
@@ -305,13 +361,22 @@ Suite* snake_model_suite(void) {
 Suite* fsm_suite(void) {
   Suite* s = suite_create("SnakeController FSM");
 
-  TCase* tc_states = tcase_create("FSM States");
-  tcase_add_test(tc_states, test_fsm_start_enter);
-  tcase_add_test(tc_states, test_fsm_spawn_to_moving);
-  tcase_add_test(tc_states, test_fsm_pause_unpause);
-  tcase_add_test(tc_states, test_proxy_methods);
-  tcase_add_test(tc_states, test_fsm_exit_q);
-  suite_add_tcase(s, tc_states);
+  TCase* tc_basic = tcase_create("Basic States");
+  tcase_add_test(tc_basic, test_fsm_start_enter);
+  tcase_add_test(tc_basic, test_fsm_spawn_to_moving);
+  tcase_add_test(tc_basic, test_fsm_pause_unpause);
+  tcase_add_test(tc_basic, test_proxy_methods);
+  suite_add_tcase(s, tc_basic);
+
+  TCase* tc_exit = tcase_create("Exit Paths");
+  tcase_add_test(tc_exit, test_fsm_exit_q_start);
+  tcase_add_test(tc_exit, test_fsm_exit_q_pause);
+  suite_add_tcase(s, tc_exit);
+
+  TCase* tc_input = tcase_create("Input Handling");
+  tcase_add_test(tc_input, test_fsm_default_case);
+  tcase_add_test(tc_input, test_fsm_direction_change);
+  suite_add_tcase(s, tc_input);
 
   return s;
 }
