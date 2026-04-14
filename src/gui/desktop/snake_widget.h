@@ -34,6 +34,15 @@ public:
   explicit SnakeWidget(SnakeController &controller, QWidget *parent = nullptr);
   ~SnakeWidget() override = default;
 
+  /// Запустить игру (стартует таймер, передаёт фокус)
+  void startGame();
+  /// Остановить игру (останавливает таймер)
+  void stopGame();
+
+signals:
+  /// Игра завершена (Q нажата)
+  void gameEnded();
+
 protected:
   /// Рендеринг кадра — читает данные из ViewModel
   void paintEvent(QPaintEvent *event) override;

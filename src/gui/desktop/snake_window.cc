@@ -14,10 +14,9 @@ SnakeWindow::SnakeWindow(SnakeController &controller, QWidget *parent)
   widget_ = new SnakeWidget(controller, this);
   setCentralWidget(widget_);
 
-  // Окно фиксированного размера (по размеру виджета)
   setFixedSize(widget_->sizeHint());
 
-  widget_->setFocus();
+  widget_->startGame();
 }
 
 } // namespace s21

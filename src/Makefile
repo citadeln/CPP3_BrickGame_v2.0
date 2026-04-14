@@ -1,15 +1,15 @@
-CC         = g++
+CC   = g++
 CCFLAGS    = -Wall -Wextra -std=c++17 -g
 NCURSES    = -lncurses
 CHECK_FLAGS= -lcheck
 LIBFLAGS   = -L. -L/usr/local/lib
-RM         = rm -rf
+RM   = rm -rf
 
 GCOVR = gcovr
 
 # ── Имена исполняемых файлов ──────────────────────────────────────────────────
-GAME_NAME         = brickgame
-QT_TARGET         = brickgame-qt
+GAME_NAME    = brickgame
+QT_TARGET    = brickgame-qt
 SNAKE_TEST_NAME   = snake_test
 TETRIS_TEST_NAME  = tetris_test
 
@@ -37,15 +37,17 @@ GUI_OBJ  = $(GUI_SRC:.cc=.o)
 DESKTOP_DIR  = ./gui/desktop
 QT_CFLAGS    = -fPIC $(shell pkg-config --cflags Qt5Widgets 2>/dev/null)
 QT_LIBS      = $(shell pkg-config --libs   Qt5Widgets 2>/dev/null)
-MOC          = $(shell pkg-config --variable=host_bins Qt5Core 2>/dev/null)/moc
+MOC   = $(shell pkg-config --variable=host_bins Qt5Core 2>/dev/null)/moc
 
 # Исходники Qt View (без moc-файлов)
 DESKTOP_SRC  = $(DESKTOP_DIR)/snake_widget.cc \
-               $(DESKTOP_DIR)/snake_window.cc
+	       $(DESKTOP_DIR)/snake_window.cc \
+	       $(DESKTOP_DIR)/tetris_widget.cc
 
 # MOC-файлы генерируются из заголовков с Q_OBJECT
 MOC_SRCS     = $(DESKTOP_DIR)/moc_snake_widget.cc \
-               $(DESKTOP_DIR)/moc_snake_window.cc
+	       $(DESKTOP_DIR)/moc_snake_window.cc \
+	       $(DESKTOP_DIR)/moc_tetris_widget.cc
 
 DESKTOP_OBJ  = $(DESKTOP_SRC:.cc=.o) $(MOC_SRCS:.cc=.o)
 
@@ -68,7 +70,7 @@ TAR_DIR     = s21_brickgame-1.0
 
 # ─────────────────────────────────────────────────────────────────────────────
 .PHONY: all build build-qt clean install uninstall dvi dist \
-        test test_snake test_tetris gcov_report style cpp valgrind
+	test test_snake test_tetris gcov_report style cpp valgrind
 
 all: clean build
 
@@ -104,6 +106,9 @@ $(DESKTOP_DIR)/moc_snake_widget.cc: $(DESKTOP_DIR)/snake_widget.h
 $(DESKTOP_DIR)/moc_snake_window.cc: $(DESKTOP_DIR)/snake_window.h
 	$(MOC) $< -o $@
 
+$(DESKTOP_DIR)/moc_tetris_widget.cc: $(DESKTOP_DIR)/tetris_widget.h
+	$(MOC) $< -o $@
+
 # Qt-файлы компилируются с Qt-флагами (через отдельные правила)
 $(DESKTOP_DIR)/%.o: $(DESKTOP_DIR)/%.cc
 	$(CC) $(CCFLAGS) $(QT_CFLAGS) -c $< -o $@
@@ -112,10 +117,10 @@ $(MAIN_QT_OBJ): main_qt.cc
 	$(CC) $(CCFLAGS) $(QT_CFLAGS) -c $< -o $@
 
 # Финальная сборка Qt-версии (Model + ViewModel — из SNAKE_LIB, View — из DESKTOP_OBJ)
-build-qt: $(SNAKE_LIB) $(DESKTOP_OBJ) $(MAIN_QT_OBJ)
+build-qt: $(TETRIS_LIB) $(SNAKE_LIB) $(DESKTOP_OBJ) $(MAIN_QT_OBJ)
 	$(CC) $(CCFLAGS) $(QT_CFLAGS) \
 	    $(MAIN_QT_OBJ) $(DESKTOP_OBJ) \
-	    $(LIBFLAGS) -l:$(SNAKE_LIB) $(QT_LIBS) \
+	    $(LIBFLAGS) -l:$(TETRIS_LIB) -l:$(SNAKE_LIB) $(QT_LIBS) \
 	    -o $(QT_TARGET)
 
 # ─────────────────────────────────────────────────────────────────────────────

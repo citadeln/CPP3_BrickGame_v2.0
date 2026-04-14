@@ -27,8 +27,19 @@ SnakeWidget::SnakeWidget(SnakeController &controller, QWidget *parent)
   // и перерисовку
   timer_ = new QTimer(this);
   connect(timer_, &QTimer::timeout, this, &SnakeWidget::onTimer);
-  timer_->start(16);
+  // Таймер запускается явно через startGame()
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Управление игрой
+// ─────────────────────────────────────────────────────────────────────────────
+
+void SnakeWidget::startGame() {
+  timer_->start(16);
+  setFocus();
+}
+
+void SnakeWidget::stopGame() { timer_->stop(); }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Вспомогательные
@@ -77,9 +88,10 @@ void SnakeWidget::keyPressEvent(QKeyEvent *event) {
     controller_.ProcessUserInput('p');
     break;
   case Qt::Key_Q:
+    timer_->stop();
     controller_.ProcessUserInput('q');
-    window()->close();
-    break;
+    emit gameEnded();
+    return;
   default:
     QWidget::keyPressEvent(event);
     return;
