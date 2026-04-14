@@ -1,7 +1,7 @@
 CC   = g++
 CCFLAGS    = -Wall -Wextra -std=c++17 -g
 NCURSES    = -lncurses
-CHECK_FLAGS= -lcheck
+CHECK_FLAGS= -lcheck -lsubunit -lm -lpthread -lrt
 LIBFLAGS   = -L. -L/usr/local/lib
 RM   = rm -rf
 
