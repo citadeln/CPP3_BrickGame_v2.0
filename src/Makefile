@@ -35,7 +35,7 @@ GUI_OBJ  = $(GUI_SRC:.cc=.o)
 
 # ── Qt GUI (desktop frontend) ─────────────────────────────────────────────────
 DESKTOP_DIR  = ./gui/desktop
-QT_CFLAGS    = $(shell pkg-config --cflags Qt5Widgets 2>/dev/null)
+QT_CFLAGS    = -fPIC $(shell pkg-config --cflags Qt5Widgets 2>/dev/null)
 QT_LIBS      = $(shell pkg-config --libs   Qt5Widgets 2>/dev/null)
 MOC          = $(shell pkg-config --variable=host_bins Qt5Core 2>/dev/null)/moc
 

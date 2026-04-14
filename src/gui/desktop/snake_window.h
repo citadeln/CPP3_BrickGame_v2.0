@@ -21,13 +21,12 @@ namespace s21 {
 class SnakeWindow : public QMainWindow {
   Q_OBJECT
 
- public:
-  explicit SnakeWindow(SnakeController &controller,
-                       QWidget *parent = nullptr);
+public:
+  explicit SnakeWindow(SnakeController &controller, QWidget *parent = nullptr);
   ~SnakeWindow() override = default;
 
- private:
-  SnakeWidget *widget_;  ///< Центральный виджет — игровое поле
+private:
+  SnakeWidget *widget_; ///< Центральный виджет — игровое поле
 };
 
-}  // namespace s21
+} // namespace s21

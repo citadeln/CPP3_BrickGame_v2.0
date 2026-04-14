@@ -26,12 +26,14 @@ void userInput(UserAction_t action, bool hold) {
   prms = create_prms(prms);
 
   // создание новой игры при gameover
-  if (prms->gameinfo->pause == 3) prms = create_prms(NULL);
+  if (prms->gameinfo->pause == 3)
+    prms = create_prms(NULL);
 
   chech_timer(prms);
 
   function func = fsm_table(prms->state, action);
-  if (func) func(prms);
+  if (func)
+    func(prms);
 
   prms->hold = (hold) ? true : false;
 }
@@ -130,11 +132,11 @@ int get_block_coord(int figure_type, int figure_state, int block_number,
  */
 Params_t *create_prms(Params_t *pointer) {
   static Params_t prms = {
-      nullptr,             // figureinfo
-      nullptr,             // gameinfo
-      GameState_t::START,  // state
-      {},                  // start_time
-      false                // hold
+      nullptr,            // figureinfo
+      nullptr,            // gameinfo
+      GameState_t::START, // state
+      {},                 // start_time
+      false               // hold
   };
 
   if (pointer == NULL) {
@@ -163,13 +165,13 @@ Params_t *create_prms(Params_t *pointer) {
  */
 Figureinfo_t *create_figure_info() {
   static Figureinfo_t current_figure = {
-      0,           // y
-      0,           // x
-      rand() % 7,  // figure_type
-      0,           // figure_state
-      rand() % 7,  // next_figure_type
-      1,           // figure_color
-      1            // next_figure_color
+      0,          // y
+      0,          // x
+      rand() % 7, // figure_type
+      0,          // figure_state
+      rand() % 7, // next_figure_type
+      1,          // figure_color
+      1           // next_figure_color
   };
 
   current_figure.y = Y_BLOCK;
@@ -203,7 +205,8 @@ Figureinfo_t *create_figure_info() {
 GameInfo_t *get_field_info(Figureinfo_t *figure_info) {
   static GameInfo_t *field_info = NULL;
 
-  if (figure_info != NULL) field_info = create_field_info(figure_info);
+  if (figure_info != NULL)
+    field_info = create_field_info(figure_info);
 
   return field_info;
 }
@@ -237,34 +240,38 @@ GameInfo_t *get_field_info(Figureinfo_t *figure_info) {
  */
 GameInfo_t *create_field_info(Figureinfo_t *figure_info) {
   static GameInfo_t field_info = {
-      nullptr,   // field
-      nullptr,   // next
-      0,         // score
-      0,         // high_score
-      1,         // level
-      50000000,  // speed
-      2          // pause
+      nullptr,  // field
+      nullptr,  // next
+      0,        // score
+      0,        // high_score
+      1,        // level
+      50000000, // speed
+      2         // pause
   };
 
   static int field[Y_FIELD + 2][X_FIELD];
   static int *field_pointer[Y_FIELD + 2];
 
-  for (int i = 0; i < Y_FIELD + 2; i++) field_pointer[i] = field[i];
+  for (int i = 0; i < Y_FIELD + 2; i++)
+    field_pointer[i] = field[i];
 
   field_info.field = field_pointer;
 
   for (int y = 0; y < Y_FIELD + 2; y++)
-    for (int x = 0; x < X_FIELD; x++) field_info.field[y][x] = 0;
+    for (int x = 0; x < X_FIELD; x++)
+      field_info.field[y][x] = 0;
 
   static int next[MAX_FIGURE_SIZE][MAX_FIGURE_SIZE];
 
   static int *next_pointer[MAX_FIGURE_SIZE];
-  for (int i = 0; i < MAX_FIGURE_SIZE; i++) next_pointer[i] = next[i];
+  for (int i = 0; i < MAX_FIGURE_SIZE; i++)
+    next_pointer[i] = next[i];
 
   field_info.next = next_pointer;
 
   for (int y = 0; y < MAX_FIGURE_SIZE; y++)
-    for (int x = 0; x < MAX_FIGURE_SIZE; x++) field_info.next[y][x] = 0;
+    for (int x = 0; x < MAX_FIGURE_SIZE; x++)
+      field_info.next[y][x] = 0;
 
   for (int i = 0; i < BLOCKS; i++) {
     int y = 1 + get_block_coord(figure_info->next_figure_type, 0, i, 0);
@@ -324,7 +331,8 @@ void chech_timer(Params_t *prms) {
         ((current_time.tv_sec) * 1000000000 + current_time.tv_nsec) -
         ((prms->start_time.tv_sec) * 1000000000 + prms->start_time.tv_nsec);
 
-    if (diff >= prms->gameinfo->speed) prms->state = GameState_t::SHIFTING;
+    if (diff >= prms->gameinfo->speed)
+      prms->state = GameState_t::SHIFTING;
   }
 }
 

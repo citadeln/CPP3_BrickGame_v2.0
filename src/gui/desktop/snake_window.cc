@@ -20,4 +20,4 @@ SnakeWindow::SnakeWindow(SnakeController &controller, QWidget *parent)
   widget_->setFocus();
 }
 
-}  // namespace s21
+} // namespace s21

@@ -22,9 +22,9 @@ int main(int argc, char *argv[]) {
   app.setApplicationVersion("2.0");
 
   // ── MVVM: создаём независимые слои ──────────────────────────────────────
-  s21::SnakeModel model;            // Model:     бизнес-логика, данные
-  s21::SnakeController controller(model);  // ViewModel: FSM, привязка данных
-  s21::SnakeWindow window(controller);     // View:      Qt-окно
+  s21::SnakeModel model; // Model:     бизнес-логика, данные
+  s21::SnakeController controller(model); // ViewModel: FSM, привязка данных
+  s21::SnakeWindow window(controller); // View:      Qt-окно
 
   window.show();
   return app.exec();

@@ -34,4 +34,4 @@ void unpause(Params_t *prms);
 void gameover(Params_t *prms);
 void exitstate(Params_t *prms);
 
-#endif  // FSM_H
+#endif // FSM_H

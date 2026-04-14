@@ -7,7 +7,8 @@ START_TEST(test_collide) {
   Params_t *prms = create_prms(NULL);
 
   for (int y = Y_FIELD - array[_i]; y < Y_FIELD + 2; y++)
-    for (int x = X_START; x < X_FIELD; x++) prms->gameinfo->field[y][x] = 1;
+    for (int x = X_START; x < X_FIELD; x++)
+      prms->gameinfo->field[y][x] = 1;
 
   prms->state = GameState_t::COLLIDE;
   function func = fsm_table(prms->state, UserAction_t::Left);

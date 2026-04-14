@@ -7,6 +7,8 @@
 
 #include <algorithm>
 
+#include "../../brick_game/snake/backend.h"
+
 namespace s21 {
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -45,8 +47,8 @@ int SnakeWidget::fieldPxH() const {
 // ─────────────────────────────────────────────────────────────────────────────
 
 void SnakeWidget::onTimer() {
-  controller_.Tick();  // ViewModel проверяет внутренний таймер скорости
-  update();            // запрос перерисовки
+  controller_.Tick(); // ViewModel проверяет внутренний таймер скорости
+  update();           // запрос перерисовки
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -55,32 +57,32 @@ void SnakeWidget::onTimer() {
 
 void SnakeWidget::keyPressEvent(QKeyEvent *event) {
   switch (event->key()) {
-    case Qt::Key_Up:
-      controller_.ProcessUserInput('U');
-      break;
-    case Qt::Key_Down:
-      controller_.ProcessUserInput('D');
-      break;
-    case Qt::Key_Left:
-      controller_.ProcessUserInput('L');
-      break;
-    case Qt::Key_Right:
-      controller_.ProcessUserInput('R');
-      break;
-    case Qt::Key_Return:
-    case Qt::Key_Enter:
-      controller_.ProcessUserInput('\n');
-      break;
-    case Qt::Key_P:
-      controller_.ProcessUserInput('p');
-      break;
-    case Qt::Key_Q:
-      controller_.ProcessUserInput('q');
-      window()->close();
-      break;
-    default:
-      QWidget::keyPressEvent(event);
-      return;
+  case Qt::Key_Up:
+    controller_.ProcessUserInput('U');
+    break;
+  case Qt::Key_Down:
+    controller_.ProcessUserInput('D');
+    break;
+  case Qt::Key_Left:
+    controller_.ProcessUserInput('L');
+    break;
+  case Qt::Key_Right:
+    controller_.ProcessUserInput('R');
+    break;
+  case Qt::Key_Return:
+  case Qt::Key_Enter:
+    controller_.ProcessUserInput('\n');
+    break;
+  case Qt::Key_P:
+    controller_.ProcessUserInput('p');
+    break;
+  case Qt::Key_Q:
+    controller_.ProcessUserInput('q');
+    window()->close();
+    break;
+  default:
+    QWidget::keyPressEvent(event);
+    return;
   }
   update();
 }
@@ -192,19 +194,19 @@ void SnakeWidget::drawHud(QPainter &p) {
   };
 
   int hi = std::max(controller_.GetHighScore(), controller_.GetScore());
-  drawBlock(kPad,       "HI-SCORE", QString("%1").arg(hi, 6, 10, QChar('0')));
-  drawBlock(kPad + 68,  "SCORE",    QString("%1").arg(controller_.GetScore(), 6, 10, QChar('0')));
-  drawBlock(kPad + 136, "LEVEL",    QString::number(controller_.GetLevel()));
-  drawBlock(kPad + 204, "SPEED",    QString("0.%1").arg(
-      controller_.GetSpeed() / 50000000LL));
+  drawBlock(kPad, "HI-SCORE", QString("%1").arg(hi, 6, 10, QChar('0')));
+  drawBlock(kPad + 68, "SCORE",
+            QString("%1").arg(controller_.GetScore(), 6, 10, QChar('0')));
+  drawBlock(kPad + 136, "LEVEL", QString::number(controller_.GetLevel()));
+  drawBlock(kPad + 204, "SPEED",
+            QString("0.%1").arg(controller_.GetSpeed() / 50000000LL));
 
   // Подсказки управления
   p.setFont(QFont("Monospace", 8));
   p.setPen(QColor(80, 80, 120));
   int tipY = kPad + 275;
-  for (const QString &tip :
-       {"↑↓←→  move", "P      pause", "Q      quit"}) {
-    p.drawText(QRect(hudX, tipY, hudW, 18), Qt::AlignLeft, "  " + tip);
+  for (const char *tip : {"↑↓←→  move", "P      pause", "Q      quit"}) {
+    p.drawText(QRect(hudX, tipY, hudW, 18), Qt::AlignLeft, QString("  ") + tip);
     tipY += 18;
   }
 }
@@ -217,16 +219,14 @@ void SnakeWidget::drawOverlay(QPainter &p) {
 
   QRect fieldRect(kPad, kPad, fieldPxW(), fieldPxH());
 
-  auto fillOverlay = [&]() {
-    p.fillRect(fieldRect, QColor(0, 0, 0, 165));
-  };
+  auto fillOverlay = [&]() { p.fillRect(fieldRect, QColor(0, 0, 0, 165)); };
 
   if (state == SnakeState::START) {
     fillOverlay();
     p.setPen(QColor(80, 230, 110));
     p.setFont(QFont("Monospace", 28, QFont::Bold));
-    p.drawText(QRect(kPad, kPad, fieldPxW(), fieldPxH() / 2),
-               Qt::AlignCenter, "SNAKE");
+    p.drawText(QRect(kPad, kPad, fieldPxW(), fieldPxH() / 2), Qt::AlignCenter,
+               "SNAKE");
 
     p.setPen(QColor(190, 190, 240));
     p.setFont(QFont("Monospace", 12));
@@ -237,8 +237,8 @@ void SnakeWidget::drawOverlay(QPainter &p) {
     fillOverlay();
     p.setPen(QColor(255, 215, 60));
     p.setFont(QFont("Monospace", 26, QFont::Bold));
-    p.drawText(QRect(kPad, kPad, fieldPxW(), fieldPxH() / 2),
-               Qt::AlignCenter, "PAUSED");
+    p.drawText(QRect(kPad, kPad, fieldPxW(), fieldPxH() / 2), Qt::AlignCenter,
+               "PAUSED");
 
     p.setPen(QColor(190, 190, 240));
     p.setFont(QFont("Monospace", 12));
@@ -252,15 +252,14 @@ void SnakeWidget::drawOverlay(QPainter &p) {
 
     p.setPen(won ? QColor(80, 230, 110) : QColor(220, 55, 55));
     p.setFont(QFont("Monospace", 24, QFont::Bold));
-    p.drawText(QRect(kPad, kPad, fieldPxW(), fieldPxH() / 2),
-               Qt::AlignCenter, won ? "YOU WIN!" : "GAME OVER");
+    p.drawText(QRect(kPad, kPad, fieldPxW(), fieldPxH() / 2), Qt::AlignCenter,
+               won ? "YOU WIN!" : "GAME OVER");
 
     p.setPen(QColor(190, 190, 240));
     p.setFont(QFont("Monospace", 11));
-    p.drawText(
-        QRect(kPad, kPad + fieldPxH() / 2, fieldPxW(), fieldPxH() / 2),
-        Qt::AlignCenter, "ENTER — restart\n  Q   — quit");
+    p.drawText(QRect(kPad, kPad + fieldPxH() / 2, fieldPxW(), fieldPxH() / 2),
+               Qt::AlignCenter, "ENTER — restart\n  Q   — quit");
   }
 }
 
-}  // namespace s21
+} // namespace s21

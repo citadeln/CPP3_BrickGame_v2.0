@@ -30,32 +30,31 @@ namespace s21 {
 class SnakeWidget : public QWidget {
   Q_OBJECT
 
- public:
-  explicit SnakeWidget(SnakeController &controller,
-                       QWidget *parent = nullptr);
+public:
+  explicit SnakeWidget(SnakeController &controller, QWidget *parent = nullptr);
   ~SnakeWidget() override = default;
 
- protected:
+protected:
   /// Рендеринг кадра — читает данные из ViewModel
   void paintEvent(QPaintEvent *event) override;
   /// Ввод пользователя — отправляет команды в ViewModel
   void keyPressEvent(QKeyEvent *event) override;
 
- private slots:
+private slots:
   /// Вызывается QTimer (~60 fps): Tick() + update()
   void onTimer();
 
- private:
-  SnakeController &controller_;  ///< ViewModel (источник данных)
+private:
+  SnakeController &controller_; ///< ViewModel (источник данных)
   QTimer *timer_;
 
   // ─── Константы разметки ──────────────────────────────────────────────────
-  static constexpr int kCellSize = 25;   ///< Пикселей на клетку
-  static constexpr int kHudWidth = 180;  ///< Ширина HUD-панели
-  static constexpr int kPad = 10;        ///< Внешний отступ
+  static constexpr int kCellSize = 25;  ///< Пикселей на клетку
+  static constexpr int kHudWidth = 180; ///< Ширина HUD-панели
+  static constexpr int kPad = 10;       ///< Внешний отступ
 
-  int fieldPxW() const;  ///< Ширина поля в пикселях
-  int fieldPxH() const;  ///< Высота поля в пикселях
+  int fieldPxW() const; ///< Ширина поля в пикселях
+  int fieldPxH() const; ///< Высота поля в пикселях
 
   // ─── Методы рендеринга ───────────────────────────────────────────────────
   void drawBackground(QPainter &p);
@@ -66,4 +65,4 @@ class SnakeWidget : public QWidget {
   void drawOverlay(QPainter &p);
 };
 
-}  // namespace s21
+} // namespace s21
