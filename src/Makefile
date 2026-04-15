@@ -174,8 +174,10 @@ $(SNAKE_GCOV_NAME): $(SNAKE_TEST_SRC) $(SNAKE_SRC)
 
 # ── Стиль кода ────────────────────────────────────────────────────────────────
 style:
+	cp ../materials/linters/.clang-format .
 	clang-format -n $(shell find . -name "*.cc" -o -name "*.h")
 	clang-format -i $(shell find . -name "*.cc" -o -name "*.h")
+	rm .clang-format
 
 # ── Статический анализ ────────────────────────────────────────────────────────
 cpp:

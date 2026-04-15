@@ -32,7 +32,7 @@ namespace s21 {
 class TetrisWidget : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   explicit TetrisWidget(QWidget *parent = nullptr);
   ~TetrisWidget() override = default;
 
@@ -41,25 +41,25 @@ public:
   /// Остановить игру (останавливает таймер)
   void stopGame();
 
-signals:
+ signals:
   /// Игра завершена (Q нажата или pause == -1)
   void gameEnded();
 
-protected:
+ protected:
   void paintEvent(QPaintEvent *) override;
   void keyPressEvent(QKeyEvent *event) override;
 
-private slots:
+ private slots:
   void onTimer();
 
-private:
+ private:
   QTimer *timer_;
   GameInfo_t gameinfo_{};
 
   // ─── Константы разметки ──────────────────────────────────────────────────
-  static constexpr int kCellSize = 30;  ///< px на клетку
-  static constexpr int kHudWidth = 180; ///< ширина HUD
-  static constexpr int kPad = 10;       ///< внешний отступ
+  static constexpr int kCellSize = 30;   ///< px на клетку
+  static constexpr int kHudWidth = 180;  ///< ширина HUD
+  static constexpr int kPad = 10;        ///< внешний отступ
 
   int fieldPxW() const { return X_FIELD * kCellSize; }
   int fieldPxH() const { return Y_FIELD * kCellSize; }
@@ -75,4 +75,4 @@ private:
   void drawOverlay(QPainter &p);
 };
 
-} // namespace s21
+}  // namespace s21

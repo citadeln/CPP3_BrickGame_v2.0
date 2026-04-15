@@ -28,4 +28,4 @@ void game_loop();
 UserAction_t get_signal();
 void color_pairs();
 
-#endif // MAIN_H
+#endif  // MAIN_H

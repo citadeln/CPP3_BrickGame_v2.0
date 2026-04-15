@@ -18,8 +18,7 @@
  * @return function Возвращает функцию для выполнения.
  */
 function fsm_table(GameState_t state, UserAction_t action) {
-  if (static_cast<int>(action) == -1)
-    action = UserAction_t::Action;
+  if (static_cast<int>(action) == -1) action = UserAction_t::Action;
 
   static const function fsm_table[8][9] = {
       // START
@@ -75,8 +74,7 @@ void spawn(Params_t *prms) {
     prms->figureinfo->next_figure_color = 1;
 
   for (int y = 0; y < MAX_FIGURE_SIZE; y++)
-    for (int x = 0; x < MAX_FIGURE_SIZE; x++)
-      prms->gameinfo->next[y][x] = 0;
+    for (int x = 0; x < MAX_FIGURE_SIZE; x++) prms->gameinfo->next[y][x] = 0;
 
   for (int i = 0; i < BLOCKS; i++) {
     int y = 1 + get_block_coord(prms->figureinfo->next_figure_type, 0, i, 0);
@@ -172,8 +170,7 @@ void rotate(Params_t *prms) {
 void move_left(Params_t *prms) {
   clear_or_draw_position(prms, 0);
 
-  if (!collide_while_moving(prms, 0, -1))
-    prms->figureinfo->x--;
+  if (!collide_while_moving(prms, 0, -1)) prms->figureinfo->x--;
 
   clear_or_draw_position(prms, 1);
 }
@@ -190,8 +187,7 @@ void move_left(Params_t *prms) {
 void move_right(Params_t *prms) {
   clear_or_draw_position(prms, 0);
 
-  if (!collide_while_moving(prms, 0, 1))
-    prms->figureinfo->x++;
+  if (!collide_while_moving(prms, 0, 1)) prms->figureinfo->x++;
 
   clear_or_draw_position(prms, 1);
 }
@@ -340,8 +336,7 @@ void collide(Params_t *prms) {
   for (int y = Y_FIELD + 1; y >= 0; y--) {
     int ones = 0;
     for (int x = 0; x < X_FIELD; x++)
-      if (prms->gameinfo->field[y][x])
-        ones++;
+      if (prms->gameinfo->field[y][x]) ones++;
     if (ones == X_FIELD) {
       lines++;
       remove_full_line(prms, y);
@@ -380,8 +375,7 @@ void remove_full_line(Params_t *prms, int y) {
     for (int x = 0; x < X_FIELD; x++)
       prms->gameinfo->field[y][x] = prms->gameinfo->field[y - 1][x];
 
-  for (int x = 0; x < X_FIELD; x++)
-    prms->gameinfo->field[0][x] = 0;
+  for (int x = 0; x < X_FIELD; x++) prms->gameinfo->field[0][x] = 0;
 }
 
 /**

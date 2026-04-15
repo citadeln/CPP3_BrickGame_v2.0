@@ -15,17 +15,16 @@ namespace s21 {
 
 QColor TetrisWidget::pieceColor(int idx) {
   static const QColor kColors[] = {
-      QColor(26, 26, 40),    // 0 — пусто (фон поля)
-      QColor(220, 220, 220), // 1 — WHITE
-      QColor(0, 200, 220),   // 2 — CYAN
-      QColor(60, 200, 60),   // 3 — GREEN
-      QColor(200, 60, 200),  // 4 — MAGENTA
-      QColor(220, 60, 60),   // 5 — RED
-      QColor(60, 100, 220),  // 6 — BLUE
-      QColor(230, 210, 50),  // 7 — YELLOW
+      QColor(26, 26, 40),     // 0 — пусто (фон поля)
+      QColor(220, 220, 220),  // 1 — WHITE
+      QColor(0, 200, 220),    // 2 — CYAN
+      QColor(60, 200, 60),    // 3 — GREEN
+      QColor(200, 60, 200),   // 4 — MAGENTA
+      QColor(220, 60, 60),    // 5 — RED
+      QColor(60, 100, 220),   // 6 — BLUE
+      QColor(230, 210, 50),   // 7 — YELLOW
   };
-  if (idx < 0 || idx > 7)
-    return kColors[0];
+  if (idx < 0 || idx > 7) return kColors[0];
   return kColors[idx];
 }
 
@@ -50,7 +49,7 @@ TetrisWidget::TetrisWidget(QWidget *parent) : QWidget(parent) {
 void TetrisWidget::startGame() {
   // Инициализируем состояние (pause=2 = START)
   userInput(UserAction_t::ERRENUM,
-            false); // ← инициализирует глобальное состояние
+            false);  // ← инициализирует глобальное состояние
   gameinfo_ = updateCurrentState();
   timer_->start(16);
 }
@@ -83,32 +82,32 @@ void TetrisWidget::keyPressEvent(QKeyEvent *event) {
   UserAction_t action = UserAction_t::ERRENUM;
 
   switch (event->key()) {
-  case Qt::Key_Return:
-  case Qt::Key_Enter:
-    action = UserAction_t::Start;
-    break;
-  case Qt::Key_P:
-    action = UserAction_t::Pause;
-    break;
-  case Qt::Key_Left:
-    action = UserAction_t::Left;
-    break;
-  case Qt::Key_Right:
-    action = UserAction_t::Right;
-    break;
-  case Qt::Key_Down:
-    action = UserAction_t::Down;
-    break;
-  case Qt::Key_Space:
-    action = UserAction_t::Action;
-    break; // поворот
-  case Qt::Key_Q:
-    timer_->stop();
-    emit gameEnded();
-    return;
-  default:
-    QWidget::keyPressEvent(event);
-    return;
+    case Qt::Key_Return:
+    case Qt::Key_Enter:
+      action = UserAction_t::Start;
+      break;
+    case Qt::Key_P:
+      action = UserAction_t::Pause;
+      break;
+    case Qt::Key_Left:
+      action = UserAction_t::Left;
+      break;
+    case Qt::Key_Right:
+      action = UserAction_t::Right;
+      break;
+    case Qt::Key_Down:
+      action = UserAction_t::Down;
+      break;
+    case Qt::Key_Space:
+      action = UserAction_t::Action;
+      break;  // поворот
+    case Qt::Key_Q:
+      timer_->stop();
+      emit gameEnded();
+      return;
+    default:
+      QWidget::keyPressEvent(event);
+      return;
   }
 
   userInput(action, false);
@@ -146,8 +145,7 @@ void TetrisWidget::drawBackground(QPainter &p) {
 // ─── Поле (field[Y_START+2 .. Y_FIELD+2][X_START .. X_FIELD]) ───────────────
 
 void TetrisWidget::drawField(QPainter &p) {
-  if (!gameinfo_.field)
-    return;
+  if (!gameinfo_.field) return;
 
   for (int row = 0; row < Y_FIELD; ++row) {
     for (int col = 0; col < X_FIELD; ++col) {
@@ -175,13 +173,12 @@ void TetrisWidget::drawField(QPainter &p) {
 // ───────────────────────────────────────────────────
 
 void TetrisWidget::drawNextPiece(QPainter &p) {
-  if (!gameinfo_.next)
-    return;
+  if (!gameinfo_.next) return;
 
   int hudX = kPad + fieldPxW() + kPad;
   // Область «NEXT» в HUD: маленькая сетка 4×4, ячейка 20px
   static constexpr int kNextCell = 20;
-  static constexpr int kNextTop = 60; // отступ сверху в HUD
+  static constexpr int kNextTop = 60;  // отступ сверху в HUD
 
   for (int r = 0; r < MAX_FIGURE_SIZE; ++r) {
     for (int c = 0; c < MAX_FIGURE_SIZE; ++c) {
@@ -299,4 +296,4 @@ void TetrisWidget::drawOverlay(QPainter &p) {
   }
 }
 
-} // namespace s21
+}  // namespace s21

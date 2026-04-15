@@ -95,33 +95,33 @@ UserAction_t get_signal() {
   UserAction_t action = UserAction_t::ERRENUM;
 
   switch (getch()) {
-  case '\n':
-    action = UserAction_t::Start;
-    break;
-  case 'p':
-    action = UserAction_t::Pause;
-    break;
-  case 'q':
-    action = UserAction_t::Terminate;
-    break;
-  case KEY_LEFT:
-    action = UserAction_t::Left;
-    break;
-  case KEY_RIGHT:
-    action = UserAction_t::Right;
-    break;
-  case KEY_UP:
-    action = UserAction_t::Up;
-    break;
-  case KEY_DOWN:
-    action = UserAction_t::Down;
-    break;
-  case ' ':
-    action = UserAction_t::Action;
-    break;
-  default:
-    action = UserAction_t::ERRENUM;
-    break;
+    case '\n':
+      action = UserAction_t::Start;
+      break;
+    case 'p':
+      action = UserAction_t::Pause;
+      break;
+    case 'q':
+      action = UserAction_t::Terminate;
+      break;
+    case KEY_LEFT:
+      action = UserAction_t::Left;
+      break;
+    case KEY_RIGHT:
+      action = UserAction_t::Right;
+      break;
+    case KEY_UP:
+      action = UserAction_t::Up;
+      break;
+    case KEY_DOWN:
+      action = UserAction_t::Down;
+      break;
+    case ' ':
+      action = UserAction_t::Action;
+      break;
+    default:
+      action = UserAction_t::ERRENUM;
+      break;
   }
 
   return action;

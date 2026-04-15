@@ -110,8 +110,7 @@ START_TEST(test_length_preserved_without_apple) {
   m.ChangeDirection('R');
   for (int i = 0; i < 3; ++i) {
     m.MoveForward();
-    if (m.IsAppleEaten())
-      break;
+    if (m.IsAppleEaten()) break;
   }
   if (!m.IsAppleEaten()) {
     int new_len = static_cast<int>(m.GetSnakePositions().size());
@@ -148,8 +147,7 @@ START_TEST(test_collision_with_top_wall) {
   SnakeModel m;
   for (int i = 0; i < 6; ++i) {
     m.MoveForward();
-    if (m.IsGameOver())
-      break;
+    if (m.IsGameOver()) break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -161,8 +159,7 @@ START_TEST(test_collision_with_right_wall) {
   m.ChangeDirection('R');
   for (int i = 0; i < 11; ++i) {
     m.MoveForward();
-    if (m.IsGameOver())
-      break;
+    if (m.IsGameOver()) break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -176,8 +173,7 @@ START_TEST(test_collision_with_bottom_wall) {
   m.ChangeDirection('D');
   for (int i = 0; i < 15; ++i) {
     m.MoveForward();
-    if (m.IsGameOver())
-      break;
+    if (m.IsGameOver()) break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -189,8 +185,7 @@ START_TEST(test_collision_with_left_wall) {
   m.ChangeDirection('L');
   for (int i = 0; i < 11; ++i) {
     m.MoveForward();
-    if (m.IsGameOver())
-      break;
+    if (m.IsGameOver()) break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -287,9 +282,9 @@ END_TEST
 START_TEST(test_fsm_exit_q_pause) {
   SnakeModel model;
   SnakeController ctrl(model);
-  ctrl.ProcessUserInput('\n'); // MOVING
-  ctrl.ProcessUserInput('p');  // PAUSE
-  ctrl.ProcessUserInput('q');  // PAUSE → EXIT
+  ctrl.ProcessUserInput('\n');  // MOVING
+  ctrl.ProcessUserInput('p');   // PAUSE
+  ctrl.ProcessUserInput('q');   // PAUSE → EXIT
   ck_assert(ctrl.GetState() == SnakeState::EXIT_STATE);
   ck_assert_int_eq(ctrl.GetPauseStatus(), -1);
 }
@@ -309,8 +304,8 @@ END_TEST
 START_TEST(test_fsm_direction_change) {
   SnakeModel model;
   SnakeController ctrl(model);
-  ctrl.ProcessUserInput('\n'); // MOVING
-  ctrl.ProcessUserInput('R');  // Направление
+  ctrl.ProcessUserInput('\n');  // MOVING
+  ctrl.ProcessUserInput('R');   // Направление
   ck_assert_int_eq(ctrl.GetPauseStatus(), 0);
   ck_assert(ctrl.GetState() == SnakeState::MOVING);
 }

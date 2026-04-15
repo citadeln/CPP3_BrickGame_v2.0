@@ -26,14 +26,14 @@ class SnakeModel;
  * START → SPAWN → MOVING → SHIFTING → COLLIDE → SPAWN | GAMEOVER
  */
 enum class SnakeState : int {
-  START = 0, ///< Начальный экран (ожидание Enter)
-  SPAWN,     ///< Инициализация / рестарт игры
-  MOVING, ///< Движение: ожидание таймера и ввода пользователя
-  SHIFTING, ///< Принудительный шаг вперёд (таймер сработал)
-  COLLIDE, ///< Обработка столкновения (съедено яблоко)
-  PAUSE,     ///< Пауза
-  GAMEOVER,  ///< Конец игры
-  EXIT_STATE ///< Выход из программы
+  START = 0,  ///< Начальный экран (ожидание Enter)
+  SPAWN,      ///< Инициализация / рестарт игры
+  MOVING,  ///< Движение: ожидание таймера и ввода пользователя
+  SHIFTING,  ///< Принудительный шаг вперёд (таймер сработал)
+  COLLIDE,  ///< Обработка столкновения (съедено яблоко)
+  PAUSE,      ///< Пауза
+  GAMEOVER,   ///< Конец игры
+  EXIT_STATE  ///< Выход из программы
 };
 
 /**
@@ -49,7 +49,7 @@ enum class SnakeState : int {
  *  - геттеры данных     — получение данных для рендеринга.
  */
 class SnakeController {
-public:
+ public:
   explicit SnakeController(SnakeModel &model);
   ~SnakeController();
 
@@ -88,10 +88,10 @@ public:
   int GetLevel() const;
   long long GetSpeed() const;
 
-private:
+ private:
   SnakeModel &model_;
   SnakeState state_{SnakeState::START};
-  int pause_status_{2}; ///< -1/0/1/2/3 — статус для View
+  int pause_status_{2};  ///< -1/0/1/2/3 — статус для View
   struct timespec last_tick_ {};
 
   // ─── Переходы FSM ─────────────────────────────────────────────────────────
@@ -116,4 +116,4 @@ private:
   void ResetTimer();
 };
 
-} // namespace s21
+}  // namespace s21

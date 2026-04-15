@@ -19,4 +19,4 @@ Suite *suite_move_right(void);
 Suite *suite_fast_move_down(void);
 Suite *suite_collide(void);
 
-#endif // TETRIS_TEST_H
+#endif  // TETRIS_TEST_H

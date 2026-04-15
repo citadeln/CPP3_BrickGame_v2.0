@@ -3,4 +3,4 @@
 
 namespace s21 {}
 
-#endif // S21_NAMESPACE_H
+#endif  // S21_NAMESPACE_H

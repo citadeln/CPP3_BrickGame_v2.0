@@ -58,8 +58,8 @@ int SnakeWidget::fieldPxH() const {
 // ─────────────────────────────────────────────────────────────────────────────
 
 void SnakeWidget::onTimer() {
-  controller_.Tick(); // ViewModel проверяет внутренний таймер скорости
-  update();           // запрос перерисовки
+  controller_.Tick();  // ViewModel проверяет внутренний таймер скорости
+  update();            // запрос перерисовки
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -68,33 +68,33 @@ void SnakeWidget::onTimer() {
 
 void SnakeWidget::keyPressEvent(QKeyEvent *event) {
   switch (event->key()) {
-  case Qt::Key_Up:
-    controller_.ProcessUserInput('U');
-    break;
-  case Qt::Key_Down:
-    controller_.ProcessUserInput('D');
-    break;
-  case Qt::Key_Left:
-    controller_.ProcessUserInput('L');
-    break;
-  case Qt::Key_Right:
-    controller_.ProcessUserInput('R');
-    break;
-  case Qt::Key_Return:
-  case Qt::Key_Enter:
-    controller_.ProcessUserInput('\n');
-    break;
-  case Qt::Key_P:
-    controller_.ProcessUserInput('p');
-    break;
-  case Qt::Key_Q:
-    timer_->stop();
-    controller_.ProcessUserInput('q');
-    emit gameEnded();
-    return;
-  default:
-    QWidget::keyPressEvent(event);
-    return;
+    case Qt::Key_Up:
+      controller_.ProcessUserInput('U');
+      break;
+    case Qt::Key_Down:
+      controller_.ProcessUserInput('D');
+      break;
+    case Qt::Key_Left:
+      controller_.ProcessUserInput('L');
+      break;
+    case Qt::Key_Right:
+      controller_.ProcessUserInput('R');
+      break;
+    case Qt::Key_Return:
+    case Qt::Key_Enter:
+      controller_.ProcessUserInput('\n');
+      break;
+    case Qt::Key_P:
+      controller_.ProcessUserInput('p');
+      break;
+    case Qt::Key_Q:
+      timer_->stop();
+      controller_.ProcessUserInput('q');
+      emit gameEnded();
+      return;
+    default:
+      QWidget::keyPressEvent(event);
+      return;
   }
   update();
 }
@@ -274,4 +274,4 @@ void SnakeWidget::drawOverlay(QPainter &p) {
   }
 }
 
-} // namespace s21
+}  // namespace s21

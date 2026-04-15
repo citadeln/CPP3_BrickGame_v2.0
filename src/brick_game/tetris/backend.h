@@ -30,4 +30,4 @@ void chech_timer(Params_t *prms);
 
 GameInfo_t updateCurrentState();
 
-#endif // BACKEND_H
+#endif  // BACKEND_H

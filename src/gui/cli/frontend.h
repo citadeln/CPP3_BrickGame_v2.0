@@ -10,7 +10,7 @@
 #include "./../../brick_game/tetris/backend.h"
 #include "./../../brick_game/tetris/defines.h"
 
-#define HUD_WIDTH 11 ///< Ширина панели со статистикой
+#define HUD_WIDTH 11  ///< Ширина панели со статистикой
 
 // Tetris CLI view
 void print_game(GameInfo_t gameinfo);
@@ -22,4 +22,4 @@ void print_gameover(void);
 void print_exit(void);
 void print_rectangle(int y1, int y2, int x1, int x2);
 
-#endif // FRONTEND_H
+#endif  // FRONTEND_H

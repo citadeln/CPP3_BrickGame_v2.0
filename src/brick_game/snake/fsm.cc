@@ -7,7 +7,7 @@
 
 #include "fsm.h"
 
-#include "backend.h" // Полное объявление SnakeModel для реализации методов
+#include "backend.h"  // Полное объявление SnakeModel для реализации методов
 
 namespace s21 {
 
@@ -31,43 +31,43 @@ SnakeController::~SnakeController() {}
  */
 void SnakeController::ProcessUserInput(char input) {
   switch (state_) {
-  case SnakeState::START:
-    if (input == '\n') {
-      DoSpawn();
-    } else if (input == 'q') {
-      DoExit();
-    }
-    break;
+    case SnakeState::START:
+      if (input == '\n') {
+        DoSpawn();
+      } else if (input == 'q') {
+        DoExit();
+      }
+      break;
 
-  case SnakeState::MOVING:
-    if (input == 'U' || input == 'D' || input == 'L' || input == 'R') {
-      model_.ChangeDirection(input);
-    } else if (input == 'p') {
-      DoPause();
-    } else if (input == 'q') {
-      DoExit();
-    }
-    break;
+    case SnakeState::MOVING:
+      if (input == 'U' || input == 'D' || input == 'L' || input == 'R') {
+        model_.ChangeDirection(input);
+      } else if (input == 'p') {
+        DoPause();
+      } else if (input == 'q') {
+        DoExit();
+      }
+      break;
 
-  case SnakeState::PAUSE:
-    if (input == 'p' || input == '\n') {
-      DoUnpause();
-    } else if (input == 'q') {
-      DoExit();
-    }
-    break;
+    case SnakeState::PAUSE:
+      if (input == 'p' || input == '\n') {
+        DoUnpause();
+      } else if (input == 'q') {
+        DoExit();
+      }
+      break;
 
-  case SnakeState::GAMEOVER:
-    if (input == '\n') {
-      model_.Reset();
-      DoSpawn();
-    } else if (input == 'q') {
-      DoExit();
-    }
-    break;
+    case SnakeState::GAMEOVER:
+      if (input == '\n') {
+        model_.Reset();
+        DoSpawn();
+      } else if (input == 'q') {
+        DoExit();
+      }
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 }
 
@@ -177,4 +177,4 @@ bool SnakeController::IsTimerExpired() const {
 
 void SnakeController::ResetTimer() { timespec_get(&last_tick_, TIME_UTC); }
 
-} // namespace s21
+}  // namespace s21

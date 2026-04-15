@@ -19,4 +19,4 @@ SnakeWindow::SnakeWindow(SnakeController &controller, QWidget *parent)
   widget_->startGame();
 }
 
-} // namespace s21
+}  // namespace s21

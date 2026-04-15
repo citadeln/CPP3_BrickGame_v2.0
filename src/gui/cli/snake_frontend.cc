@@ -53,7 +53,7 @@ void SnakeFrontend::ClearHud() {
  * @brief Рисует статичную рамку и HUD (вызывается один раз).
  */
 void SnakeFrontend::DrawOverlay() {
-  print_rectangle(0, kFieldHeight + 1, 0, kFieldWidth + 1); // 21 символ
+  print_rectangle(0, kFieldHeight + 1, 0, kFieldWidth + 1);  // 21 символ
 
   // Рамка HUD справа
   print_rectangle(0, kFieldHeight + 1, kFieldWidth + 2,
@@ -141,7 +141,7 @@ void SnakeFrontend::DrawStatus() {
     mvprintw(kFieldHeight / 2 + 1, 6, " to start! ");
   } else if (pause_status == 1) {
     print_rectangle(kFieldHeight / 2 - 1, kFieldHeight / 2 + 1, 2,
-                    9); // PAUSE
+                    9);  // PAUSE
     mvprintw(kFieldHeight / 2, 3, "PAUSE ");
   } else if (pause_status == 3) {
     // GAME OVER
@@ -165,42 +165,42 @@ void SnakeView::startEventLoop() {
   frontend.DrawOverlay();
   frontend.RenderGame();
 
-  while (controller_.GetPauseStatus() != -1) { // -1 = EXIT_STATE
+  while (controller_.GetPauseStatus() != -1) {  // -1 = EXIT_STATE
     int ch = getch();
 
     if (ch != ERR) {
       switch (ch) {
-      case KEY_UP:
-        controller_.ProcessUserInput('U');
-        break;
-      case KEY_DOWN:
-        controller_.ProcessUserInput('D');
-        break;
-      case KEY_LEFT:
-        controller_.ProcessUserInput('L');
-        break;
-      case KEY_RIGHT:
-        controller_.ProcessUserInput('R');
-        break;
-      case 'p':
-        controller_.ProcessUserInput('p');
-        break;
-      case 'q':
-        controller_.ProcessUserInput('q');
-        break;
-      case '\n':
-        controller_.ProcessUserInput('\n');
-        break;
-      default:
-        break;
+        case KEY_UP:
+          controller_.ProcessUserInput('U');
+          break;
+        case KEY_DOWN:
+          controller_.ProcessUserInput('D');
+          break;
+        case KEY_LEFT:
+          controller_.ProcessUserInput('L');
+          break;
+        case KEY_RIGHT:
+          controller_.ProcessUserInput('R');
+          break;
+        case 'p':
+          controller_.ProcessUserInput('p');
+          break;
+        case 'q':
+          controller_.ProcessUserInput('q');
+          break;
+        case '\n':
+          controller_.ProcessUserInput('\n');
+          break;
+        default:
+          break;
       }
     }
 
     controller_.Tick();
-    frontend.RenderGame(); // перерисовываем только изменяющееся
+    frontend.RenderGame();  // перерисовываем только изменяющееся
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 }
 
-} // namespace s21
+}  // namespace s21

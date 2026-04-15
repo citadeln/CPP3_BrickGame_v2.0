@@ -78,8 +78,7 @@ static int showLauncher() {
   hint->setStyleSheet("color: #505080; font-size: 10px;");
   layout->addWidget(hint);
 
-  if (dlg.exec() != QDialog::Accepted)
-    return 0;
+  if (dlg.exec() != QDialog::Accepted) return 0;
   return choice;
 }
 
@@ -117,8 +116,7 @@ int main(int argc, char *argv[]) {
 
   while (true) {
     int choice = showLauncher();
-    if (choice == 0)
-      break;
+    if (choice == 0) break;
 
     if (choice == 1) {
       // ── Snake (MVVM) ────────────────────────────────────────────────────
