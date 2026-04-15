@@ -32,6 +32,7 @@ private:
   void DrawApple();  // яблоко
   void DrawStats();  // статистика
   void DrawStatus(); // START/PAUSE/GAMEOVER
+  void ClearHud();
 };
 
 /**

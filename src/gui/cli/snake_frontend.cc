@@ -25,13 +25,28 @@ SnakeFrontend::~SnakeFrontend() {}
 void SnakeFrontend::RenderGame() {
   // 1. ОЧИСТКА: Стираем ВСЕ символы игрового поля
   DrawField();
+  ClearHud();
 
   // 2. РИСОВАНИЕ: Отрисовываем все элементы
+  DrawOverlay();
   DrawSnake();
   DrawApple();
   DrawStats();
   DrawStatus();
+
   refresh();
+}
+
+/**
+ * @brief Очищает только HUD (не трогает игровое поле)
+ */
+void SnakeFrontend::ClearHud() {
+  // Очищаем области статистики (строки 1-12, колонки kFieldWidth+2...)
+  for (int y = 1; y <= 12; y++) {
+    for (int x = kFieldWidth + 2; x <= kFieldWidth + kHudWidth + 2; x++) {
+      mvaddch(y, x, ' ');
+    }
+  }
 }
 
 /**
@@ -49,13 +64,13 @@ void SnakeFrontend::DrawOverlay() {
   mvprintw(1, kFieldWidth + kHudWidth / 2, " HiSCORE ");
 
   print_rectangle(4, 6, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
-  mvprintw(4, kFieldWidth + kHudWidth / 2 + 1, " SCORE ");
+  mvprintw(4, kFieldWidth + kHudWidth / 2, " SCORE ");
 
   print_rectangle(7, 9, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
-  mvprintw(7, kFieldWidth + kHudWidth / 2 + 1, " LEVEL ");
+  mvprintw(7, kFieldWidth + kHudWidth / 2, " LEVEL ");
 
   print_rectangle(10, 12, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
-  mvprintw(10, kFieldWidth + kHudWidth / 2 + 1, " SPEED ");
+  mvprintw(10, kFieldWidth + kHudWidth / 2, " SPEED ");
 
   // Подсказки
   mvprintw(kFieldHeight - 5, kFieldWidth + 4, "p - pause");
@@ -127,7 +142,7 @@ void SnakeFrontend::DrawStatus() {
   } else if (pause_status == 1) {
     print_rectangle(kFieldHeight / 2 - 1, kFieldHeight / 2 + 1, 2,
                     9); // PAUSE
-    mvprintw(kFieldHeight / 2, 5, " PAUSE ");
+    mvprintw(kFieldHeight / 2, 3, "PAUSE ");
   } else if (pause_status == 3) {
     // GAME OVER
     print_rectangle(kFieldHeight / 2 - 1, kFieldHeight / 2 + 2, 1, 20);
