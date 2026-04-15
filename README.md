@@ -73,10 +73,10 @@ make install  # ./install/brickgame
 ## Примеры
 
 ### Десктопная версия Змейки
-[Здесь будет скриншот snake_qt.png]
+![](misc/images/snake-desctop.png)
 
 ### Терминальная версия Тетриса
-[Здесь будет скриншот tetris_ncurses.png]
+![](misc/images/snake-cli.png)
 
 ## Документация
 
