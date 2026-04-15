@@ -25,10 +25,10 @@ SnakeModel::~SnakeModel() { SaveHighScore(); }
 void SnakeModel::Reset() {
   snake_.clear();
   // Начальная позиция: 4 сегмента по столбцу 5, голова наверху
-  snake_.push_back({5, 10});
-  snake_.push_back({6, 10});
-  snake_.push_back({7, 10});
-  snake_.push_back({8, 10});
+  snake_.push_back({5, 5});
+  snake_.push_back({6, 5});
+  snake_.push_back({7, 5});
+  snake_.push_back({8, 5});
   dir_ = 'U';
   next_dir_ = 'U';
   score_ = 0;

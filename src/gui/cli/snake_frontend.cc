@@ -38,28 +38,28 @@ void SnakeFrontend::RenderGame() {
  * @brief Рисует статичную рамку и HUD (вызывается один раз).
  */
 void SnakeFrontend::DrawOverlay() {
-  print_rectangle(0, kFieldHeight + 1, 0, kFieldWidth * 2 + 1); // 21 символ
+  print_rectangle(0, kFieldHeight + 1, 0, kFieldWidth + 1); // 21 символ
 
   // Рамка HUD справа
-  print_rectangle(0, kFieldHeight + 1, kFieldWidth * 2 + 2,
-                  kFieldWidth * 2 + kHudWidth + 3);
+  print_rectangle(0, kFieldHeight + 1, kFieldWidth + 2,
+                  kFieldWidth + kHudWidth + 3);
 
   // Заголовки HUD
-  print_rectangle(1, 3, kFieldWidth * 2 + 3, kFieldWidth * 2 + kHudWidth + 2);
-  mvprintw(1, kFieldWidth * 2 + kHudWidth / 2, " HiSCORE ");
+  print_rectangle(1, 3, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
+  mvprintw(1, kFieldWidth + kHudWidth / 2, " HiSCORE ");
 
-  print_rectangle(4, 6, kFieldWidth * 2 + 3, kFieldWidth * 2 + kHudWidth + 2);
-  mvprintw(4, kFieldWidth * 2 + kHudWidth / 2 + 1, " SCORE ");
+  print_rectangle(4, 6, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
+  mvprintw(4, kFieldWidth + kHudWidth / 2 + 1, " SCORE ");
 
-  print_rectangle(7, 9, kFieldWidth * 2 + 3, kFieldWidth * 2 + kHudWidth + 2);
-  mvprintw(7, kFieldWidth * 2 + kHudWidth / 2 + 1, " LEVEL ");
+  print_rectangle(7, 9, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
+  mvprintw(7, kFieldWidth + kHudWidth / 2 + 1, " LEVEL ");
 
-  print_rectangle(10, 12, kFieldWidth * 2 + 3, kFieldWidth * 2 + kHudWidth + 2);
-  mvprintw(10, kFieldWidth * 2 + kHudWidth / 2 + 1, " SPEED ");
+  print_rectangle(10, 12, kFieldWidth + 3, kFieldWidth + kHudWidth + 2);
+  mvprintw(10, kFieldWidth + kHudWidth / 2 + 1, " SPEED ");
 
   // Подсказки
-  mvprintw(kFieldHeight - 5, kFieldWidth * 2 + 4, "p - pause");
-  mvprintw(kFieldHeight - 3, kFieldWidth * 2 + 4, "q - quit");
+  mvprintw(kFieldHeight - 5, kFieldWidth + 4, "p - pause");
+  mvprintw(kFieldHeight - 3, kFieldWidth + 4, "q - quit");
 }
 
 /**
@@ -67,7 +67,7 @@ void SnakeFrontend::DrawOverlay() {
  */
 void SnakeFrontend::DrawField() {
   for (int y = 1; y <= kFieldHeight; y++) {
-    for (int x = 1; x <= kFieldWidth * 2; x++) {
+    for (int x = 1; x <= kFieldWidth; x++) {
       mvaddch(y, x, ' ');
     }
   }
@@ -100,18 +100,16 @@ void SnakeFrontend::DrawApple() {
 void SnakeFrontend::DrawStats() {
   // HiScore (показываем максимум из текущего и рекорда)
   int hi = std::max(controller_.GetHighScore(), controller_.GetScore());
-  mvprintw(2, kFieldWidth * 2 + kHudWidth / 2 + 1, "%04d", hi);
+  mvprintw(2, kFieldWidth + kHudWidth / 2 + 1, "%04d", hi);
 
   // Score
-  mvprintw(5, kFieldWidth * 2 + kHudWidth / 2 + 1, "%04d",
-           controller_.GetScore());
+  mvprintw(5, kFieldWidth + kHudWidth / 2 + 1, "%04d", controller_.GetScore());
 
   // Level
-  mvprintw(8, kFieldWidth * 2 + kHudWidth / 2 + 3, "%d",
-           controller_.GetLevel());
+  mvprintw(8, kFieldWidth + kHudWidth / 2 + 3, "%d", controller_.GetLevel());
 
   // Speed (примерно, как у тетриса)
-  mvprintw(11, kFieldWidth * 2 + kHudWidth / 2 + 1, "0.%lld",
+  mvprintw(11, kFieldWidth + kHudWidth / 2 + 1, "0.%lld",
            controller_.GetSpeed() / 100000000LL);
 }
 

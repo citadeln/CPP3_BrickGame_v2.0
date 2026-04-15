@@ -24,7 +24,7 @@ namespace s21 {
  */
 class SnakeModel {
 public:
-  static constexpr int kFieldWidth = 20;
+  static constexpr int kFieldWidth = 10;
   static constexpr int kFieldHeight = 20;
   static constexpr int kWinLength = 200;
   static constexpr int kMaxLevel = 10;
