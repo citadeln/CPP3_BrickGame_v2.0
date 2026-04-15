@@ -23,12 +23,12 @@ namespace s21 {
  * Предоставляет методы-запросы (геттеры) и методы-команды.
  */
 class SnakeModel {
- public:
-  static constexpr int kFieldWidth = 20;
+public:
+  static constexpr int kFieldWidth = 10;
   static constexpr int kFieldHeight = 20;
   static constexpr int kWinLength = 200;
   static constexpr int kMaxLevel = 10;
-  static constexpr long long kBaseSpeed = 500000000LL;  ///< 500 мс в нс
+  static constexpr long long kBaseSpeed = 500000000LL; ///< 500 мс в нс
   static constexpr const char *kHiScoreFile = "hi-score-snake.txt";
 
   SnakeModel();
@@ -78,15 +78,15 @@ class SnakeModel {
   long long GetSpeed() const;
   char GetDirection() const;
 
- private:
-  std::vector<std::pair<int, int>> snake_;  ///< {row, col}, голова — первый
+private:
+  std::vector<std::pair<int, int>> snake_; ///< {row, col}, голова — первый
   std::pair<int, int> apple_pos_{0, 0};
   int score_{0};
   int high_score_{0};
   int level_{1};
   long long speed_{kBaseSpeed};
-  char dir_{'U'};  ///< Текущее направление движения
-  char next_dir_{'U'};  ///< Буферизированное следующее направление
+  char dir_{'U'}; ///< Текущее направление движения
+  char next_dir_{'U'}; ///< Буферизированное следующее направление
   bool game_over_{false};
   bool apple_eaten_{false};
 
@@ -122,4 +122,4 @@ class SnakeModel {
   void SaveHighScore();
 };
 
-}  // namespace s21
+} // namespace s21

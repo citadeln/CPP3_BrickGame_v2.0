@@ -110,7 +110,8 @@ START_TEST(test_length_preserved_without_apple) {
   m.ChangeDirection('R');
   for (int i = 0; i < 3; ++i) {
     m.MoveForward();
-    if (m.IsAppleEaten()) break;
+    if (m.IsAppleEaten())
+      break;
   }
   if (!m.IsAppleEaten()) {
     int new_len = static_cast<int>(m.GetSnakePositions().size());
@@ -147,7 +148,8 @@ START_TEST(test_collision_with_top_wall) {
   SnakeModel m;
   for (int i = 0; i < 6; ++i) {
     m.MoveForward();
-    if (m.IsGameOver()) break;
+    if (m.IsGameOver())
+      break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -159,7 +161,8 @@ START_TEST(test_collision_with_right_wall) {
   m.ChangeDirection('R');
   for (int i = 0; i < 11; ++i) {
     m.MoveForward();
-    if (m.IsGameOver()) break;
+    if (m.IsGameOver())
+      break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -173,7 +176,8 @@ START_TEST(test_collision_with_bottom_wall) {
   m.ChangeDirection('D');
   for (int i = 0; i < 15; ++i) {
     m.MoveForward();
-    if (m.IsGameOver()) break;
+    if (m.IsGameOver())
+      break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -185,7 +189,8 @@ START_TEST(test_collision_with_left_wall) {
   m.ChangeDirection('L');
   for (int i = 0; i < 11; ++i) {
     m.MoveForward();
-    if (m.IsGameOver()) break;
+    if (m.IsGameOver())
+      break;
   }
   ck_assert(m.IsGameOver());
 }
@@ -282,9 +287,9 @@ END_TEST
 START_TEST(test_fsm_exit_q_pause) {
   SnakeModel model;
   SnakeController ctrl(model);
-  ctrl.ProcessUserInput('\n');  // MOVING
-  ctrl.ProcessUserInput('p');   // PAUSE
-  ctrl.ProcessUserInput('q');   // PAUSE → EXIT
+  ctrl.ProcessUserInput('\n'); // MOVING
+  ctrl.ProcessUserInput('p');  // PAUSE
+  ctrl.ProcessUserInput('q');  // PAUSE → EXIT
   ck_assert(ctrl.GetState() == SnakeState::EXIT_STATE);
   ck_assert_int_eq(ctrl.GetPauseStatus(), -1);
 }
@@ -304,8 +309,8 @@ END_TEST
 START_TEST(test_fsm_direction_change) {
   SnakeModel model;
   SnakeController ctrl(model);
-  ctrl.ProcessUserInput('\n');  // MOVING
-  ctrl.ProcessUserInput('R');   // Направление
+  ctrl.ProcessUserInput('\n'); // MOVING
+  ctrl.ProcessUserInput('R');  // Направление
   ck_assert_int_eq(ctrl.GetPauseStatus(), 0);
   ck_assert(ctrl.GetState() == SnakeState::MOVING);
 }
@@ -315,10 +320,10 @@ END_TEST
 // Сьюты
 // ─────────────────────────────────────────────────────────────────────────────
 
-Suite* snake_model_suite(void) {
-  Suite* s = suite_create("SnakeModel");
+Suite *snake_model_suite(void) {
+  Suite *s = suite_create("SnakeModel");
 
-  TCase* tc_init = tcase_create("Initialization");
+  TCase *tc_init = tcase_create("Initialization");
   tcase_add_test(tc_init, test_initial_length);
   tcase_add_test(tc_init, test_initial_score);
   tcase_add_test(tc_init, test_initial_level);
@@ -326,7 +331,7 @@ Suite* snake_model_suite(void) {
   tcase_add_test(tc_init, test_apple_on_field);
   suite_add_tcase(s, tc_init);
 
-  TCase* tc_move = tcase_create("Movement");
+  TCase *tc_move = tcase_create("Movement");
   tcase_add_test(tc_move, test_move_forward_up);
   tcase_add_test(tc_move, test_move_forward_right);
   tcase_add_test(tc_move, test_move_forward_left);
@@ -334,23 +339,23 @@ Suite* snake_model_suite(void) {
   tcase_add_test(tc_move, test_length_preserved_without_apple);
   suite_add_tcase(s, tc_move);
 
-  TCase* tc_dir = tcase_create("Direction");
+  TCase *tc_dir = tcase_create("Direction");
   tcase_add_test(tc_dir, test_no_reverse_u_d);
   tcase_add_test(tc_dir, test_no_reverse_l_r);
   suite_add_tcase(s, tc_dir);
 
-  TCase* tc_coll = tcase_create("Collision");
+  TCase *tc_coll = tcase_create("Collision");
   tcase_add_test(tc_coll, test_collision_with_top_wall);
   tcase_add_test(tc_coll, test_collision_with_right_wall);
   tcase_add_test(tc_coll, test_collision_with_bottom_wall);
   tcase_add_test(tc_coll, test_collision_with_left_wall);
   suite_add_tcase(s, tc_coll);
 
-  TCase* tc_stats = tcase_create("Stats");
+  TCase *tc_stats = tcase_create("Stats");
   tcase_add_test(tc_stats, test_speed_level1);
   suite_add_tcase(s, tc_stats);
 
-  TCase* tc_misc = tcase_create("Misc");
+  TCase *tc_misc = tcase_create("Misc");
   tcase_add_test(tc_misc, test_reset);
   tcase_add_test(tc_misc, test_has_won_false);
   suite_add_tcase(s, tc_misc);
@@ -358,22 +363,22 @@ Suite* snake_model_suite(void) {
   return s;
 }
 
-Suite* fsm_suite(void) {
-  Suite* s = suite_create("SnakeController FSM");
+Suite *fsm_suite(void) {
+  Suite *s = suite_create("SnakeController FSM");
 
-  TCase* tc_basic = tcase_create("Basic States");
+  TCase *tc_basic = tcase_create("Basic States");
   tcase_add_test(tc_basic, test_fsm_start_enter);
   tcase_add_test(tc_basic, test_fsm_spawn_to_moving);
   tcase_add_test(tc_basic, test_fsm_pause_unpause);
   tcase_add_test(tc_basic, test_proxy_methods);
   suite_add_tcase(s, tc_basic);
 
-  TCase* tc_exit = tcase_create("Exit Paths");
+  TCase *tc_exit = tcase_create("Exit Paths");
   tcase_add_test(tc_exit, test_fsm_exit_q_start);
   tcase_add_test(tc_exit, test_fsm_exit_q_pause);
   suite_add_tcase(s, tc_exit);
 
-  TCase* tc_input = tcase_create("Input Handling");
+  TCase *tc_input = tcase_create("Input Handling");
   tcase_add_test(tc_input, test_fsm_default_case);
   tcase_add_test(tc_input, test_fsm_direction_change);
   suite_add_tcase(s, tc_input);
@@ -384,14 +389,14 @@ Suite* fsm_suite(void) {
 int main(void) {
   int failed = 0;
 
-  Suite* model_suite = snake_model_suite();
-  SRunner* model_runner = srunner_create(model_suite);
+  Suite *model_suite = snake_model_suite();
+  SRunner *model_runner = srunner_create(model_suite);
   srunner_run_all(model_runner, CK_NORMAL);
   failed += srunner_ntests_failed(model_runner);
   srunner_free(model_runner);
 
-  Suite* fsm_s = fsm_suite();
-  SRunner* fsm_runner = srunner_create(fsm_s);
+  Suite *fsm_s = fsm_suite();
+  SRunner *fsm_runner = srunner_create(fsm_s);
   srunner_run_all(fsm_runner, CK_NORMAL);
   failed += srunner_ntests_failed(fsm_runner);
   srunner_free(fsm_runner);

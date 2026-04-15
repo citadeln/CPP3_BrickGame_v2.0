@@ -25,10 +25,10 @@ SnakeModel::~SnakeModel() { SaveHighScore(); }
 void SnakeModel::Reset() {
   snake_.clear();
   // Начальная позиция: 4 сегмента по столбцу 5, голова наверху
-  snake_.push_back({5, 10});
-  snake_.push_back({6, 10});
-  snake_.push_back({7, 10});
-  snake_.push_back({8, 10});
+  snake_.push_back({5, 5});
+  snake_.push_back({6, 5});
+  snake_.push_back({7, 5});
+  snake_.push_back({8, 5});
   dir_ = 'U';
   next_dir_ = 'U';
   score_ = 0;
@@ -78,7 +78,7 @@ void SnakeModel::MoveForward() {
     apple_eaten_ = true;
     // Хвост не удаляем — змейка растёт
   } else {
-    snake_.pop_back();  // Удаляем хвост — змейка движется
+    snake_.pop_back(); // Удаляем хвост — змейка движется
   }
 
   // Добавляем новую голову
@@ -128,10 +128,14 @@ long long SnakeModel::GetSpeed() const { return speed_; }
 // ─────────────────────────────────────────────────────────────────────────────
 
 bool SnakeModel::IsOppositeDirection(char dir) const {
-  if (dir_ == 'U' && dir == 'D') return true;
-  if (dir_ == 'D' && dir == 'U') return true;
-  if (dir_ == 'L' && dir == 'R') return true;
-  if (dir_ == 'R' && dir == 'L') return true;
+  if (dir_ == 'U' && dir == 'D')
+    return true;
+  if (dir_ == 'D' && dir == 'U')
+    return true;
+  if (dir_ == 'L' && dir == 'R')
+    return true;
+  if (dir_ == 'R' && dir == 'L')
+    return true;
   return false;
 }
 
@@ -172,7 +176,8 @@ void SnakeModel::EatApple() {
 void SnakeModel::UpdateLevelAndSpeed() {
   // Новый уровень каждые 5 яблок, максимум kMaxLevel
   level_ = 1 + score_ / 5;
-  if (level_ > kMaxLevel) level_ = kMaxLevel;
+  if (level_ > kMaxLevel)
+    level_ = kMaxLevel;
 
   // Скорость: (11 - level) * 50 мс, в наносекундах
   speed_ = static_cast<long long>(11 - level_) * 50000000LL;
@@ -196,4 +201,4 @@ void SnakeModel::SaveHighScore() {
   }
 }
 
-}  // namespace s21
+} // namespace s21
